@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-//erase thsi test text <3
+
 namespace Stoker.Controllers
 {
     public class HomeController : Controller
