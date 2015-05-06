@@ -162,6 +162,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserSettingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,14 +232,13 @@
     <Content Include="Views\Stoker\NewPhotoView.cshtml" />
     <Content Include="Views\Stoker\ProfileView.cshtml" />
     <Content Include="Views\Stoker\SearchView.cshtml" />
-    <Content Include="Views\Home\UserSettingsView.cshtml" />
     <Content Include="Views\Stoker\GroupView.cshtml" />
     <Content Include="Views\Stoker\InterestView.cshtml" />
     <Content Include="Views\Stoker\GroupSettingsView.cshtml" />
     <Content Include="Views\Stoker\HeaderPartialView.cshtml" />
     <Content Include="Views\Stoker\SidebarPartialView.cshtml" />
     <Content Include="Views\Stoker\FooterPartialView.cshtml" />
-    <Content Include="Views\Home\UserSettings.cshtml" />
+    <Content Include="Views\UserSettings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
