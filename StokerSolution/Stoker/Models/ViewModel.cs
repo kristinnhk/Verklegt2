@@ -11,7 +11,7 @@ namespace Stoker.Models
     /// </summary>
     public class ViewModel
     {
-        // list of user model ??
+        public List<ApplicationUser> Users { get; set; }
         public List<GroupModel> groups { get; set; }
         public List<InterestModel> interests { get; set; }
         public List<ThreadModel> threads { get; set; }
