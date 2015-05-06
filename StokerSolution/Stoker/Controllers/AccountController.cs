@@ -45,7 +45,7 @@ namespace Stoker.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("LoginView");
         }
 
         //
@@ -78,7 +78,7 @@ namespace Stoker.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View("LoginView");
         }
 
         //

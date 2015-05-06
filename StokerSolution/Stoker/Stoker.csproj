@@ -228,7 +228,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Stoker\LoginView.cshtml" />
+    <Content Include="Views\Shared\LoginView.cshtml" />
     <Content Include="Views\Stoker\FrontPageView.cshtml" />
     <Content Include="Views\Stoker\NewPhotoView.cshtml" />
     <Content Include="Views\Stoker\ProfileView.cshtml" />
@@ -240,6 +240,8 @@
     <Content Include="Views\Stoker\SidebarPartialView.cshtml" />
     <Content Include="Views\Stoker\FooterPartialView.cshtml" />
     <Content Include="Views\UserSettings\UserSettings.cshtml" />
+    <Content Include="Views\Shared\LoginPartial.cshtml" />
+    <Content Include="Views\Shared\SignUpPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
