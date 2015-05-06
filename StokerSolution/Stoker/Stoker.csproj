@@ -231,13 +231,14 @@
     <Content Include="Views\Stoker\NewPhotoView.cshtml" />
     <Content Include="Views\Stoker\ProfileView.cshtml" />
     <Content Include="Views\Stoker\SearchView.cshtml" />
-    <Content Include="Views\Stoker\UserSettingsView.cshtml" />
+    <Content Include="Views\Home\UserSettingsView.cshtml" />
     <Content Include="Views\Stoker\GroupView.cshtml" />
     <Content Include="Views\Stoker\InterestView.cshtml" />
     <Content Include="Views\Stoker\GroupSettingsView.cshtml" />
     <Content Include="Views\Stoker\HeaderPartialView.cshtml" />
     <Content Include="Views\Stoker\SidebarPartialView.cshtml" />
     <Content Include="Views\Stoker\FooterPartialView.cshtml" />
+    <Content Include="Views\Home\UserSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
