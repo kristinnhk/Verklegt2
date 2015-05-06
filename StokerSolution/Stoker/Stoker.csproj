@@ -223,6 +223,18 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Stoker\LoginView.cshtml" />
+    <Content Include="Views\Stoker\FrontPageView.cshtml" />
+    <Content Include="Views\Stoker\NewPhotoView.cshtml" />
+    <Content Include="Views\Stoker\ProfileView.cshtml" />
+    <Content Include="Views\Stoker\SearchView.cshtml" />
+    <Content Include="Views\Stoker\UserSettingsView.cshtml" />
+    <Content Include="Views\Stoker\GroupView.cshtml" />
+    <Content Include="Views\Stoker\InterestView.cshtml" />
+    <Content Include="Views\Stoker\GroupSettingsView.cshtml" />
+    <Content Include="Views\Stoker\HeaderPartialView.cshtml" />
+    <Content Include="Views\Stoker\SidebarPartialView.cshtml" />
+    <Content Include="Views\Stoker\FooterPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
