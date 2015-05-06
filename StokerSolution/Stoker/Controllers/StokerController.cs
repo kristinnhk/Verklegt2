@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace Stoker.Controllers
 {
-    public class UserSettingsController : StokerController
+    public class StokerController : Controller
     {
         //
-        // GET: /UserSettings/
-        public ActionResult UserSettings()
+        // GET: /Stoker/
+        public ActionResult Index()
         {
             return View();
         }
