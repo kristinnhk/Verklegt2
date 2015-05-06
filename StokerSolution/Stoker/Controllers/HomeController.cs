@@ -12,7 +12,7 @@ namespace Stoker.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View("FrontPageView");
         }
 
         public ActionResult About()
