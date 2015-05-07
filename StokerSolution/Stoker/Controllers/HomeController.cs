@@ -17,7 +17,7 @@ namespace Stoker.Controllers
 
         public ActionResult Index()
         {
-            UserInterestUnion test = new UserInterestUnion();
+         /*   UserInterestUnion test = new UserInterestUnion();
 
             InterestModel interest = new InterestModel();
             interest.name = "cats";
@@ -35,7 +35,7 @@ namespace Stoker.Controllers
             test.interest = (from i in db.interests
                              select i).First();
 
-            testfunction(test);
+            testfunction(test);*/
             return View();
         }
         [HttpPost]
