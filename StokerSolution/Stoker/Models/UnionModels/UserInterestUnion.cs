@@ -12,12 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int userInterestID { get; set; }
 
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
-        public int InterestModelID { get; set; }
-        [ForeignKey("InterestModelID")]
-        public InterestModel interest { get; set; }
+        public InterestModel interestID { get; set; }
     }
 }

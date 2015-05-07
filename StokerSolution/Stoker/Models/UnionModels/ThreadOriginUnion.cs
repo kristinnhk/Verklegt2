@@ -12,16 +12,10 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int ThreadOriginID { get; set; }
 
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
-        public int InterestModelID { get; set; }
-        [ForeignKey("InterestModelID")]
         public InterestModel interest { get; set; }
 
-        public int GroupModelID { get; set; }
-        [ForeignKey("GroupModelID")]
         public GroupModel group { get; set; }
     }
 }

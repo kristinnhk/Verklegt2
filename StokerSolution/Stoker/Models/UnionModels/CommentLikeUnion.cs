@@ -12,12 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int CommentLikeID { get; set; }
 
-        public int CommentModelID { get; set; }
-        [ForeignKey("CommentModelID")]
         public CommentModel comment { get; set; }
 
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
     }
 }

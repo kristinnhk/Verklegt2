@@ -12,12 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int UserGroupsID { get; set; }
 
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
-        public int GroupModelID { get; set; }
-        [ForeignKey("GroupModelID")]
         public GroupModel group { get; set; }
     }
 }
