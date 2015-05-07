@@ -11,8 +11,8 @@ namespace Stoker.Models
     /// </summary>
     public class CommentModel
     {
-        [Required]
-        public int ID { get; set; }
+        [Key]
+        public int commentID { get; set; }
         [Required]
         public string content { get; set; }
         [Required]
