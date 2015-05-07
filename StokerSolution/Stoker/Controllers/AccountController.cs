@@ -70,7 +70,7 @@ namespace Stoker.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View("LoginView",model);
+            return View("LoginView");
         }
 
         //

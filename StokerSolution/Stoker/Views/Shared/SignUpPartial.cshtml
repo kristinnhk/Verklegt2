@@ -16,32 +16,32 @@
             @*Html.LabelFor(m => m.firstName, new { @class = "col-md-2 control-label" })*@
             <label for="firstName" class="col-md-2 control-label">First Name</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.firstName, new { @class = "form-control" })
+                @Html.TextBoxFor(k => k.firstName, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
             @*Html.LabelFor(m => m.lastName, new { @class = "col-md-2 control-label" })*@
             <label for="lastName" class="col-md-2 control-label">Last Name</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.lastName, new { @class = "form-control" })
+                @Html.TextBoxFor(k => k.lastName, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(k => k.Email, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.TextBoxFor(k => k.Email, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(k => k.Password, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.PasswordFor(k => k.Password, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(k => k.ConfirmPassword, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                @Html.PasswordFor(k => k.ConfirmPassword, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
