@@ -12,14 +12,46 @@ namespace Stoker.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            UserInterestUnion test;
-            //var temp = User.Identity.GetUserId();
-           // test.UserId = User.Identity.GetUserId();
+            UserInterestUnion test = new UserInterestUnion();
 
-           // AddUserFriend(, int userID2)
+            InterestModel interest = new InterestModel();
+            interest.name = "cats";
+            interest.numberOfUsersInterested = 10;
+            db.interests.Add(interest);
+            db.SaveChanges();
+            test.interest = interest;
+            ApplicationUser user = (from s in db.Users
+                                    select s).First();
+            if (ModelState.IsValid)
+            {
+                db.Users.Add(user);
+              //  db.SaveChanges();
+            }
+            test.interest = (from i in db.interests
+                             select i).First();
+
+            testfunction(test);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult testfunction(UserInterestUnion test)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.userInterestUnion.Add(test);
+            //    db.SaveChanges();
+            }
+
+            //var temp = User.Identity.GetUserId();
+            // test.UserId = User.Identity.GetUserId();
+
+            // AddUserFriend(, int userID2)
             return View();
         }
 
