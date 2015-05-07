@@ -11,8 +11,8 @@ namespace Stoker.Models
     /// </summary>
     public class GroupModel
     {
-        [Required]
-        public int ID { get; set; }
+        [Key]
+        public int groupID { get; set; }
         [Required]
         public string title { get; set; }
         public string about { get; set; }

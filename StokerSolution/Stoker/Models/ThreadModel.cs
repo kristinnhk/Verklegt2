@@ -11,8 +11,8 @@ namespace Stoker.Models
     /// </summary>
     public class ThreadModel
     {
-        [Required]
-        public int ID { get; set; }
+        [Key]
+        public int threadID { get; set; }
         [Required]
         public string title { get; set; }
         public string mainContent { get; set; }

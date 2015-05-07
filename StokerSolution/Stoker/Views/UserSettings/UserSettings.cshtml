@@ -3,6 +3,7 @@
     ViewBag.Title = "UserSettingsView";
 }
 <!--model Stoker.Models.ViewModel-->
+<script src="~/Scripts/UserSettingScripts.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +16,10 @@
     </div>
     <div>
         <form>
-            <textarea>Bla</textarea>
+            <textarea id="AboutTextarea">Bla</textarea>
             <input type="submit" value="Change about me" />
         </form>
-        <button>Create new interest</button>
+        <button id="AboutSubmit">Create new interest</button>
     </div>
     <div class="col-md-4">
         <form>
