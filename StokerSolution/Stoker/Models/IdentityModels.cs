@@ -35,6 +35,13 @@ namespace Stoker.Models
         public DbSet<InterestModel> interests { get; set; }
         public DbSet<ThreadModel> threads { get; set; }
         public DbSet<UserInterestUnion> userInterestUnion { get; set; }
+        public DbSet<CommentLikeUnion> commentLikeUnion { get; set; }
+        public DbSet<ThreadLikeUnion> threadLikeUnion { get; set; }
+        public DbSet<UserCommentUnion> userCommentUnion { get; set; }
+        public DbSet<UserFriendsUnion> userFriendsUnion { get; set; }
+        public DbSet<UserGroupsUnion> userGroupsUnion { get; set; }
+        public DbSet<ThreadOriginUnion> threadOriginUnion { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
