@@ -1,0 +1,20 @@
+﻿footer {
+	height: 50px;
+	background-color: white;
+	position: relative;
+	width: 100%;
+	/*/border-style: solid;
+	border-width: 1px;
+	border-color: black;*/
+	z-index: 150;
+}
+
+footer #backToTop {
+	position: relative;
+	float: right;
+}
+
+footer #aboutUs {
+	position: relative;
+	
+}
