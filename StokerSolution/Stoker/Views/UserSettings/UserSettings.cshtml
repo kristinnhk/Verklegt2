@@ -9,14 +9,14 @@
 </head>
 <body>
     @Html.Partial("HeaderPartialView")
-    @*@Html.Partial("SidebarPartialView")*@
+    @Html.Partial("SidebarPartialView")
     <div id="photoContainer">
         <img src="" alt="Photo change" />
         <button id="changePhoto">"Change Photo"</button>
     </div>
     <div>
         <form>
-            <textarea id="AboutTextarea">@Model.about</textarea>
+            <!--<textarea id="AboutTextarea">@@Model.about</textarea>-->
             <input type="submit" value="Change about me" />
         </form>
         <button id="AboutSubmit">Create new interest</button>
