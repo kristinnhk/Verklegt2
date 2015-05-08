@@ -7,5 +7,6 @@ namespace Stoker.Services
 {
     public class UserService
     {
+
     }
 }
