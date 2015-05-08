@@ -11,6 +11,7 @@ namespace Stoker.Services
     public class InterestService
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserService us = new UserService();
 
         /// <summary>
         /// returns an interestmodel with the given id from the database using LINQ
@@ -56,6 +57,25 @@ namespace Stoker.Services
 
             return users;
         }
+
+        public void SetNewInterest(string title)
+        {
+            InterestModel interest = new InterestModel();
+            interest.name = title;
+            db.interests.Add(interest);
+            db.SaveChanges();
+        }
+
+        public void SetUserInterest(int interestID, string userID)
+        {
+            UserInterestUnion union = new UserInterestUnion();
+          //  union.User = us.GetUserByID(userID); //why does this code not work? add throws entity object exception
+            union.User = db.Users.FirstOrDefault(x => x.Id == userID);
+            union.interestID = GetInterestByID(interestID);
+            db.userInterestUnion.Add(union);
+            db.SaveChanges();
+        }
+
 
     }
 }

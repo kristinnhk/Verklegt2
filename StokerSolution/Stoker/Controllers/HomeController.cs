@@ -28,32 +28,15 @@ namespace Stoker.Controllers
             //adding an interest to the database
             //do not need to specify the primary key
             
-           /* InterestModel interest = new InterestModel();
-            interest.name = "cats";
-            interest.numberOfUsersInterested = 10;*/
+            
 
             //if you do not comment out these 2 lines after adding the interest the frist time
             //then you will get alot of the same interest since the database doesnt check if 
             //name is unique
-          //  db.interests.Add(interest);
-          //  db.SaveChanges();
-/*
-            int interestidtotest = 1;
-            Is.SetInterestTitle(interestidtotest, "dogs");
-            InterestModel test = Is.GetInterestByID(interestidtotest);
-            int good = 0;
-/*
-            if (test.name == "dogs")
-            {
-
-                good++;
-            }
-            else
-            {
-                good--;
-            }
-            */
-
+       //     Is.SetNewInterest("steinn");
+            
+       //     Is.SetUserInterest(2, User.Identity.GetUserId());
+  
             //to put a union in the database we have to give the function the two models we want to link together
             //it is not enough to give it the primary key of the models, we have to give it the models themselves
             //so it can link them together
