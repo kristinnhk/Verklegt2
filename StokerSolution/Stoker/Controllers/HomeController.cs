@@ -35,8 +35,8 @@ namespace Stoker.Controllers
             //if you do not comment out these 2 lines after adding the interest the frist time
             //then you will get alot of the same interest since the database doesnt check if 
             //name is unique
-            db.interests.Add(interest);
-            db.SaveChanges();
+            //db.interests.Add(interest);
+            //db.SaveChanges();
 
 
             //to put a union in the database we have to give the function the two models we want to link together
@@ -55,8 +55,8 @@ namespace Stoker.Controllers
             union.interestID = (from i in db.interests
                                 select i).First();
             //adding to the database
-            db.userInterestUnion.Add(union);
-            db.SaveChanges();
+            //db.userInterestUnion.Add(union);
+            //db.SaveChanges();
 
             return View();
         }
