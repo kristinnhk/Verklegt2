@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Stoker.Services;
 
 namespace Stoker.Controllers
 {
@@ -18,6 +19,10 @@ namespace Stoker.Controllers
 
         public ActionResult Index()
         {
+
+            
+
+
             //create a new union model
             UserInterestUnion union = new UserInterestUnion();
 
