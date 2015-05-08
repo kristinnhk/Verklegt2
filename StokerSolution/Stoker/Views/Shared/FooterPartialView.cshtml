@@ -1,29 +1,12 @@
 ﻿<!DOCTYPE html>
-
-<!--<hr />
-		<footer>
-			<!--<p>&copy; @@DateTime.Now.Year - My ASP.NET Application</p>
-			<span id="aboutUsFooter" class="bottom">
-				<a href="https://www.youtube.com/watch?v=iq_d8VSM0nw">About Us</a>
-			</span>
-			<span id="backToTopFooter">
-				<a href="http://www.rohaizad.org/top-of-the-world/">Back To Top</a>
-			</span>
-		</footer>-->
 <footer class="navbar navbar-inverse navbar-fixed-bottom">
-	<link rel="stylesheet" type="text/css" href="~/Content/FooterStyleSheet.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/FrameStyleSheet.css">
 	<div class="container">
-		<!--<div class="navbar-header">-->
 		<span id="aboutUsFooter" class="bottom">
 			@Html.ActionLink("About Us", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-			<!--<a href="https://www.youtube.com/watch?v=iq_d8VSM0nw">About Us</a>-->
 		</span>
-		<!--</div>-->
-
 		<span id="backToTopFooter">
 			@Html.ActionLink("FAQ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-			<!--<a href="http://www.rohaizad.org/top-of-the-world/">Back To Top</a>-->
 		</span>
-
 	</div>
 </footer>

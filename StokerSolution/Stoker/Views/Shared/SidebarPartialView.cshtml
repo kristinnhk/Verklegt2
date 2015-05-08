@@ -1,0 +1,23 @@
+﻿@model Stoker.Models.ViewModel
+<nav class="container" id="sidebarEveryPage">
+    <link rel="stylesheet" type="text/css" href="~/Content/FrameStyleSheet.css">
+    <div>
+        <h3>Interests</h3>
+        <ul>
+            @*foreach (var m in Model.interests)
+            {
+                <li>@Html.ActionLink(@m.name, "InterestViewController", @m.interestID)</li>
+            }*@
+        </ul>
+    </div>
+    <div>
+        <h3>Groups</h3>
+        <ul>
+            @*foreach(var m in Model.groups)
+            {
+                <li><a>@m.title</a></li>
+            }*@
+        </ul>
+    </div>
+
+</nav>
