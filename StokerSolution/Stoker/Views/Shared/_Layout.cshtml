@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!--Header Begin-->
-	<header class="navbar navbar-inverse navbar-fixed-top">
+	<!--<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,28 +19,28 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a href="http://www.imdb.com/title/tt2224026/"><img id="headerLogo" src="~/Content/Images/logo.jpg" alt="Stoker Logo" /></a>
-				<!--@@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @@class = "navbar-brand" })-->
+				@@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @@class = "navbar-brand" })
 			</div>
 			<div class="navbar-collapse collapse">
 
-				@Html.ActionLink("User Name", "Index", "Home")
+				@@Html.ActionLink("User Name", "Index", "Home")
 				<span id="searchInHeader">
 					<input type="text" value="Search" onfocus="if (this.value == 'Search') {this.value = '';}" />
 					<input type="submit" value="Search" />
 				</span>
-				<!--<li>@@Html.ActionLink("About", "About", "Home")</li>
-				<li>@@Html.ActionLink("Contact", "Contact", "Home")</li>-->
-				@Html.Partial("_LoginPartial")
+				<li>@@Html.ActionLink("About", "About", "Home")</li>
+				<li>@@Html.ActionLink("Contact", "Contact", "Home")</li>
+				@@Html.Partial("_LoginPartial")
 			</div>
 		</div>
-	</header>
+	</header>-->
 	<!--Header End-->
 	<!--Footer Begin-->
 	<div class="container body-content">
 		@RenderBody()
 		<!--<hr />
 		<footer>
-			<!--<p>&copy; @@DateTime.Now.Year - My ASP.NET Application</p>->
+			<!--<p>&copy; @@DateTime.Now.Year - My ASP.NET Application</p>
 			<span id="aboutUsFooter" class="bottom">
 				<a href="https://www.youtube.com/watch?v=iq_d8VSM0nw">About Us</a>
 			</span>
@@ -48,7 +48,7 @@
 				<a href="http://www.rohaizad.org/top-of-the-world/">Back To Top</a>
 			</span>
 		</footer>-->
-		<footer class="navbar navbar-inverse navbar-fixed-bottom">
+		<!--<footer class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">
 					<span id="aboutUsFooter" class="bottom">
@@ -61,7 +61,7 @@
 					</span>
 				
 			</div>
-		</footer>
+		</footer>-->
 		
 	</div>
 	<!--Footer End-->
