@@ -14,6 +14,6 @@ namespace Stoker.Models.UnionModels
 
         public ApplicationUser User { get; set; }
 
-        public GroupModel group { get; set; }
+        public GroupModel Group { get; set; }
     }
 }

@@ -16,6 +16,6 @@ namespace Stoker.Models.UnionModels
 
         public InterestModel interest { get; set; }
 
-        public GroupModel group { get; set; }
+        public GroupModel Group { get; set; }
     }
 }

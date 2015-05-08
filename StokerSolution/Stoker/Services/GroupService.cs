@@ -119,14 +119,14 @@ namespace Stoker.Services
         /// </summary>
         /// <param name="interestID">the id of the interest we are looking to find the users for</param>
         /// <returns></returns>
-        /*public IEnumerable<ApplicationUser> GetGroupUsers(int ID)
+        public IEnumerable<ApplicationUser> GetGroupUsers(int ID)
         {
             
             IEnumerable<ApplicationUser> users = (from u in db.userGroupsUnion
-                                                  where u. == ID
+                                                  where u.Group.groupID == ID
                                                   select u.User);
 
             return users;
-        }*/
+        }
     }
 }
