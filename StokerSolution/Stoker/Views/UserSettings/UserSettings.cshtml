@@ -1,11 +1,9 @@
-﻿<!-- Model Stoker.Models.ViewModel -->
-@{
+﻿@{
     ViewBag.Title = "UserSettingsView";
 }
-<!--model Stoker.Models.ViewModel-->
+@model Stoker.Models.ApplicationUser
 <script src="~/Scripts/UserSettingScripts.js"></script>
-<!DOCTYPE html>
-<html>
+
 <head>
     <title>"User settings"</title>
 </head>
@@ -18,7 +16,7 @@
     </div>
     <div>
         <form>
-            <textarea id="AboutTextarea">Bla</textarea>
+            <textarea id="AboutTextarea">@Model.about</textarea>
             <input type="submit" value="Change about me" />
         </form>
         <button id="AboutSubmit">Create new interest</button>
@@ -44,8 +42,31 @@
     <div class="col-md-4">
         <button>Create new group</button>
     </div>
+
 	@Html.Partial("FooterPartialView")
 </body>
 
+    <!--
+    <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>about</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        foreach (var user in Model)
+        {
 
-</html>
+
+        <tr>
+            <td>user.firstName</td>
+            <td>user.lastName</td>
+            <td>user.about</td>
+            <td>user.gender</td>
+        </tr>
+        }
+    </table>
+        -->
+</body>
