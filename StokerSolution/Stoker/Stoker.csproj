@@ -167,12 +167,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InterestModel.cs" />
     <Compile Include="Models\ThreadModel.cs" />
+    <Compile Include="Models\UnionModels\CommentLikeUnion.cs" />
+    <Compile Include="Models\UnionModels\ThreadLikeUnion.cs" />
+    <Compile Include="Models\UnionModels\ThreadOriginUnion.cs" />
+    <Compile Include="Models\UnionModels\UserCommentUnion.cs" />
+    <Compile Include="Models\UnionModels\UserFriendsUnion.cs" />
+    <Compile Include="Models\UnionModels\UserGroupsUnion.cs" />
+    <Compile Include="Models\UnionModels\UserInterestUnion.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -198,6 +206,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\UserSettingScripts.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -246,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>

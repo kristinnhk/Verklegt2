@@ -11,8 +11,8 @@ namespace Stoker.Models
     /// </summary>
     public class InterestModel
     {
-        [Required]
-        public int ID { get; set; }
+        [Key]
+        public int interestID { get; set; }
         [Required]
         public string name { get; set; }
         [Required]
