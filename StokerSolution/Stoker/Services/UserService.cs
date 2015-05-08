@@ -5,6 +5,7 @@ using System.Web;
 
 using Stoker.Models;
 
+
 namespace Stoker.Services
 {
     public class UserService
@@ -43,15 +44,91 @@ namespace Stoker.Services
                     select user).SingleOrDefault();
         }
 
-        public void ChangeAboutMe(string userID, string aboutMe)
+        /// <summary>
+        /// Changes the about me section of the current user
+        /// </summary>
+        /// <param name="tempID">current user ID</param>
+        /// <param name="aboutMe">the new about me text you want to set</param>
+        public void SetAboutMe(string tempID, string aboutMe)
         {
             try
             {
-                GetUserByID(userID).about = aboutMe;
+                GetUserByID(tempID).about = aboutMe;
                 db.SaveChanges();
                 return;
+            }catch
+            {
+                return;
             }
-            catch
+        }
+
+        /// <summary>
+        /// Changes the first name of the current user
+        /// </summary>
+        /// <param name="tempID">current user ID</param>
+        /// <param name="firstName">the new first name you want to set</param>
+        public void SetFirstName(string tempID, string firstName)
+        {
+            try
+            {
+                GetUserByID(tempID).firstName = firstName;
+                db.SaveChanges();
+                return;
+            }catch
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Changes the last name of the current user
+        /// </summary>
+        /// <param name="tempID">current user ID</param>
+        /// <param name="lastName">the new last name you want to set</param>
+        public void SetLastName(string tempID, string lastName)
+        {
+            try
+            {
+                GetUserByID(tempID).lastName = lastName;
+                db.SaveChanges();
+                return;
+            }catch
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Changes the gender of the current user
+        /// </summary>
+        /// <param name="tempID">current user ID</param>
+        /// <param name="gender">the new gender you want to set</param>
+        public void SetGender(string tempID, string gender)
+        {
+            try
+            {
+                GetUserByID(tempID).gender = gender;
+                db.SaveChanges();
+                return;
+            }catch
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Changes image of the current user
+        /// </summary>
+        /// <param name="tempID">current user ID</param>
+        /// <param name="image">the new image you want to set</param>
+        public void SetImage(string tempID, byte[] image)
+        {
+            try
+            {
+                GetUserByID(tempID).image = image;
+                db.SaveChanges();
+                return;
+            }catch
             {
                 return;
             }
