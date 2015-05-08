@@ -18,13 +18,22 @@ namespace Stoker.Controllers
         // GET: /UserSettings/
         public ActionResult UserSettings()
         {
-            UserService service = new UserService();
+            UserService userService = new UserService();
+            GroupService groupService = new GroupService();
             string tempid = User.Identity.GetUserId();
-            service.ChangeAboutMe(tempid, "Steinnvaradbreyta");
-            ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == tempid);
+            //service.SetAboutMe(tempid, "Steinnvaradbreyta");
+            //ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == tempid);
             //union.User = db.Users.FirstOrDefault(x => x.Id == tempid);
             //ApplicationUser model = service.GetUserByID("c14bc092-cbe2-418e-ba36-e86021da5a05");
-            return View(user);
+
+            //creating a new group
+            GroupModel newGroup = new GroupModel();
+            newGroup.title = "Bolti a thridjudogum";
+            newGroup.about = "I KR heimilinu kl. 20:00";
+            newGroup.numberOfGroupMembers = 2;
+            groupService.SetGroup(newGroup);
+
+            return View();
         }
         
 
