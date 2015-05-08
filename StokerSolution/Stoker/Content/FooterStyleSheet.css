@@ -1,4 +1,9 @@
-﻿header #searchInHeader {
+﻿header #headerLogo {
+	width: 25px;
+	height: auto;
+}
+
+header #searchInHeader {
 	position: relative;
   margin-left:25%
 }
