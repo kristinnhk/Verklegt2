@@ -3,11 +3,24 @@
 	height: auto;
 }
 
-header #searchInHeader {
-	position: relative;
-  margin-left:25%
+#searchInHeader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -12px;
+  margin-left: -200px;
+  width: 200px;
+  height: 25px;
 }
-
+#searchButtonInHeader{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -12px;
+  margin-left: 0px;
+  width: 75px;
+  height: 25px;
+}
 #backToTopFooter {
 	position: relative;
 	float: right;
