@@ -1,15 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
 	<link rel="stylesheet" type="text/css" href="~/Content/FooterStyleSheet.css">
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<!--Header Begin-->
+	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,34 +18,56 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+				<a href="http://www.imdb.com/title/tt2224026/"><img src="~/Content/Images/logo.jpg" alt="Stoker Logo" /></a>
+				<!--@@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @@class = "navbar-brand" })-->
 			</div>
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li>@Html.ActionLink("Home", "Index", "Home")</li>
-					<li>@Html.ActionLink("About", "About", "Home")</li>
-					<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-				</ul>
+
+				@Html.ActionLink("User Name", "Index", "Home")
+				<span id="searchInHeader">
+					<input type="text" value="Search" onfocus="if (this.value == 'Search') {this.value = '';}" />
+					<input type="submit" value="Search" />
+				</span>
+				<!--<li>@@Html.ActionLink("About", "About", "Home")</li>
+				<li>@@Html.ActionLink("Contact", "Contact", "Home")</li>-->
 				@Html.Partial("_LoginPartial")
 			</div>
 		</div>
-	</div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <!--<p>&copy; @@DateTime.Now.Year - My ASP.NET Application</p>-->
-					<span id="aboutUs" class="bottom">
+	</header>
+	<!--Header End-->
+	<!--Footer Begin-->
+	<div class="container body-content">
+		@RenderBody()
+		<!--<hr />
+		<footer>
+			<!--<p>&copy; @@DateTime.Now.Year - My ASP.NET Application</p>->
+			<span id="aboutUsFooter" class="bottom">
+				<a href="https://www.youtube.com/watch?v=iq_d8VSM0nw">About Us</a>
+			</span>
+			<span id="backToTopFooter">
+				<a href="http://www.rohaizad.org/top-of-the-world/">Back To Top</a>
+			</span>
+		</footer>-->
+		<footer class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="container">
+				<div class="navbar-header">
+					<span id="aboutUsFooter" class="bottom">
 						<a href="https://www.youtube.com/watch?v=iq_d8VSM0nw">About Us</a>
 					</span>
-					<span id="backToTop">
+				</div>
+				
+					<span id="backToTopFooter">
 						<a href="http://www.rohaizad.org/top-of-the-world/">Back To Top</a>
 					</span>
-        </footer>
-    </div>
+				
+			</div>
+		</footer>
+		
+	</div>
+	<!--Footer End-->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
 </body>
 </html>

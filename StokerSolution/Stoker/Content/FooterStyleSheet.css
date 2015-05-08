@@ -1,20 +1,13 @@
-﻿footer {
-	height: 50px;
-	background-color: white;
+﻿header #searchInHeader {
 	position: relative;
-	width: 100%;
-	/*/border-style: solid;
-	border-width: 1px;
-	border-color: black;*/
-	z-index: 150;
+  margin-left:25%
 }
 
-footer #backToTop {
+#backToTopFooter {
 	position: relative;
 	float: right;
 }
 
-footer #aboutUs {
+#aboutUsFooter {
 	position: relative;
-	
 }
