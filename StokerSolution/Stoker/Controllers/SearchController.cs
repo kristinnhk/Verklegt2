@@ -23,9 +23,9 @@ namespace Stoker.Controllers
 
             List<ApplicationUser> users = userService.GetUsersByName("S").ToList();
             List<GroupModel> groups = groupService.GetGroupByTitle("Steinn").ToList();
-            //List<InterestModel> interests = interestService.GetInterestsByTitle(query).ToList();
+            List<InterestModel> interests = interestService.GetInterestsByTitle("S").ToList();
             //List<ThreadModel> threads = threadService.GetThreadByTitle(query).ToList();
-            //results.interests = interests;
+            results.interests = interests;
             //results.threads = threads;
             results.groups = groups;
             results.Users = users;
