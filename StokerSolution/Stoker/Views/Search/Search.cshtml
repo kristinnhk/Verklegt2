@@ -1,0 +1,171 @@
+﻿@model Stoker.Models.ViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+<!--http://bootsnipp.com/snippets/featured/panel-tables-with-filter Template credited to Bootsnip user robm-->
+<link href="~/Content/Search.css" rel="stylesheet" />
+@Html.Partial("HeaderPartialView")
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Users</h3>
+                    <div class="pull-right">
+                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+                </div>
+                <table class="table table-hover" id="dev-table">
+                    <thead>
+                        <tr>
+                            <!--<th>#</th>-->
+                            <th>User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--<tr>
+                            <td>1</td>
+                            <td>Kilgore</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bob</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Holden</td>
+                        </tr>-->
+                        @if (Model.Users != null) { 
+                            foreach (var m in Model.Users)
+                            {
+                                <tr>
+                                    <td>@m.firstName @m.lastName</td>
+                                </tr>
+                            }
+                        }
+                        @if(Model.Users == null || Model.Users.Count == 0)
+                        {
+                            <tr>
+                                <td>No users found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Interests</h3>
+                    <div class="pull-right">
+                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                            <i class="glyphicon glyphicon-thumbs-up"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Tasks" />
+                </div>
+                <table class="table table-hover" id="task-table">
+                    <thead>
+                        <tr>
+                            <th>Interests</th>
+                            <th>Number of users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--<tr>
+                            <td>1</td>
+                            <td>Site Wireframes</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Mobile Landing Page</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Add SEO tags</td>
+                        </tr>-->
+                        @if (Model.interests != null)
+                        {
+                            foreach(var m in Model.interests)
+                            {
+                                <tr>
+                                    <td>@m.name</td>
+                                    <td>@m.numberOfUsersInterested</td>
+                                </tr>
+                            }
+                        }
+                        @if(Model.interests == null || Model.interests.Count == 0)
+                        {
+                            <tr>
+                                <td>No interests found</td>
+                            </tr>      
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Groups</h3>
+                    <div class="pull-right">
+                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                            <i class="glyphicon glyphicon-heart"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Tasks" />
+                </div>
+                <table class="table table-hover" id="task-table">
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>About</th>
+                            <th>Number of users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <!-- <tr>
+                            <td>1</td>
+                            <td>Site Wireframes</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Mobile Landing Page</td>
+                        </tr>-->
+                        @if (Model.groups != null) { 
+                            foreach (var m in Model.groups)
+                            {
+                                <tr>
+                                    <td>@m.title</td>
+                                    <td>@m.about</td>
+                                    <td>@m.numberOfGroupMembers</td>
+                                </tr>
+                            }
+                        }
+                        @if (Model.groups == null || Model.groups.Count == 0)
+                        {
+                            <tr>
+                                <td>No groups found</td>
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("FooterPartialView")
+<script src="~/Scripts/Search.js"></script>
