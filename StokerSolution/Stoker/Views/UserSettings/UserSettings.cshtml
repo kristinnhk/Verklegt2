@@ -5,12 +5,12 @@
 <script src="~/Scripts/UserSettingScripts.js"></script>
 
 <head>
-    <title>"User settings"</title>
+	<title>"User settings"</title>
 </head>
 <body>
-    @Html.Partial("HeaderPartialView")
-    @Html.Partial("SidebarPartialView")
-	
+	@Html.Partial("HeaderPartialView")
+	@Html.Partial("SidebarPartialView")
+	<div class="pageMainContent">
 		<div id="photoContainer">
 			<img src="" alt="Photo change" />
 			<button id="changePhoto">"Change Photo"</button>
@@ -43,7 +43,7 @@
 		<div class="col-md-4">
 			<button>Create new group</button>
 		</div>
-	
+	</div>
 	@Html.Partial("FooterPartialView")
 </body>
 
