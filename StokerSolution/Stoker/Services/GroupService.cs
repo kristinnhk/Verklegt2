@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using Stoker.Models;
+using Stoker.Models.UnionModels;
 
 namespace Stoker.Services
 {
@@ -127,6 +128,49 @@ namespace Stoker.Services
                                                   select u.User);
 
             return users;
+        }
+
+        /// <summary>
+        /// Returns the groups a user is a member of
+        /// </summary>
+        /// <param name="userID">ID of the user</param>
+        /// <returns>List of groups the user is a member of</returns>
+        public IEnumerable<GroupModel> GetUserGroups(string userID)
+        {
+            IEnumerable<GroupModel> groups = (from u in db.userGroupsUnion
+                                                  where u.User.Id == userID
+                                                  select u.Group);
+
+            return groups;
+        }
+
+        /// <summary>
+        /// Adds a user as a member of a group by adding an entry to the usergroupunion datatable.
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="groupID">id of the group</param>
+        public void SetUserGroup(string userID, int groupID)
+        {
+            foreach (UserGroupsUnion union in db.userGroupsUnion)
+            {
+                if (union.User.Id == userID && union.Group.groupID == groupID)
+                {
+                    return;
+                }
+            }
+                try
+                {
+                    UserGroupsUnion newUnion = new UserGroupsUnion();
+                    newUnion.Group = GetGroupByID(groupID);
+                    newUnion.User = db.Users.FirstOrDefault(x => x.Id == userID);
+                    db.userGroupsUnion.Add(newUnion);
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    return;
+                }
+
         }
     }
 }

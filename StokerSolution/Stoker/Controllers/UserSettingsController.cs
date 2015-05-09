@@ -16,6 +16,7 @@ namespace Stoker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserService userService = new UserService();
         private GroupService groupService = new GroupService();
+        private InterestService interestService = new InterestService();
         //
         // GET: /UserSettings/
         public ActionResult UserSettings()
@@ -24,17 +25,28 @@ namespace Stoker.Controllers
             //service.SetAboutMe(tempid, "Steinnvaradbreyta");
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             ViewModel model = new ViewModel();
-            model.Users = new List<ApplicationUser>();
-            model.Users.Add(user);
-            //union.User = db.Users.FirstOrDefault(x => x.Id == tempid);
-            //ApplicationUser model = service.GetUserByID("c14bc092-cbe2-418e-ba36-e86021da5a05");
 
-            //creating a new group
-            //GroupModel newGroup = new GroupModel();
-            //newGroup.title = "Bolti a thridjudogum";
-            //newGroup.about = "I KR heimilinu kl. 20:00";
-            //newGroup.numberOfGroupMembers = 2;
-            //groupService.SetGroup(newGroup);
+            interestService.SetUserInterest(1, user.Id);
+
+            //Initiating the parts of the view model needed. 
+            model.Users = new List<ApplicationUser>();
+            model.groups = new List<GroupModel>();
+            model.interests = new List<InterestModel>();
+
+            var groups = GetUserGroups(user.Id);
+            foreach(GroupModel group in groups)
+            {
+                model.groups.Add(group);
+            }
+
+            var interests = GetUserInterests(user.Id);
+            foreach(InterestModel interest in interests)
+            {
+                model.interests.Add(interest);
+            }
+
+            model.Users.Add(user);
+            
 
             return View(model);
         }
@@ -50,5 +62,14 @@ namespace Stoker.Controllers
             userService.SetAboutMe(userID, aboutMeString);
         }
 
+        public List<GroupModel> GetUserGroups(string userID) 
+        {
+            return groupService.GetUserGroups(userID).ToList();
+        }
+
+        public List<InterestModel> GetUserInterests(string userID)
+        {
+            return interestService.GetUserInterests(userID).ToList();
+        }
 	}
 }

@@ -58,6 +58,20 @@ namespace Stoker.Services
             return users;
         }
 
+        /// <summary>
+        /// Returns the interests a user is a member of
+        /// </summary>
+        /// <param name="userID">ID of the user</param>
+        /// <returns>List of interests the user is a member of</returns>
+        public IEnumerable<InterestModel> GetUserInterests(string userID)
+        {
+            IEnumerable<InterestModel> interests = (from u in db.userInterestUnion
+                                              where u.User.Id == userID
+                                              select u.interestID);
+
+            return interests;
+        }
+
         public void SetNewInterest(InterestModel interest)
         {
             db.interests.Add(interest);
@@ -92,5 +106,10 @@ namespace Stoker.Services
         }
 
 
+
+        internal void SetUserInterest(string p1, int p2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
