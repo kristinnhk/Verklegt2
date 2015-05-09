@@ -58,10 +58,8 @@ namespace Stoker.Services
             return users;
         }
 
-        public void SetNewInterest(string title)
+        public void SetNewInterest(InterestModel interest)
         {
-            InterestModel interest = new InterestModel();
-            interest.name = title;
             db.interests.Add(interest);
             db.SaveChanges();
         }

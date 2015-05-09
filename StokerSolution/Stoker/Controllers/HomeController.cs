@@ -19,7 +19,8 @@ namespace Stoker.Controllers
         //each service will have this. this is just here in controller for testing atm
         private ApplicationDbContext db = new ApplicationDbContext();
         private InterestService Is = new InterestService();
-
+        private ThreadService ts = new ThreadService();
+        private GroupService gs = new GroupService();
         public ActionResult Index()
         {
             //create a new union model
@@ -27,8 +28,31 @@ namespace Stoker.Controllers
 
             //adding an interest to the database
             //do not need to specify the primary key
-            
-            
+           /* CommentModel comment = new CommentModel();
+            comment.content = "Such WoW";
+            comment.dateCreated = DateTime.Now;
+            comment.likes = 100;
+
+            CommentModel comment2 = new CommentModel();
+            comment2.content = "such quality";
+            comment2.dateCreated = DateTime.Now;
+            comment2.likes = 144;
+
+            CommentModel comment3 = new CommentModel();
+            comment3.content = "very nice";
+            comment3.dateCreated = DateTime.Now;
+            comment3.likes = 1337;
+
+            ts.SetThreadComment(4, User.Identity.GetUserId(), comment);
+            ts.SetThreadComment(4, User.Identity.GetUserId(), comment2);
+            ts.SetThreadComment(4, User.Identity.GetUserId(), comment3);
+            */
+   /*         IEnumerable<CommentModel> comments = ts.GetThreadComments(4);
+            foreach (var item in comments)
+            {
+                System.Diagnostics.Debug.WriteLine(item.content + ".  NUMBER OF LIKES: " + item.likes
+                    + "\n DATE POSTED: " + item.dateCreated);
+            }*/
 
             //if you do not comment out these 2 lines after adding the interest the frist time
             //then you will get alot of the same interest since the database doesnt check if 
@@ -39,12 +63,12 @@ namespace Stoker.Controllers
             Is.SetNewInterest("stupid cats doing stupid stuff");
             Is.SetNewInterest("hoskuldur");*/
 
-            IEnumerable<InterestModel> test = Is.GetInterestsByTitle("dog");
+        /*    IEnumerable<InterestModel> test = Is.GetInterestsByTitle("dog");
 
             foreach (var item in test)
             {
                 System.Diagnostics.Debug.WriteLine(item.name);
-            }
+            }*/
       
 
        //     Is.SetUserInterest(2, User.Identity.GetUserId());
@@ -68,7 +92,7 @@ namespace Stoker.Controllers
             db.userInterestUnion.Add(union);
             db.SaveChanges();
             IEnumerable<ApplicationUser> list = Is.GetInterestUsers(1);*/
-
+     //       int stopper = 5;
             return View();
         }
 
