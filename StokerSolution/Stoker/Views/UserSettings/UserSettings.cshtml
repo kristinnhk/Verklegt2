@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "UserSettingsView";
 }
-@model Stoker.Models.ApplicationUser
+@model Stoker.Models.ViewModel
 
 
     <head>
@@ -17,9 +17,9 @@
         <div>
             <fieldset>
                 <legend>About me</legend>
-                <textarea id="AboutTextarea"> @if (Model.about != null)
+                <textarea id="AboutTextarea"> @if (Model.Users[0] != null)
                                               {
-                                                  @Model.about
+                                                  @Model.Users[0].about
                                               }
                 </textarea>
                 <span id="AboutMeError">About me section can not be empty</span>

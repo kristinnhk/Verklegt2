@@ -23,6 +23,9 @@ namespace Stoker.Controllers
             string userID = User.Identity.GetUserId();
             //service.SetAboutMe(tempid, "Steinnvaradbreyta");
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
+            ViewModel model = new ViewModel();
+            model.Users = new List<ApplicationUser>();
+            model.Users.Add(user);
             //union.User = db.Users.FirstOrDefault(x => x.Id == tempid);
             //ApplicationUser model = service.GetUserByID("c14bc092-cbe2-418e-ba36-e86021da5a05");
 
@@ -33,7 +36,7 @@ namespace Stoker.Controllers
             //newGroup.numberOfGroupMembers = 2;
             //groupService.SetGroup(newGroup);
 
-            return View(user);
+            return View(model);
         }
         
         /// <summary>
