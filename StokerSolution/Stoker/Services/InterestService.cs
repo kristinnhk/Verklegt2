@@ -65,7 +65,11 @@ namespace Stoker.Services
             db.interests.Add(interest);
             db.SaveChanges();
         }
-
+        /// <summary>
+        /// connect a user to an interest he is interested in
+        /// </summary>
+        /// <param name="interestID">The ID of the interest the user is interesed in</param>
+        /// <param name="userID">The ID of the user who is interest in something</param>
         public void SetUserInterest(int interestID, string userID)
         {
             UserInterestUnion union = new UserInterestUnion();
@@ -74,6 +78,19 @@ namespace Stoker.Services
             union.interestID = GetInterestByID(interestID);
             db.userInterestUnion.Add(union);
             db.SaveChanges();
+        }
+        /// <summary>
+        /// Gets all of the interests that include the search string
+        /// it matches partially and selects all that match
+        /// </summary>
+        /// <param name="title">The search string</param>
+        /// <returns></returns>
+        public IEnumerable<InterestModel> GetInterestsByTitle(string title)
+        {
+            IEnumerable<InterestModel> interests = from i in db.interests
+                                                   where i.name.Contains(title)
+                                                   select i;
+            return interests;
         }
 
 

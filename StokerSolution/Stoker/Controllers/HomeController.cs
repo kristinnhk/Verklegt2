@@ -33,8 +33,20 @@ namespace Stoker.Controllers
             //if you do not comment out these 2 lines after adding the interest the frist time
             //then you will get alot of the same interest since the database doesnt check if 
             //name is unique
-       //     Is.SetNewInterest("steinn");
-            
+          /*  Is.SetNewInterest("dog pictures");
+            Is.SetNewInterest("dog videos");
+            Is.SetNewInterest("funny dogs");
+            Is.SetNewInterest("stupid cats doing stupid stuff");
+            Is.SetNewInterest("hoskuldur");*/
+
+            IEnumerable<InterestModel> test = Is.GetInterestsByTitle("dog");
+
+            foreach (var item in test)
+            {
+                System.Diagnostics.Debug.WriteLine(item.name);
+            }
+      
+
        //     Is.SetUserInterest(2, User.Identity.GetUserId());
   
             //to put a union in the database we have to give the function the two models we want to link together
