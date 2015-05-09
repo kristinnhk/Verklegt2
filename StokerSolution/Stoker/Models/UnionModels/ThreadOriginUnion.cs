@@ -12,6 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int ThreadOriginID { get; set; }
 
+        public ThreadModel Thread { get; set; }
+
         public ApplicationUser User { get; set; }
 
         public InterestModel interest { get; set; }
