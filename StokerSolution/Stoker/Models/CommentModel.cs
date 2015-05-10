@@ -21,5 +21,7 @@ namespace Stoker.Models
         public int likes { get; set; }
         [Required]
         public bool currentUserLiked { get; set; }
-    }
+
+				public string commentAuthor { get; set; }
+		}
 }

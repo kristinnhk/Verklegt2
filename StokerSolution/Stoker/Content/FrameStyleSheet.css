@@ -35,14 +35,14 @@ header #headerLogo {
 }
 
 footer {
-	position: absolute;
+	
 	bottom: 0;
 	width: 100%;
 	height: 40px;
 }
 
 #sidebarEveryPage{
-    margin-bottom: 40px;
-    width: 250px;
-		border: 5px solid red;
+	float: left;
+	width: 250px;
+	border: 5px solid red;
 }

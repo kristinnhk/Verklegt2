@@ -1,0 +1,42 @@
+﻿.singleComment {
+	border: 1px solid black;
+}
+
+.threadUsername {
+	position: relative;
+	text-align: center;
+	border: 1px solid black;
+	float: left;
+	width: 33.33333%;
+}
+
+
+.threadTitle {
+	position: relative;
+	text-align: center;
+	border: 1px solid black;
+	float: left;
+	width: 33.33333%;
+}
+
+.threadInterestOrGroup {
+	position: relative;
+	text-align: center;
+	border: 1px solid black;
+	float: left;
+	width: 33.33333%;
+}
+
+.singleCommentAuthor {
+	position: relative;
+	border: 1px solid black;
+	float: left;
+	width: 5%;
+}
+
+.singleCommentContent {
+	position: relative;
+	border: 1px solid black;
+	float: left;
+	width: 95%;
+}

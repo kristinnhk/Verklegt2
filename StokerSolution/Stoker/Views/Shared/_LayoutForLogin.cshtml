@@ -6,19 +6,17 @@
 	<title>@ViewBag.Title - My ASP.NET Application</title>
 	@Styles.Render("~/Content/css")
 	@Scripts.Render("~/bundles/modernizr")
-	<link rel="stylesheet" type="text/css" href="~/Content/FrameStyleSheet.css">
-	<link rel="stylesheet" type="text/css" href="~/Content/ThreadStyleSheet.css">
-	<link rel="stylesheet" type="text/css" href="~/Content/pageMainContent.css">
+	@*<link rel="stylesheet" type="text/css" href="~/Content/FrameStyleSheet.css">*@
+	@*<link rel="stylesheet" type="text/css" href="~/Content/ThreadStyleSheet.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/pageMainContent.css">*@
 </head>
 <body>
-	@Html.Partial("HeaderPartialView")
 	<div class="body-content">
-		@Html.Partial("SidebarPartialView")
-		<div class="pageMainContent clearfix">
+		<div class="container clearfix">
 			@RenderBody()
 		</div>
 	</div>
-	@Html.Partial("FooterPartialView")
+	@*@Html.Partial("FooterPartialView")*@
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
 	@RenderSection("scripts", required: false)
