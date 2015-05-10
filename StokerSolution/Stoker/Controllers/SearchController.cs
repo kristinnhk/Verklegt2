@@ -22,10 +22,10 @@ namespace Stoker.Controllers
             return View();
         }
 
-        public ActionResult SearchJson(FormCollection collection)
+        public ActionResult SearchJson()
         {
             ViewModel results = new ViewModel();
-            string query = collection["searchbarInSearchView"];
+            string query = Request["Search"].ToString();
             List<ApplicationUser> users = userService.GetUsersByName(query).ToList();
             List<GroupModel> groups = groupService.GetGroupByTitle(query).ToList();
             List<InterestModel> interests = interestService.GetInterestsByTitle(query).ToList();
