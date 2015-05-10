@@ -103,15 +103,11 @@ namespace Stoker.Controllers
 						threadID = 1,
 						user = User,
 						title = "cute cats",
-						interest = new InterestModel(){
-							name = "Cats",
-						},
+						interest = "Cats",
 						mainContent = "lolololololol",
-						/*image*/
 						comments = new List<CommentModel>() {
 							new CommentModel() {
 								commentID = 1,
-								/*image*/
 								commentAuthor = "Skúli",
 								content = "bad status bro",
 								dateCreated = DateTime.Now,
@@ -121,7 +117,35 @@ namespace Stoker.Controllers
 							new CommentModel() {
 								commentID = 2,
 								commentAuthor = "Steinn",
-								/*image*/
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 2,
+						user = User,
+						title = "CoolGoal",
+						interest = "Football",
+						mainContent = "RONALDOOOOOOO!!",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "h.ki",
+								content = "bbbbbbb",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
 								content = "yolo",
 								dateCreated = DateTime.Now,
 								likes = 0,

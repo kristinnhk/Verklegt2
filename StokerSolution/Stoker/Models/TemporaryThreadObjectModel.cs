@@ -16,7 +16,7 @@ namespace Stoker.Models
 		public int threadID;
 		public IPrincipal user;
 		public string title;
-		public InterestModel interest;
+		public string interest;
 		public string mainContent;
 		/*image*/
 		public List<CommentModel> comments;
