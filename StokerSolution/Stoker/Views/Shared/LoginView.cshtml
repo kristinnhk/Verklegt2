@@ -1,19 +1,21 @@
 ﻿@using Stoker.Models
-<header>
-    <span>
-        <a href="~/"><img src="~/Content/Images/logo.jpg" /></a>
-    </span>
-</header>
+<body id="loginBody">
+    <link href="~/Content/FrameStyleSheet.css" rel="stylesheet" />
+    <header>
+        <span>
+            <!-- <a href="~/"><img src="~/Content/Images/logo.jpg" /></a>-->
+        </span>
+    </header>
 
-<div class="row">
-    <div class="col-md-6">
-        @Html.Partial("LoginPartial")
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Partial("LoginPartial")
+        </div>
+        <div class="col-md-6">
+            @Html.Partial("SignupPartial")
+        </div>
     </div>
-    <div class="col-md-6">
-        @Html.Partial("SignupPartial")
-    </div>
-</div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
