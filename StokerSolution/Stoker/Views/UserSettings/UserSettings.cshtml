@@ -2,6 +2,7 @@
 	ViewBag.Title = "UserSettingsView";
 }
 @model Stoker.Models.ApplicationUser
+<<<<<<< HEAD
 <script src="~/Scripts/UserSettingScripts.js"></script>
 	
 
@@ -51,8 +52,76 @@
 		</thead>
 		foreach (var user in Model)
 		{
+=======
 
 
+    <head>
+        <title>"User settings"</title>
+    </head>
+    <body>
+        @Html.Partial("HeaderPartialView")
+        @*@Html.Partial("SidebarPartialView")*@
+        <div id="photoContainer">
+            <img src="" alt="Photo change" />
+            <button id="changePhoto">"Change Photo"</button>
+        </div>
+        <div>
+            <fieldset>
+                <legend>About me</legend>
+                <textarea id="AboutTextarea"> @if (Model.about != null)
+                                              {
+                                                  @Model.about
+                                              }
+                </textarea>
+                <span id="AboutMeError">About me section can not be empty</span>
+                <button id="AboutSubmit">Change about me</button>
+                <button>Create new interest</button>
+            </fieldset>
+        </div>
+        <div class="col-md-4">
+            <form>
+                <ul>
+                    <li><input type="checkbox" name="group1" value="group1" /> Group1</li>
+                    <li><input type="checkbox" name="group2" value="group2" />Group2</li>
+                    <li><input type="checkbox" name="group3" value="group3" />Group3</li>
+                </ul>
+                <button> Delete selected groups</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <ul>
+                <li> <input type="checkbox" name="interest1" value="interest1" /> Interest1</li>
+                <li><input type="checkbox" name="interest2" value="interest2" /> Interest2</li>
+                <li><input type="checkbox" name="interest3" value="interest3" /> Interest4</li>
+            </ul>
+            <button> Delete selected groups</button>
+        </div>
+        <div class="col-md-4">
+            <button>Create new group</button>
+        </div>
+
+                    @Html.Partial("FooterPartialView")\
+
+>>>>>>> master
+
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/UserSettingScripts.js" type="text/javascript"></script>
+    </body>
+
+        <!--
+        <table>
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>about</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+            foreach (var user in Model)
+    {
+
+<<<<<<< HEAD
 		<tr>
 				<td>user.firstName</td>
 				<td>user.lastName</td>
@@ -63,3 +132,15 @@
 </table>
 		-->
 <!--</body>-->
+=======
+
+            <tr>
+                <td>user.firstName</td>
+                <td>user.lastName</td>
+                <td>user.about</td>
+                <td>user.gender</td>
+            </tr>
+                }
+        </table>
+            -->
+>>>>>>> master
