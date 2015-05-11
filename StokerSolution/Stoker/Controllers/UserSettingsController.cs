@@ -25,10 +25,17 @@ namespace Stoker.Controllers
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             ViewModel model = new ViewModel();
 
+            //groupService.SetUserGroup(User.Identity.GetUserId(), 1);
+            //groupService.SetUserGroup(User.Identity.GetUserId(), 2);
+            //groupService.SetUserGroup(User.Identity.GetUserId(), 3);
+            //groupService.SetUserGroup(User.Identity.GetUserId(), 4);
+
             //Initiating the parts of the view model needed. 
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
+
+            
 
             if (user.Id != null)
             {
@@ -77,7 +84,15 @@ namespace Stoker.Controllers
         {
             foreach (int ID in Request["groupIds[]"])
             {
-             //   groupService.DeleteUserGroup(User.Identity.GetUserId(), ID);
+               // groupService.DeleteUserGroup(User.Identity.GetUserId(), ID);
+            }
+        }
+
+        public void DeleteUserInterests()
+        {
+            foreach (int ID in Request["interestIds[]"])
+            {
+                //   interestService.DeleteUserInterest(User.Identity.GetUserId(), ID);
             }
         }
 	}

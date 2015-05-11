@@ -10,7 +10,12 @@ namespace Stoker.Services
 {
     public class UserService
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+         private readonly IAppDataContext db;
+
+        public UserService(IAppDataContext context = null)
+        {
+            db = context ?? new ApplicationDbContext();
+        }
 
         /// <summary>
         /// This function Gets users from the database by searching the firstName and lastName

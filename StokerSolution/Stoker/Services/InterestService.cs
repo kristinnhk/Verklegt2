@@ -10,8 +10,15 @@ namespace Stoker.Services
 {
     public class InterestService
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+       
         private UserService us = new UserService();
+
+         private readonly IAppDataContext db;
+
+        public InterestService(IAppDataContext context = null)
+        {
+            db = context ?? new ApplicationDbContext();
+        }
 
         /// <summary>
         /// returns an interestmodel with the given id from the database using LINQ

@@ -28,19 +28,35 @@ namespace Stoker.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public interface IAppDataContext
     {
-        public DbSet<CommentModel> comments { get; set; }
-        public DbSet<GroupModel> groups { get; set; }
-        public DbSet<InterestModel> interests { get; set; }
-        public DbSet<ThreadModel> threads { get; set; }
-        public DbSet<UserInterestUnion> userInterestUnion { get; set; }
-        public DbSet<CommentLikeUnion> commentLikeUnion { get; set; }
-        public DbSet<ThreadLikeUnion> threadLikeUnion { get; set; }
-        public DbSet<UserCommentUnion> userCommentUnion { get; set; }
-        public DbSet<UserFriendsUnion> userFriendsUnion { get; set; }
-        public DbSet<UserGroupsUnion> userGroupsUnion { get; set; }
-        public DbSet<ThreadOriginUnion> threadOriginUnion { get; set; }
+        IDbSet<CommentModel> comments { get; set; }
+        IDbSet<GroupModel> groups { get; set; }
+        IDbSet<InterestModel> interests { get; set; }
+        IDbSet<ThreadModel> threads { get; set; }
+        IDbSet<UserInterestUnion> userInterestUnion { get; set; }
+        IDbSet<CommentLikeUnion> commentLikeUnion { get; set; }
+        IDbSet<ThreadLikeUnion> threadLikeUnion { get; set; }
+        IDbSet<UserCommentUnion> userCommentUnion { get; set; }
+        IDbSet<UserFriendsUnion> userFriendsUnion { get; set; }
+        IDbSet<UserGroupsUnion> userGroupsUnion { get; set; }
+        IDbSet<ThreadOriginUnion> threadOriginUnion { get; set; }
+        int SaveChanges();
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IAppDataContext
+    {
+        public IDbSet<CommentModel> comments { get; set; }
+        public IDbSet<GroupModel> groups { get; set; }
+        public IDbSet<InterestModel> interests { get; set; }
+        public IDbSet<ThreadModel> threads { get; set; }
+        public IDbSet<UserInterestUnion> userInterestUnion { get; set; }
+        public IDbSet<CommentLikeUnion> commentLikeUnion { get; set; }
+        public IDbSet<ThreadLikeUnion> threadLikeUnion { get; set; }
+        public IDbSet<UserCommentUnion> userCommentUnion { get; set; }
+        public IDbSet<UserFriendsUnion> userFriendsUnion { get; set; }
+        public IDbSet<UserGroupsUnion> userGroupsUnion { get; set; }
+        public IDbSet<ThreadOriginUnion> threadOriginUnion { get; set; }
 
 
         public ApplicationDbContext()
