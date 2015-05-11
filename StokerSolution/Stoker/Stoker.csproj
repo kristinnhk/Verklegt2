@@ -161,7 +161,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StokerController.cs" />
     <Compile Include="Controllers\UserSettingsController.cs" />
@@ -266,6 +268,8 @@
     <Content Include="Views\Shared\NewsFeedPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutForLogin.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\GroupProfile\GroupProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

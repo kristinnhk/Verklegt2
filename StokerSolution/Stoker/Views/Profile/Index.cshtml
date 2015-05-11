@@ -1,0 +1,31 @@
+﻿@model Stoker.Models.ViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="container">
+        <img src="@Model.Users[0].image" alt="Profile picture" class="img-responsive col-lg-4" />
+        <p class="col-lg-6" style="overflow: scroll; overflow-x: hidden; max-height: 150px;">@Model.Users[0].about </p>
+        @Html.ActionLink("Settings", "UserSettings", "UserSettings", null, new { @class="btn btn-primary" })
+    </div>
+    <div class="container">
+        <h2>@Model.Users[0].firstName @Model.Users[0].lastName</h2>
+    </div>
+</div>
+<div class="col-lg-12 container">
+    <fieldset>
+        <legend>New Thread</legend>
+        @using (@Html.BeginForm("SubmitThread", "Profile", FormMethod.Post))
+        {  
+            <div class="container">
+                <input type="text" value="Title" name="titleInUserThread" class="col-lg-3 form-control" />
+                <input type="file" value="Photo" name="photoInUserThread" class="col-lg-3" />
+            </div>
+            <div class="container">
+                <textarea name="contentInUserThread" class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        }
+    </fieldset>
+</div>
