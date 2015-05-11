@@ -16,15 +16,16 @@
 <div class="col-lg-12 container">
     <fieldset>
         <legend>New Thread</legend>
-        <form>
+        @using (@Html.BeginForm("SubmitThread", "Profile", FormMethod.Post))
+        {  
             <div class="container">
-                <input type="text" value="Title" class="col-lg-3 form-control" />
-                <input type="file" value="Photo" class="col-lg-3" />
+                <input type="text" value="Title" name="titleInUserThread" class="col-lg-3 form-control" />
+                <input type="file" value="Photo" name="photoInUserThread" class="col-lg-3" />
             </div>
             <div class="container">
-                <textarea class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
+                <textarea name="contentInUserThread" class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
-        </form>
+        }
     </fieldset>
 </div>
