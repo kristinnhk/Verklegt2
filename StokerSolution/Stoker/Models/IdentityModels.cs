@@ -30,6 +30,7 @@ namespace Stoker.Models
 
     public interface IAppDataContext
     {
+        IDbSet<ApplicationUser> Users { get; set; }
         IDbSet<CommentModel> comments { get; set; }
         IDbSet<GroupModel> groups { get; set; }
         IDbSet<InterestModel> interests { get; set; }
@@ -46,6 +47,7 @@ namespace Stoker.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IAppDataContext
     {
+        public IDbSet<ApplicationUser> Users { get; set; }
         public IDbSet<CommentModel> comments { get; set; }
         public IDbSet<GroupModel> groups { get; set; }
         public IDbSet<InterestModel> interests { get; set; }
