@@ -17,6 +17,7 @@ namespace Stoker.Controllers
         private GroupService groupService = new GroupService();
         private InterestService interestService = new InterestService();
         // GET: Profile
+        [Authorize]
         public ActionResult Index()
         {
             string userID = User.Identity.GetUserId();

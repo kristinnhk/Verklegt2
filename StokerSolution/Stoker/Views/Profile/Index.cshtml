@@ -3,23 +3,26 @@
 @{
     ViewBag.Title = "Index";
 }
-<div>
-    <div class="container">
-        <img src="@Model.Users[0].image" alt="Profile picture" />
-        <p>@Model.Users[0].about</p>
-    </div>
-    <div class="container">
-        @Html.ActionLink("Settings", "UserSettings", "UserSettings", new { @class = "btn btn-primary"})
-    </div>
+<div class="col-lg-12 container">
+    <img src="@Model.Users[0].image" alt="Profile picture" class="img-responsive col-lg-4"  />
+    <p class="col-lg-6" style="overflow: scroll; overflow-x: hidden; max-height: 150px;">@Model.Users[0].about Lorem ipsum dolor sit amet, consectetur adipiscing elit. Verba tu fingas et ea dicas, quae non sentias? Nulla profecto est, quin suam vim retineat a primo ad extremum. Nihil minus, contraque illa hereditate dives ob eamque rem laetus. Duo Reges: constructio interrete. An tu me de L.
+
+An me, inquis, tam amentem putas, ut apud imperitos isto modo loquar? Qui ita affectus, beatum esse numquam probabis; Videsne quam sit magna dissensio? Nihil acciderat ei, quod nollet, nisi quod anulum, quo delectabatur, in mari abiecerat. Beatus autem esse in maximarum rerum timore nemo potest. Igitur neque stultorum quisquam beatus neque sapientium non beatus. Quo modo? Quid iudicant sensus? Qui autem de summo bono dissentit de tota philosophiae ratione dissentit. Si longus, levis dictata sunt.</p>
+
+    @Html.ActionLink("Settings", "UserSettings", "UserSettings", new { @class = "btn btn-primary"})
 </div>
-<div>
+<div class="col-lg-12 container">
     <fieldset>
         <legend>New Thread</legend>
         <form>
-            <input type="text" value="Title" />
-            <input type="file" value="Photo" />
-            <textarea style="height: 100px; width: 700px;">Content</textarea>
-            <input type="submit" value="Submit" />
+            <div class="container">
+                <input type="text" value="Title" class="col-lg-3 form-control" />
+                <input type="file" value="Photo" class="col-lg-3" />
+            </div>
+            <div class="container">
+                <textarea class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
         </form>
     </fieldset>
 </div>
