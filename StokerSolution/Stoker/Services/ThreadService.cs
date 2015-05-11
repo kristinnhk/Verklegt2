@@ -10,7 +10,12 @@ namespace Stoker.Services
 {
     public class ThreadService
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+         private readonly IAppDataContext db;
+
+        public ThreadService(IAppDataContext context = null)
+        {
+            db = context ?? new ApplicationDbContext();
+        }
 
         /// <summary>
         /// Gets all of the threads that have been posted to the group being queried for

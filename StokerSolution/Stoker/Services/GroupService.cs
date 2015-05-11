@@ -10,7 +10,12 @@ namespace Stoker.Services
 {
     public class GroupService
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IAppDataContext db;
+
+        public GroupService(IAppDataContext context = null)
+        {
+            db = context ?? new ApplicationDbContext();
+        }
 
         /// <summary>
         /// Adds a new group to the databaser
@@ -110,7 +115,7 @@ namespace Stoker.Services
         {
             return (from selectGroup in db.groups
                     where selectGroup.groupID == groupID
-                    select selectGroup).FirstOrDefault();
+                    select selectGroup).SingleOrDefault();
         }
 
         /// <summary>
@@ -176,16 +181,21 @@ namespace Stoker.Services
 
         public void DeleteUserGroup(string userID, int groupID)
         {
-            UserGroupsUnion ugu = (from u in db.userGroupsUnion
-                                   where u.Group.groupID == groupID
-                                   && u.User.Id == userID
-                                   select u
-                                       ).SingleOrDefault();
-            if (ugu != null)
+            UserGroupsUnion ugu2 = (from u in db.userGroupsUnion
+                            where u.Group.groupID == groupID
+                            && u.User.Id == userID
+                            select u).SingleOrDefault();
+
+            try
             {
-                db.userGroupsUnion.Remove(ugu);
+                db.userGroupsUnion.Remove(ugu2);
                 db.SaveChanges();
             }
+            catch
+            {
+                return;
+            }
+                
         }
     }
 }
