@@ -151,26 +151,41 @@ namespace Stoker.Services
         /// <param name="groupID">id of the group</param>
         public void SetUserGroup(string userID, int groupID)
         {
-            foreach (UserGroupsUnion union in db.userGroupsUnion)
+            ApplicationDbContext db2 = new ApplicationDbContext();
+            /*foreach (UserGroupsUnion union in db2.userGroupsUnion)
             {
                 if (union.User.Id == userID && union.Group.groupID == groupID)
                 {
                     return;
                 }
-            }
+            }*/
                 try
                 {
                     UserGroupsUnion newUnion = new UserGroupsUnion();
                     newUnion.Group = GetGroupByID(groupID);
-                    newUnion.User = db.Users.FirstOrDefault(x => x.Id == userID);
-                    db.userGroupsUnion.Add(newUnion);
-                    db.SaveChanges();
+                    newUnion.User = db2.Users.FirstOrDefault(x => x.Id == userID);
+                    db2.userGroupsUnion.Add(newUnion);
+                    db2.SaveChanges();
                 }
                 catch
                 {
                     return;
                 }
 
+        }
+
+        public void DeleteUserGroup(string userID, int groupID)
+        {
+            UserGroupsUnion ugu = (from u in db.userGroupsUnion
+                                   where u.Group.groupID == groupID
+                                   && u.User.Id == userID
+                                   select u
+                                       ).SingleOrDefault();
+            if (ugu != null)
+            {
+                db.userGroupsUnion.Remove(ugu);
+                db.SaveChanges();
+            }
         }
     }
 }
