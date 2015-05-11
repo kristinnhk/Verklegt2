@@ -12,8 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int UserGroupsID { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public GroupModel Group { get; set; }
+        public virtual GroupModel Group { get; set; }
     }
 }
