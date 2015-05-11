@@ -11,13 +11,15 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li>@Html.ActionLink("Front Page", "Index", "Home")</li>
-				<!--<li>@@Html.ActionLink("About", "About", "Home")</li>
-				<li>@@Html.ActionLink("Contact", "Contact", "Home")</li>-->
+				<li>@Html.ActionLink("Search", "Search", "Search")</li>
+				@*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>-->*@
 			</ul>
-            <div class="nav navbar-nav">
-                <input id="searchInHeader" type="search" class="form-control" value="Search" onfocus="if (this.value == 'Search') {this.value = '';}" />
-                <input id="searchButtonInHeader" type="submit" value="Search" />
-            </div>
+            <!--<div class="nav navbar-nav">
+                <form>
+                    <input id="searchInHeader" type="search" class="form-control" value="Search" onfocus="if (this.value == 'Search') {this.value = '';}" />
+                    <input id="searchButtonInHeader" type="submit" value="Search" />
+                </form>
+            </div>-->
 			@Html.Partial("_LoginPartial")
 		</div>
 	</div>

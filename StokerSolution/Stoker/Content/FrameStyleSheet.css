@@ -46,3 +46,10 @@ footer {
 	width: 250px;
 	border: 5px solid red;
 }
+#loginBody {
+    background-image: url(Images/logo.jpg);
+}
+#loginBody div h1{
+    margin-left: auto;
+    margin-right: auto;
+}
