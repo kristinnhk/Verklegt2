@@ -31,17 +31,26 @@ namespace Stoker.Controllers
         public ActionResult SearchJson()
         {
             ViewModel results = new ViewModel();
-            string query = Request["Search"].ToString();
-            List<ApplicationUser> users = userService.GetUsersByName(query).ToList();
-            List<GroupModel> groups = groupService.GetGroupByTitle(query).ToList();
-            List<InterestModel> interests = interestService.GetInterestsByTitle(query).ToList();
-            //List<ThreadModel> threads = threadService.GetThreadByTitle(query).ToList();
-            results.interests = interests;
-            //results.threads = threads;
-            results.groups = groups;
-            results.Users = users;
+            if (Request["Search"] != null)
+            {
+                string query = Request["Search"].ToString();
 
-            return Json(results, JsonRequestBehavior.AllowGet);
+                List<ApplicationUser> users = userService.GetUsersByName(query).ToList();
+                List<GroupModel> groups = groupService.GetGroupByTitle(query).ToList();
+                List<InterestModel> interests = interestService.GetInterestsByTitle(query).ToList();
+                //List<ThreadModel> threads = threadService.GetThreadByTitle(query).ToList();
+                results.interests = interests;
+                //results.threads = threads;
+                results.groups = groups;
+                results.Users = users;
+                return Json(results, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return RedirectToAction("Search", "Search");
+            }
+
+            
         }
     }
 }
