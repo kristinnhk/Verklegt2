@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using Microsoft.SqlServer.Server;
 using Stoker.Models;
 using System.IO;
 
@@ -142,7 +142,9 @@ namespace Stoker.Services
 
         public void SetImageDefault(string userID)
         {
-            System.Drawing.Image imageIn = System.Drawing.Image.FromFile(@"C:\Users\Kristinn\Dropbox\HR\HR.2.onn\Verklegt_namskeid_2\ProjectX\Verklegt2\StokerSolution\Stoker\Content\Images\default-Photo.png");
+            string pathPrefix = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images"), "default-photo.png");
+            System.Diagnostics.Debug.WriteLine(pathPrefix);
+            System.Drawing.Image imageIn = System.Drawing.Image.FromFile(pathPrefix);
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             GetUserByID(userID).image = ms.ToArray();
