@@ -14,10 +14,10 @@ namespace Stoker.Models.UnionModels
 
         public ThreadModel Thread { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public InterestModel interest { get; set; }
+        public virtual InterestModel interest { get; set; }
 
-        public GroupModel Group { get; set; }
+        public virtual GroupModel Group { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Stoker.Tests
         public MockDatabase()
         {
             // We're setting our DbSets to be InMemoryDbSets rather than using SQL Server.
-            //Users = new InMemoryDbSet<ApplicationUser>();
+            Users = new InMemoryDbSet<ApplicationUser>();
             comments = new InMemoryDbSet<CommentModel>();
             groups = new InMemoryDbSet<GroupModel>();
             interests = new InMemoryDbSet<InterestModel>();
@@ -32,7 +32,7 @@ namespace Stoker.Tests
             threadOriginUnion = new InMemoryDbSet<ThreadOriginUnion>();
         }
 
-        //public IDbSet<ApplicationUser> Users { get; set; }
+        public IDbSet<ApplicationUser> Users { get; set; }
         public IDbSet<CommentModel> comments { get; set; }
         public IDbSet<GroupModel> groups { get; set; }
         public IDbSet<InterestModel> interests { get; set; }

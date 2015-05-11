@@ -12,8 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int userInterestID { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public InterestModel interestID { get; set; }
+        public virtual InterestModel interestID { get; set; }
     }
 }
