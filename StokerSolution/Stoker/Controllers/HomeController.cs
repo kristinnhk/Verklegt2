@@ -156,6 +156,209 @@ namespace Stoker.Controllers
 						likes = 5,
 						currentUserLiked = false
 					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 1,
+						user = User,
+						title = "cute cats",
+						interest = "Cats",
+						mainContent = "lolololololol",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "Skúli",
+								content = "bad status bro",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 1,
+						user = User,
+						title = "cute cats",
+						interest = "Cats",
+						mainContent = "lolololololol",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "Skúli",
+								content = "bad status bro",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 1,
+						user = User,
+						title = "cute cats",
+						interest = "Cats",
+						mainContent = "lolololololol",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "Skúli",
+								content = "bad status bro",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 1,
+						user = User,
+						title = "cute cats",
+						interest = "Cats",
+						mainContent = "lolololololol",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "Skúli",
+								content = "bad status bro",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 1,
+						user = User,
+						title = "cute cats",
+						interest = "Cats",
+						mainContent = "lolololololol",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "Skúli",
+								content = "bad status bro",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 1,
+						user = User,
+						title = "cute cats",
+						interest = "Cats",
+						mainContent = "lolololololol",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "Skúli",
+								content = "bad status bro",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
+					ThreadList.Add(new TemporaryThreadObjectModel()
+					{
+						threadID = 1,
+						user = User,
+						title = "cute cats",
+						interest = "Cats",
+						mainContent = "lolololololol",
+						comments = new List<CommentModel>() {
+							new CommentModel() {
+								commentID = 1,
+								commentAuthor = "Skúli",
+								content = "bad status bro",
+								dateCreated = DateTime.Now,
+								likes = 100,
+								currentUserLiked = false
+							},
+							new CommentModel() {
+								commentID = 2,
+								commentAuthor = "Steinn",
+								content = "yolo",
+								dateCreated = DateTime.Now,
+								likes = 0,
+								currentUserLiked = false
+							}
+						},
+						dateCreated = DateTime.Now,
+						likes = 5,
+						currentUserLiked = false
+					});
 					ViewBag.List = ThreadList;
 					return View("NewsFeedPartial");
 				}
