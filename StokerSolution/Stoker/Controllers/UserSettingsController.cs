@@ -77,7 +77,7 @@ namespace Stoker.Controllers
         {
             foreach (int ID in Request["groupIds[]"])
             {
-                groupService.DeleteUserGroup(User.Identity.GetUserId(), ID);
+             //   groupService.DeleteUserGroup(User.Identity.GetUserId(), ID);
             }
         }
 	}
