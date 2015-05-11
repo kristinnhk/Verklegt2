@@ -56,11 +56,13 @@ namespace Stoker.Tests.Services
             var result1 = service.GetGroupByID(1);
             var result2 = service.GetGroupByID(2);
             var result3 = service.GetGroupByID(3);
+            var result4 = service.GetGroupByID(4);
 
             //Assert:
             Assert.AreEqual(result1.title, title1);
             Assert.AreEqual(result2.title, title2);
             Assert.AreEqual(result3.title, title3);
+            Assert.AreEqual(result4, null);
 
 
         }

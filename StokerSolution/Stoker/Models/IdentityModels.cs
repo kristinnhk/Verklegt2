@@ -47,7 +47,7 @@ namespace Stoker.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IAppDataContext
     {
-        public IDbSet<ApplicationUser> Users { get; set; }
+        public override IDbSet<ApplicationUser> Users { get; set; }
         public IDbSet<CommentModel> comments { get; set; }
         public IDbSet<GroupModel> groups { get; set; }
         public IDbSet<InterestModel> interests { get; set; }

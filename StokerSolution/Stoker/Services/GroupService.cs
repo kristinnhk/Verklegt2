@@ -115,7 +115,7 @@ namespace Stoker.Services
         {
             return (from selectGroup in db.groups
                     where selectGroup.groupID == groupID
-                    select selectGroup).FirstOrDefault();
+                    select selectGroup).SingleOrDefault();
         }
 
         /// <summary>
