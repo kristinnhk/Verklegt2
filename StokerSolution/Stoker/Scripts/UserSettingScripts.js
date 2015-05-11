@@ -21,6 +21,7 @@ $(document).ready(function () {
 
         var data = { 'groupIds[]': [] };
         $(".userGroups:checked").each(function () {
+            alert($(this).val());
             data['groupIds[]'].push($(this).val());
         });
         $.post('/UserSettings/DeleteUserGroups/', data);

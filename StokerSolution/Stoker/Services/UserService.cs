@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using Stoker.Models;
+using System.IO;
 
 
 namespace Stoker.Services
@@ -121,17 +122,26 @@ namespace Stoker.Services
         /// </summary>
         /// <param name="tempID">current user ID</param>
         /// <param name="image">the new image you want to set</param>
-        public void SetImage(string tempID, byte[] image)
+        public void SetImage(string userID, byte[] image)
         {
             try
             {
-                GetUserByID(tempID).image = image;
+                GetUserByID(userID).image = image;
                 db.SaveChanges();
                 return;
             }catch
             {
                 return;
             }
+        }
+
+        public void SetImageDefault(string userID)
+        {
+            System.Drawing.Image imageIn = System.Drawing.Image.FromFile(@"C:\Users\Kristinn\Dropbox\HR\HR.2.onn\Verklegt_namskeid_2\ProjectX\Verklegt2\StokerSolution\Stoker\Content\Images\default-Photo.png");
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            GetUserByID(userID).image = ms.ToArray();
+            db.SaveChanges();
         }
     }
 }

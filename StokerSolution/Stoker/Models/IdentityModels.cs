@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using Stoker.Models.UnionModels;
+using System.IO;
 
 namespace Stoker.Models
 {
@@ -18,6 +19,7 @@ namespace Stoker.Models
         public string gender { get; set; }
         public string about { get; set; }
         public byte[] image { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
 

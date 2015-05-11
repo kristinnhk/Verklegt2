@@ -8,6 +8,9 @@ using Microsoft.AspNet.Identity;
 
 using Stoker.Models;
 using Stoker.Services;
+using System.Threading.Tasks;
+using System.IO;
+using System.Drawing;
 
 namespace Stoker.Controllers
 {
@@ -30,6 +33,11 @@ namespace Stoker.Controllers
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
 
+            //groupService.SetUserGroup(userID, 24);
+            //groupService.SetUserGroup(userID, 25);
+            //groupService.SetUserGroup(userID, 26);
+            //groupService.SetUserGroup(userID, 27);
+
             if (user.Id != null)
             {
                 var groups = GetUserGroups(user.Id);
@@ -38,7 +46,11 @@ namespace Stoker.Controllers
                     model.groups.Add(group);
                 }
             }
-
+            //kristinn bætti við hax
+            if (user.image == null)
+            {
+                userService.SetImageDefault(user.Id);
+            }
             var interests = GetUserInterests(user.Id);
             foreach(InterestModel interest in interests)
             {
@@ -79,6 +91,40 @@ namespace Stoker.Controllers
             {
              //   groupService.DeleteUserGroup(User.Identity.GetUserId(), ID);
             }
+        }
+
+    /*    [HttpPost]
+        public ActionResult UpdateImage(HttpPostedFileBase file)
+        {   
+      //       HttpPostedFileBase file = collection["imgFileInUserSettings"];
+            Image imageIn = Image.FromStream(file.InputStream, true, true);
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            byte[] image = ms.ToArray();
+            userService.SetImage(User.Identity.GetUserId(), image);
+            
+            return View();
+        }*/
+
+        [HttpPost]
+        public ActionResult UpdateImage(FormCollection collection)
+        {
+          //  string file = collection["imgFileInUserSettings"];
+            HttpPostedFileBase file = Request.Files[0];
+            Image imageIn = Image.FromStream(file.InputStream, true, true);
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            byte[] image = ms.ToArray();
+            userService.SetImage(User.Identity.GetUserId(), image);
+
+            return RedirectToAction("UserSettings","UserSettings");
+        }
+
+        public ActionResult RenderImage(string id)
+        {
+            ApplicationUser user =  userService.GetUserByID(id);
+            byte[] photoBack = user.image;
+            return File(photoBack, "image/png");
         }
 	}
 }

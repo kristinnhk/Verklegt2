@@ -195,6 +195,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FrameStyleSheet.css" />
+    <Content Include="Content\Images\default-Photo.png" />
     <Content Include="Content\pageMainContent.css" />
     <Content Include="Content\SidebarStyleSheet.css" />
     <Content Include="Content\ThreadStyleSheet.css" />
@@ -269,7 +270,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
