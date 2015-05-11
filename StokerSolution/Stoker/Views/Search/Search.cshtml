@@ -1,0 +1,100 @@
+﻿@model Stoker.Models.ViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+<!--http://bootsnipp.com/snippets/featured/panel-tables-with-filter Template credited to Bootsnip user robm-->
+@section JavaScript
+{
+    <script type="text/javascript" src="@Url.Content("/Scripts/SearchJS.js")"></script>
+}
+@Html.Partial("HeaderPartialView")
+
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("SearchJson", "Search", FormMethod.Get, new { id = "formInSearch" }))
+        {
+            <input type="text" class="form-control" id="searchbarInSearchView" style="margin-left:auto; margin-right:auto;" />
+            @Html.ValidationSummary(false)
+        }
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Users</h3>
+                    <!--<div class="pull-right">
+                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                    </div>-->
+                </div>
+                <!--<div class="panel-body">
+                    <!--<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+                </div>-->
+                <table class="table table-hover" id="userTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Interests</h3>
+                    <!--<div class="pull-right">
+                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                            <i class="glyphicon glyphicon-thumbs-up"></i>
+                        </span>
+                    </div>-->
+                </div>
+                <!--<div class="panel-body">
+                    <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Tasks" />
+                </div>-->
+                <table class="table table-hover" id="interestTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Interests</th>
+                            <th>Number of users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Groups</h3>
+                    <!--<div class="pull-right">
+                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                            <i class="glyphicon glyphicon-heart"></i>
+                        </span>
+                    </div>-->
+                </div>
+                <!--<div class="panel-body">
+                    <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Tasks" />
+                </div>-->
+                <table class="table table-hover" id="groupTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Group</th>
+                            <th>Number of users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("FooterPartialView")
