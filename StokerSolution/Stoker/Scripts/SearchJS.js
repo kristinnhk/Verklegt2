@@ -10,13 +10,6 @@
                 $("#groupTable tbody tr").remove();
             return false;
         }
-           
-        /*$.ajax({
-            type: 'POST',
-            url: '/Search/SearchJson',
-            data: theForm.serialize(),
-        })*/
-            
         else{
             var theForm = $("#searchbarInSearchView");
             var returnString = { 'Search': $('#searchbarInSearchView').val().trim() };
