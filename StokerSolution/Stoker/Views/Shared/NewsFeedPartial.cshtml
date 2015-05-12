@@ -6,19 +6,22 @@
         <div class="threadItem">
             <div class="threadTop">
                 <div class="threadUsername">
-                    Jönné Jésnssen
+                    @item.nameOfPoster
                 </div>
                 <div class="threadTitle">
                     @item.title
                 </div>
                 <div class="threadInterestOrGroup">
-                    Cats
+                    TODO link to that page
                 </div>
             </div>
             <div class="threadContent">
                 @item.mainContent
             </div>
-            <div class="threadComments">
+            <div class="DetailView">
+                <a href="#">Detailed view with comment //TODO rename this</a>
+            </div>
+       @*    <div class="threadComments">
                 @foreach (var comment in Model.comments)
                 {
                     <div class="singleComment">
@@ -36,7 +39,7 @@
                     <input type="text" />
                     <input type="submit" value="Post Comment" />
                 </form>
-            </div>
+            </div>*@
         </div>
     }
 </div>
