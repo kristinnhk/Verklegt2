@@ -5,9 +5,10 @@
 	<div class="interestsSidebar">
 		<h3>Interests</h3>
 		<ul>
-			@for (int i = 1; i <= 20; i++)
+			@foreach (Stoker.Models.InterestModel interest in Model.interests)
 			{
-				<li>interest @i</li>
+
+				<li><input type="checkbox" name=@interest.name value=@interest.name /> @interest.name</li>
 			}
 			@*foreach (var m in Model.interests)
 				{
@@ -18,10 +19,10 @@
 	<div class="groupsSidebar">
 		<h3>Groups</h3>
 		<ul>
-			@for (int i = 1; i <= 300; i++)
-			{
-				<li>group @i</li>
-			}
+				@foreach (Stoker.Models.GroupModel group in Model.groups)
+				{
+					<li><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
+				}
 			@*foreach(var m in Model.groups)
 				{
 						<li><a>@m.title</a></li>
