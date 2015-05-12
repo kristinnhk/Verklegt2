@@ -3,12 +3,14 @@ using Stoker.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Identity;
+
 using System.Web;
 using System.Web.Mvc;
 
 namespace Stoker.Controllers
 {
-    public class GroupProfileController : Controller
+    public class GroupProfileController : StokerController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserService userService = new UserService();
@@ -30,6 +32,20 @@ namespace Stoker.Controllers
                 model.groups.Add(group); 
             
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SubmitGroupThread(FormCollection thread)
+        {
+            ThreadModel model = new ThreadModel();
+
+            model = FillThreadModel(thread);
+            //int groupID = thread["groupid"];
+            int tempgroupID = 5;
+            string userID = User.Identity.GetUserId();
+            threadService.SetGroupThread(tempgroupID, userID, model);
+
+            return RedirectToAction("GroupProfile", "GroupProfile", "?groupID=1");
         }
     }
 }

@@ -132,20 +132,11 @@ namespace Stoker.Controllers
         {
           //  string file = collection["imgFileInUserSettings"];
             HttpPostedFileBase file = Request.Files[0];
-            Image imageIn = Image.FromStream(file.InputStream, true, true);
-            MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-            byte[] image = ms.ToArray();
+            byte[] image = FileToByteArray(file);
             userService.SetImage(User.Identity.GetUserId(), image);
 
             return RedirectToAction("UserSettings","UserSettings");
         }
 
-        public ActionResult RenderImage(string id)
-        {
-            ApplicationUser user =  userService.GetUserByID(id);
-            byte[] photoBack = user.image;
-            return File(photoBack, "image/png");
-        }
 	}
 }
