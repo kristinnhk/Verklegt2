@@ -19,11 +19,8 @@ namespace Stoker.Models
         public DateTime dateCreated { get; set; }
         [Required]
         public int likes { get; set; }
-        [Required]
-        public string nameOfPoster { get; set; }
-        [Required]
-        public bool currentUserLiked { get; set; }
-
-				public string commentAuthor { get; set; }
-		}
+		public virtual ApplicationUser commentAuthor { get; set; }
+        public virtual ThreadModel thread { get; set; }
+        public virtual ICollection<ApplicationUser> usersLiked { get; set; }
+	}
 }

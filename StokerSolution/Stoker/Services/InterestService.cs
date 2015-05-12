@@ -40,7 +40,7 @@ namespace Stoker.Services
         /// </summary>
         /// <param name="interestID">The id of the interest we want to change</param>
         /// <param name="title">The new title</param>
-        public void SetInterestTitle(int interestID, string title)
+        /*public void SetInterestTitle(int interestID, string title)
         {
             try { 
                 GetInterestByID(interestID).name = title;
@@ -48,39 +48,60 @@ namespace Stoker.Services
                 return;
             }
             db.SaveChanges();
-        }
+        }*/
         /// <summary>
         /// This function returns a list of users who are interested in the interest of the given id
-        /// Dude to how the union tables work, the FK's are directly pointing to the model itself
-        /// The FK names are a bit off though, since the entity framework made them for us using code first
         /// </summary>
         /// <param name="interestID">the id of the interest we are looking to find the users for</param>
-        /// <returns></returns>
-        public IEnumerable<ApplicationUser> GetInterestUsers(int interestID)
+        /// <returns>Returns a collection of Application users,
+        ///  if the interest with that id does not exist this function returns null</returns>
+        public ICollection<ApplicationUser> GetInterestUsers(int interestID)
         {
-            IEnumerable<ApplicationUser> users = (from u in db.userInterestUnion
-                                        where u.interestID.interestID == interestID
-                                        select u.User);
-
-            return users;
+            InterestModel interest = GetInterestByID(interestID);
+            if (interest == null)
+            {
+                return null;
+            }
+            if (interest.users == null)
+            {
+                interest.users = new List<ApplicationUser>();
+            }
+            return interest.users;
         }
 
         /// <summary>
         /// Returns the interests a user is a member of
         /// </summary>
         /// <param name="userID">ID of the user</param>
-        /// <returns>List of interests the user is a member of</returns>
-        public IEnumerable<InterestModel> GetUserInterests(string userID)
+        /// <returns>Icollection of interests the user is a member of
+        ///  if this user does not exist returns null</returns>
+        public ICollection<InterestModel> GetUserInterests(string userID)
         {
-            IEnumerable<InterestModel> interests = (from u in db.userInterestUnion
-                                              where u.User.Id == userID
-                                              select u.interestID);
+            UserService service = new UserService(db);
 
-            return interests;
+            ApplicationUser user = service.GetUserByID(userID);
+            if (user != null)
+            {
+                return user.interests;
+            }
+            else
+            {
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Adds a new interest to the database. Be advised that when you call this
+        /// function it should already have at least one member. That member should be the interest
+        /// creator.
+        /// </summary>
+        /// <param name="interest"></param>
         public void SetNewInterest(InterestModel interest)
         {
+            if (interest.users == null)
+            {
+                interest.users = new List<ApplicationUser>();
+            }
             db.interests.Add(interest);
             db.SaveChanges();
         }
@@ -91,11 +112,25 @@ namespace Stoker.Services
         /// <param name="userID">The ID of the user who is interest in something</param>
         public void SetUserInterest(int interestID, string userID)
         {
-            UserInterestUnion union = new UserInterestUnion();
-          //  union.User = us.GetUserByID(userID); //why does this code not work? add throws entity object exception
-            union.User = db.Users.FirstOrDefault(x => x.Id == userID);
-            union.interestID = GetInterestByID(interestID);
-            db.userInterestUnion.Add(union);
+            UserService service = new UserService(db);
+
+            ApplicationUser user = service.GetUserByID(userID);
+            InterestModel interest = GetInterestByID(interestID);
+            //if the user or interest does not exist we do not add to the database.
+            if (user == null || interest == null)
+            {
+                return;
+            }
+            if (user.interests == null)
+            {
+                user.interests = new List<InterestModel>();
+            }
+            if (interest.users == null)
+            {
+                interest.users = new List<ApplicationUser>();
+            }
+            user.interests.Add(interest);
+            interest.users.Add(user);
             db.SaveChanges();
         }
         /// <summary>
@@ -110,13 +145,6 @@ namespace Stoker.Services
                                                    where i.name.Contains(title)
                                                    select i;
             return interests;
-        }
-
-
-
-        internal void SetUserInterest(string p1, int p2)
-        {
-            throw new NotImplementedException();
         }
     }
 }

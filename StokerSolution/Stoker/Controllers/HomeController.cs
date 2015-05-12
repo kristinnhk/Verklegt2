@@ -104,7 +104,7 @@ namespace Stoker.Controllers
             return View();
         }
 
-				public ActionResult Test()
+				/*public ActionResult Test()
 				{
 					List<TemporaryThreadObjectModel> ThreadList = new List<TemporaryThreadObjectModel>();
 					ThreadList.Add(new TemporaryThreadObjectModel() { 
@@ -166,7 +166,7 @@ namespace Stoker.Controllers
 					});
 					ViewBag.List = ThreadList;
 					return View("NewsFeedPartial");
-				}
+				}*/
 
         public ActionResult About()
         {

@@ -17,6 +17,7 @@ namespace Stoker.Models
         public string name { get; set; }
         [Required]
         public int numberOfUsersInterested { get; set; }
-
+        public virtual ICollection<ApplicationUser> users { get; set; }
+        public virtual ICollection<ThreadModel> threads { get; set; }
     }
 }

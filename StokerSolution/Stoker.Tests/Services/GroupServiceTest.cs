@@ -25,11 +25,21 @@ namespace Stoker.Tests.Services
         {
             var mockDb = new MockDatabase();
 
+            ApplicationUser user = new ApplicationUser();
+
+            user.Id = "Steinn";
+            user.gender = "male";
+            user.firstName = "Ellidi";
+            user.lastName = "Petursson";
+            user.PasswordHash = "LALALAL";
+            mockDb.Users.Add(user);
+
             var f1 = new GroupModel
             {
                 groupID = 1,
                 title = "dabs",
-                numberOfGroupMembers = 0
+                numberOfGroupMembers = 0,
+                users = new List<ApplicationUser>()
             };
             mockDb.groups.Add(f1);
 
@@ -37,7 +47,8 @@ namespace Stoker.Tests.Services
             {
                 groupID = 2,
                 title = "Steinn",
-                numberOfGroupMembers = 3
+                numberOfGroupMembers = 3,
+                users = new List<ApplicationUser>()
             };
             mockDb.groups.Add(f2);
 
@@ -45,24 +56,64 @@ namespace Stoker.Tests.Services
             {
                 groupID = 3,
                 title = "Ellidi",
-                numberOfGroupMembers = 2
+                numberOfGroupMembers = 2,
+                users = new List<ApplicationUser>()
             };
             mockDb.groups.Add(f3);
-
-            ApplicationUser user = new ApplicationUser();
-
-            user.Id = "Steinn";
-            user.gender = "male";
-            user.firstName = "Ellidi";
-            user.PasswordHash = "LALALAL";
-            mockDb.Users.Add(user);
             
 
             service = new GroupService(mockDb);
             service2 = new UserService(mockDb);
         }
 
+        [TestMethod]
+        public void TestGroupUsersUnions()
+        {
+            //Arrange:
+            service.SetUserGroup("Steinn", 1);
+            service.SetUserGroup("Steinn", 2);
+            service.SetUserGroup("Steinn", 3);
+            //Act:
+            ApplicationUser user = service2.GetUserByID("Steinn");
+            List<GroupModel> groups = new List<GroupModel>();
+            foreach (GroupModel g in user.groups)
+            {
+                groups.Add(g);
+            }
 
+            //Assert:
+            Assert.AreEqual(groups[0].title, "dabs");
+            Assert.AreEqual(groups[0].groupID, 1);
+            Assert.AreEqual(groups[1].title, "Steinn");
+            Assert.AreEqual(groups[1].groupID, 2);
+            Assert.AreEqual(groups[2].title, "Ellidi");
+            Assert.AreEqual(groups[2].groupID, 3);
+        }
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         [TestMethod]
         public void TestGetGroupByID()
         {

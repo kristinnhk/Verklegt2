@@ -22,8 +22,11 @@ namespace Stoker.Models
         [Required]
         public int likes { get; set; }
         [Required]
-        public string nameOfPoster { get; set; }
-        [Required]
-        public bool currentUserLiked { get; set; }
+        public virtual ApplicationUser originalPoster { get; set; }
+        public virtual ICollection<ApplicationUser> usersLiked { get; set; }
+        public virtual ICollection<CommentModel> comments { get; set; }
+        public virtual GroupModel groupPost { get; set; }
+        public virtual InterestModel interestPost { get; set; }
+        public virtual ApplicationUser profilePost {get; set;}
     }
 }

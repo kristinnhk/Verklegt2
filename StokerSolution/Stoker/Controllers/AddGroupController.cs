@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Microsoft.AspNet.Identity;
+
 using Stoker.Models;
 using Stoker.Services;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace Stoker.Controllers
     public class AddGroupController : StokerController
     {
         GroupService service = new GroupService();
+        UserService userService = new UserService();
         //
         // GET: /AddGroup/
         public ActionResult AddGroup()
@@ -28,6 +31,10 @@ namespace Stoker.Controllers
 
             model.title = collection["titleInGroup"];
             model.about = collection["aboutInGroup"];
+            model.groupAdmin = userService.GetUserByID(User.Identity.GetUserId());
+            model.users = new List<ApplicationUser>();
+            model.users.Add(model.groupAdmin);
+
             HttpPostedFileBase file = Request.Files[0];
             if (file.ContentLength != 0)
             {

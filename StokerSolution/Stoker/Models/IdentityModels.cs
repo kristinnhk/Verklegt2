@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using Stoker.Models.UnionModels;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Stoker.Models
 {
@@ -19,7 +20,11 @@ namespace Stoker.Models
         public string gender { get; set; }
         public string about { get; set; }
         public byte[] image { get; set; }
-
+        public virtual ICollection<GroupModel> groups { get; set; }
+        public virtual ICollection<InterestModel> interests { get; set; }
+        public virtual ICollection<ThreadModel> threads { get; set; }
+        public virtual ICollection<ApplicationUser> friendRequestSent { get; set; }
+        public virtual ICollection<ApplicationUser> friendRequestReceived { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
 

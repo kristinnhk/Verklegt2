@@ -56,11 +56,11 @@ namespace Stoker.Controllers
             model.title = Convert.ToString(thread["titleInThread"]);
             string userID = User.Identity.GetUserId();
             ApplicationUser gettingName = db.Users.FirstOrDefault(x => x.Id == userID);
-            model.nameOfPoster = gettingName.firstName + " " + gettingName.lastName;
+           // model.nameOfPoster = gettingName.firstName + " " + gettingName.lastName;
             model.mainContent = Convert.ToString(thread["contentInThread"]);
             model.dateCreated = DateTime.Now;
             model.likes = 0;
-            model.currentUserLiked = false;
+            //model.currentUserLiked = false;
 
             return model;
 

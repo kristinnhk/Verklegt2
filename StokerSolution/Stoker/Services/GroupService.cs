@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 
 using Stoker.Models;
-using Stoker.Models.UnionModels;
 using System.IO;
 
 namespace Stoker.Services
@@ -24,8 +23,10 @@ namespace Stoker.Services
         /// <param name="newGroup">A model of the group to be added</param>
         public void SetGroup(GroupModel newGroup)
         {
-            try
+            if (newGroup.users == null)
             {
+                newGroup.users = new List<ApplicationUser>();
+            }
                 if (newGroup.image == null)
                 {
                     SetImageDefault(newGroup);
@@ -33,11 +34,6 @@ namespace Stoker.Services
                 db.groups.Add(newGroup);
                 db.SaveChanges();
                 return;
-            }
-            catch
-            {
-                return;
-            }
         }
 
         /// <summary>
@@ -124,83 +120,76 @@ namespace Stoker.Services
         }
 
         /// <summary>
-        /// This function returns a list of users who are interested in the interest of the given id
-        /// Dude to how the union tables work, the FK's are directly pointing to the model itself
-        /// The FK names are a bit off though, since the entity framework made them for us using code first
+        /// This function returns a list of users of the group in the group with the given id
         /// </summary>
-        /// <param name="interestID">the id of the interest we are looking to find the users for</param>
-        /// <returns></returns>
-        public IEnumerable<ApplicationUser> GetGroupUsers(int ID)
+        /// <param name="ID">the id of the group we are looking to find the users for</param>
+        /// <returns>returns a collection of users of the group if the group
+        ///  exists, if not it returns null</returns>
+        public ICollection<ApplicationUser> GetGroupUsers(int ID)
         {
-            
-            IEnumerable<ApplicationUser> users = (from u in db.userGroupsUnion
-                                                  where u.Group.groupID == ID
-                                                  select u.User);
-
-            return users;
+            GroupModel group = GetGroupByID(ID);
+            if (group != null)
+            {
+                return group.users;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
         /// Returns the groups a user is a member of
         /// </summary>
         /// <param name="userID">ID of the user</param>
-        /// <returns>List of groups the user is a member of</returns>
-        public IEnumerable<GroupModel> GetUserGroups(string userID)
+        /// <returns>List of groups the user is a member of if the group exists if not returns null</returns>
+        public ICollection<GroupModel> GetUserGroups(string userID)
         {
-            IEnumerable<GroupModel> groups = (from u in db.userGroupsUnion
-                                                  where u.User.Id == userID
-                                                  select u.Group);
+            UserService service = new UserService(db);
 
-            return groups;
+            ApplicationUser user = service.GetUserByID(userID);
+            if (user != null)
+            {
+                return user.groups;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
-        /// Adds a user as a member of a group by adding an entry to the usergroupunion datatable.
+        /// Adds a relation between a user and a group.
         /// </summary>
         /// <param name="userID">id of the user</param>
         /// <param name="groupID">id of the group</param>
         public void SetUserGroup(string userID, int groupID)
         {
-            ApplicationDbContext db2 = new ApplicationDbContext();
-            /*foreach (UserGroupsUnion union in db2.userGroupsUnion)
-            {
-                if (union.User.Id == userID && union.Group.groupID == groupID)
-                {
-                    return;
-                }
-            }*/
-                try
-                {
-                    UserGroupsUnion newUnion = new UserGroupsUnion();
-                    newUnion.Group = GetGroupByID(groupID);
-                    newUnion.User = db2.Users.FirstOrDefault(x => x.Id == userID);
-                    db2.userGroupsUnion.Add(newUnion);
-                    db2.SaveChanges();
-                }
-                catch
-                {
-                    return;
-                }
+            UserService service = new UserService(db);
 
-        }
-
-        public void DeleteUserGroup(string userID, int groupID)
-        {
-            UserGroupsUnion ugu2 = (from u in db.userGroupsUnion
-                            where u.Group.groupID == groupID
-                            && u.User.Id == userID
-                            select u).SingleOrDefault();
-
-            try
-            {
-                db.userGroupsUnion.Remove(ugu2);
-                db.SaveChanges();
-            }
-            catch
+            ApplicationUser user = service.GetUserByID(userID);
+            //If the user does not exist nothing will be changed.
+            if (user == null)
             {
                 return;
             }
-                
+            else if (user.groups == null)
+            {
+                user.groups = new List<GroupModel>();
+            }
+            GroupModel group = GetGroupByID(groupID);
+            //if the group does not exist nothing will be changed.
+            if (group == null)
+            {
+                return;
+            }
+            else if (group.users == null)
+            {
+                group.users = new List<ApplicationUser>();
+            }
+            group.users.Add(user);
+            user.groups.Add(group);
+            db.SaveChanges();
         }
 
         /// <summary>

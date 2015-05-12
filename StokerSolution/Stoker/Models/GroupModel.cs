@@ -17,7 +17,11 @@ namespace Stoker.Models
         public string title { get; set; }
         public string about { get; set; }
         public byte[] image { get; set; }
+        public virtual ICollection<ApplicationUser> users { get; set; }
+        public virtual ICollection<ThreadModel> threads { get; set; }
         [Required]
         public int numberOfGroupMembers { get; set; }
+        public ApplicationUser groupAdmin { get; set; }
+
     }
 }
