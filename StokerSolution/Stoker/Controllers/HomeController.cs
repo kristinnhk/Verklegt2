@@ -13,7 +13,7 @@ using Stoker.Models;
 namespace Stoker.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : StokerController
     {
         //add private member db context so we dont have to make a new one everytime
         //each service will have this. this is just here in controller for testing atm
@@ -22,7 +22,7 @@ namespace Stoker.Controllers
         private ThreadService ts = new ThreadService();
         private GroupService gs = new GroupService();
 
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             ViewModel model = new ViewModel();
             model.Users = new List<ApplicationUser>();
