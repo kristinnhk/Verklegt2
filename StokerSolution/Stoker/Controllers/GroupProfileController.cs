@@ -38,14 +38,12 @@ namespace Stoker.Controllers
         public ActionResult SubmitGroupThread(FormCollection thread)
         {
             ThreadModel model = new ThreadModel();
-
+            int currentGroupID = Convert.ToInt32(thread["groupID"]);
             model = FillThreadModel(thread);
-            //int groupID = thread["groupid"];
-            int tempgroupID = 5;
             string userID = User.Identity.GetUserId();
-            threadService.SetGroupThread(tempgroupID, userID, model);
+            threadService.SetGroupThread(currentGroupID, userID, model);
 
-            return RedirectToAction("GroupProfile", "GroupProfile", "?groupID=1");
+            return RedirectToAction("GroupProfile", "GroupProfile", new { groupID = currentGroupID });
         }
     }
 }

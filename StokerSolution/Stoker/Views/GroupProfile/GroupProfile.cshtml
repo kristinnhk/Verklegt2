@@ -2,11 +2,11 @@
 
 @{
     ViewBag.Title = "GroupProfile";
-}
-
+} 
+ 
 <div class="container">
     <div class="container">
-        <img src="@Url.Action("RenderUserImage", new { id = Model.Users[0].Id })" alt="Photo change" width="100" height="100" />
+        <img src="@Url.Action("RenderGroupImage", new { id = Model.groups[0].groupID })" alt="Photo change" width="100" height="100" />
        @* <img src="@Model.groups[0].image" alt="Profile picture" class="img-responsive col-lg-4" /> *@
         <p class="col-lg-6" style="overflow: scroll; overflow-x: hidden; max-height: 150px;">@Model.groups[0].about </p>
         @Html.ActionLink("Settings", "GroupSettings", "GroupSettings", @Model.groups[0].groupID, new { @class = "btn btn-primary" })
@@ -18,14 +18,15 @@
 <div class="col-lg-12 container">
     <fieldset>
         <legend>New Thread</legend>
-        @using (@Html.BeginForm("SubmitThread", "GroupProfile", FormMethod.Post))
+        @using (@Html.BeginForm("SubmitGroupThread", "GroupProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="container">
-                <input type="text" value="Title" name="titleInGroupThread" class="col-lg-3 form-control" />
-                <input type="file" value="Photo" name="photoInGroupThread" class="col-lg-3" />
+                <input type="text" value="Title" name="titleInThread" class="col-lg-3 form-control" />
+                <input type="file" value="Photo" name="photoInThread" class="col-lg-3" />
+                <input type="hidden" name="groupID" value=@Model.groups[0].groupID />
             </div>
             <div class="container">
-                <textarea name="contentInGroupThread" class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
+                <textarea name="contentInThread" class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         }
