@@ -29,7 +29,7 @@ namespace Stoker.Controllers
         /// </summary>
         /// <returns>Function returns a json object that includes everything thatsatisfies the query</returns>
         public ActionResult SearchJson()
-        {
+       {
             ViewModel results = new ViewModel();
             if (Request["Search"] != null)
             {
