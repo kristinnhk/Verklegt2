@@ -93,6 +93,7 @@ namespace Stoker.Controllers
             db.SaveChanges();
             IEnumerable<ApplicationUser> list = Is.GetInterestUsers(1);*/
      //       int stopper = 5;
+            
             return View();
         }
 

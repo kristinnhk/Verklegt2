@@ -161,7 +161,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StokerController.cs" />
     <Compile Include="Controllers\UserSettingsController.cs" />
@@ -195,6 +197,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FrameStyleSheet.css" />
+    <Content Include="Content\Images\default-Photo.png" />
     <Content Include="Content\pageMainContent.css" />
     <Content Include="Content\SidebarStyleSheet.css" />
     <Content Include="Content\ThreadStyleSheet.css" />
@@ -266,10 +269,11 @@
     <Content Include="Views\Shared\NewsFeedPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutForLogin.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\GroupProfile\GroupProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

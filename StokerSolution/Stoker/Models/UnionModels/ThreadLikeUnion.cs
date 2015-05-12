@@ -12,8 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int UserCommentID { get; set; }
 
-        public ThreadModel Thread { get; set; }
+        public virtual ThreadModel Thread { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

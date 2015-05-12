@@ -12,8 +12,8 @@ namespace Stoker.Models.UnionModels
         [Key]
         public int CommentLikeID { get; set; }
 
-        public CommentModel comment { get; set; }
+        public virtual CommentModel comment { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

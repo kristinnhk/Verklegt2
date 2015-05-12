@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using Microsoft.SqlServer.Server;
 using Stoker.Models;
+using System.IO;
 
 
 namespace Stoker.Services
 {
     public class UserService
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+         private readonly IAppDataContext db;
+
+        public UserService(IAppDataContext context = null)
+        {
+            db = context ?? new ApplicationDbContext();
+        }
 
         /// <summary>
         /// This function Gets users from the database by searching the firstName and lastName
@@ -121,17 +127,28 @@ namespace Stoker.Services
         /// </summary>
         /// <param name="tempID">current user ID</param>
         /// <param name="image">the new image you want to set</param>
-        public void SetImage(string tempID, byte[] image)
+        public void SetImage(string userID, byte[] image)
         {
             try
             {
-                GetUserByID(tempID).image = image;
+                GetUserByID(userID).image = image;
                 db.SaveChanges();
                 return;
             }catch
             {
                 return;
             }
+        }
+
+        public void SetImageDefault(string userID)
+        {
+            string pathPrefix = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images"), "default-photo.png");
+            System.Diagnostics.Debug.WriteLine(pathPrefix);
+            System.Drawing.Image imageIn = System.Drawing.Image.FromFile(pathPrefix);
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            GetUserByID(userID).image = ms.ToArray();
+            db.SaveChanges();
         }
     }
 }

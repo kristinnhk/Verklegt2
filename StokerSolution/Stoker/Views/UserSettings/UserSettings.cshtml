@@ -9,11 +9,19 @@
     </head>
     <body>
         @Html.Partial("HeaderPartialView")
-        @*@Html.Partial("SidebarPartialView")*@
+        @*@Html.Partial("SidebarPartialView"
+            {)*@
         <div id="photoContainer">
-            <img src="" alt="Photo change" />
-            <button id="changePhoto">"Change Photo"</button>
-        </div>
+            <img src="@Url.Action("RenderImage", new { id = Model.Users[0].Id})" alt="Photo change" width="100" height="100" />
+        @*    @using (Html.BeginForm("UpdateImage", "UserSettings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {*@
+            <form action="UpdateImage" method="post" enctype="multipart/form-data">
+                <input type="file" name="imgFileInUserSettings" id="ImageFile" accept="image/*" />
+                <input type="submit" value="Change Photo" />
+            </form>
+
+
+</div>
         <div>
             <fieldset>
                 <legend>About me</legend>
@@ -27,24 +35,24 @@
                 <button>Create new interest</button>
             </fieldset>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" id="groupDiv">
             <fieldset>
                 <ul>
                     @foreach (Stoker.Models.GroupModel group in Model.groups)
-                    { 
-                        <li><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
-                    }
+{
+    <li><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
+}
                 </ul>
                 <button id="deleteGroupButton"> Delete selected groups</button>
             </fieldset>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" id="interestDiv">
             <fieldset>
                 <ul>
                     @foreach (Stoker.Models.InterestModel interest in Model.interests)
                     {
 
-                        <li><input type="checkbox" name=@interest.name value=@interest.name /> @interest.name</li>
+                        <li><input type="checkbox" class="userInterests" name=@interest.name value=@interest.name /> @interest.name</li>
                     }
                 </ul>
             <button id="deleteInterestButton"> Delete selected interests</button>
