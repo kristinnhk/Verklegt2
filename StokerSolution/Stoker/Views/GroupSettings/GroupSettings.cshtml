@@ -9,33 +9,26 @@
 </head>
 <body>
     @Html.Partial("HeaderPartialView")
-    <div id="photoContainer">
+    <div id="photoContainer" class="col-md-6">
+        <h3>Change the image of your group</h3>
         <img src="@Url.Action("RenderGroupImage", new { id = Model.groups[0].groupID })" alt="Photo change" width="100" height="100" />
         <form action="UpdateImage" method="post" enctype="multipart/form-data">
             <input type="file" name="imgFileInSettings" id="ImageFile" accept="image/*" />
             <input type="hidden" name="hiddenGroupID" value=@Model.groups.First().groupID />
-            <input type="submit" value="Change Photo" />
+            <input type="submit" value="Change Photo" class="btn btn-default"/>
         </form>
         <p id="groupIDText">@Model.groups[0].groupID</p>
-
     </div>
-    <div class="form-control">
-        <fieldset>
-            <label for="AboutTextarea">About group</label>
+    <div class="col-md-6">
+            <h3>Change the about section of your group</h3>
             <textarea id="AboutTextarea" class="form-control">
                 @if (Model.groups[0] != null)
                 {
                     @Model.groups[0].about
                 }
             </textarea>
-            <span id="AboutGroupError">About group section can not be empty</span>
-            <button id="AboutSubmit">Change about group</button>
-        </fieldset>
+        <button id="AboutSubmit" class="btn btn-default">Change about group</button>
     </div>
-    <div class="col-md-4" id="groupDiv">
-        
-    </div>
-
     @Html.Partial("FooterPartialView")
 
 
