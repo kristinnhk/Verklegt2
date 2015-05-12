@@ -6,52 +6,37 @@ using System.Web.Mvc;
 
 using Stoker.Models;
 using Stoker.Models.UnionModels;
+using Stoker.Services;
+using System.Drawing;
+using System.IO;
+
 
 namespace Stoker.Controllers
 {
     public class StokerController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private UserService userService = new UserService();
+        private GroupService groupService = new GroupService();
+        private InterestService interestService = new InterestService();
         //
         // GET: /Stoker/
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }
-
-				//public ActionResult Test()
-				//{
-				//	List<ThreadModel> ThreadList = new List<ThreadModel>();
-				//	ThreadList.Add(new ThreadModel()
-				//	{
-				//		threadID = 1,
-				//		user = User,
-				//		title = "cute cats",
-				//		interest = "Cats",
-				//		mainContent = "lolololololol",
-				//		comments = new List<CommentModel>() {
-				//			new CommentModel() {
-				//				commentID = 1,
-				//				commentAuthor = "Skúli",
-				//				content = "bad status bro",
-				//				dateCreated = DateTime.Now,
-				//				likes = 100,
-				//				currentUserLiked = false
-				//			},
-				//			new CommentModel() {
-				//				commentID = 2,
-				//				commentAuthor = "Steinn",
-				//				content = "yolo",
-				//				dateCreated = DateTime.Now,
-				//				likes = 0,
-				//				currentUserLiked = false
-				//			}
-				//		},
-				//		dateCreated = DateTime.Now,
-				//		likes = 5,
-				//		currentUserLiked = false
-				//	});
-				//	ViewBag.List = ThreadList;
-				//	return View("NewsFeedPartial");
-				//}
+        public ActionResult RenderUserImage(string id)
+        {
+            ApplicationUser user = userService.GetUserByID(id);
+            byte[] photoBack = user.image;
+            return File(photoBack, "image/png");
+        }
+        public byte[] FileToByteArray(HttpPostedFileBase file)
+        {
+            Image imageIn = Image.FromStream(file.InputStream, true, true);
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
 	}
 }
