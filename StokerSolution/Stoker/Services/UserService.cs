@@ -143,7 +143,6 @@ namespace Stoker.Services
         public void SetImageDefault(string userID)
         {
             string pathPrefix = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images"), "default-photo.png");
-            System.Diagnostics.Debug.WriteLine(pathPrefix);
             System.Drawing.Image imageIn = System.Drawing.Image.FromFile(pathPrefix);
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);

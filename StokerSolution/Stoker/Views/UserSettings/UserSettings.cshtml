@@ -1,5 +1,6 @@
 ﻿@{
 	ViewBag.Title = "UserSettingsView";
+	Layout = "~/Views/Shared/_LayoutNoSidebar.cshtml";
 }
 @model Stoker.Models.ViewModel
 
@@ -9,57 +10,57 @@
     </head>
     <body>
         @Html.Partial("HeaderPartialView")
-        @*@Html.Partial("SidebarPartialView"
-            {)*@
-        <div id="photoContainer">
+        <div id="photoContainer" class="col-md-6">
+            <h3>Add a new photo to your profile</h3>
             <img src="@Url.Action("RenderUserImage", new { id = Model.Users[0].Id })" alt="Photo change" width="100" height="100" />
-        @*    @using (Html.BeginForm("UpdateImage", "UserSettings", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {*@
             <form action="UpdateImage" method="post" enctype="multipart/form-data">
-                <input type="file" name="imgFileInUserSettings" id="ImageFile" accept="image/*" />
-                <input type="submit" value="Change Photo" />
+                <input type="file" name="imgFileInSettings" id="ImageFile" accept="image/*" />
+                <input type="submit" value="Change Photo" class="btn btn-default" />
             </form>
-
-
-</div>
-        <div>
-            <fieldset>
-                <legend>About me</legend>
-                <textarea id="AboutTextarea"> @if (Model.Users[0] != null)
-                                              {
-                                                  @Model.Users[0].about
-                                              }
-                </textarea>
-                <span id="AboutMeError">About me section can not be empty</span>
-                <button id="AboutSubmit">Change about me</button>
-                <button>Create new interest</button>
-            </fieldset>
         </div>
-        <div class="col-md-4" id="groupDiv">
+        <div class="col-md-6">
+            <h3>Change the about me section of your profile</h3>
             <fieldset>
-                <ul>
-                    @foreach (Stoker.Models.GroupModel group in Model.groups)
-{
-    <li><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
-}
-                </ul>
-                <button id="deleteGroupButton"> Delete selected groups</button>
-            </fieldset>
-        </div>
-        <div class="col-md-4" id="interestDiv">
-            <fieldset>
-                <ul>
-                    @foreach (Stoker.Models.InterestModel interest in Model.interests)
+                <label for="AboutTextarea">About me</label>
+                <textarea id="AboutTextarea" class="form-control">
+                    @if (Model.Users[0] != null)
                     {
-
-                        <li><input type="checkbox" class="userInterests" name=@interest.name value=@interest.name /> @interest.name</li>
+                        @Model.Users[0].about
                     }
-                </ul>
-            <button id="deleteInterestButton"> Delete selected interests</button>
+                </textarea>
+                <button id="AboutSubmit" class="btn btn-default">Change about me</button>
             </fieldset>
         </div>
-        <div class="col-md-4">
-            <button>Create new group</button>
+        <div class="col-md-10">
+            <div class="col-md-3" id="groupDiv">
+                <h3>Manage your groups</h3>
+                <fieldset>
+                    <ul>
+                        @foreach (Stoker.Models.GroupModel group in Model.groups)
+                        {
+                            <li><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
+                        }
+                    </ul>
+                    <button id="deleteGroupButton" class="btn btn-danger">Leave selected groups</button>
+                </fieldset>
+            </div>
+            <div class="col-md-3" id="interestDiv">
+                <h3>Manage your interests</h3>
+                <fieldset>
+                    <ul>
+                        @foreach (Stoker.Models.InterestModel interest in Model.interests)
+                        {
+                            <li><input type="checkbox" class="userInterests" name=@interest.name value=@interest.name /> @interest.name</li>
+                        }
+                    </ul>
+                    <button id="deleteInterestButton" class="btn btn-danger"> Unfollow selected interests</button>
+                </fieldset>
+            </div>
+            <div class="col-md-5">
+                <h3>Create a new group or interest</h3>
+                @Html.ActionLink("Create new group", "AddGroup", "AddGroup", new { @class = "btn btn-primary pull-left" })
+                <button class="btn btn-primary pull-right">Create new interest</button>
+            </div>
         </div>
 
                     @Html.Partial("FooterPartialView")

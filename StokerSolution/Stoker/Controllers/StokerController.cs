@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 using Stoker.Models;
+using Stoker.Models.UnionModels;
 using Stoker.Services;
 using System.Drawing;
 using System.IO;
+
 
 namespace Stoker.Controllers
 {
@@ -23,19 +26,45 @@ namespace Stoker.Controllers
         {
             return View();
         }
-
         public ActionResult RenderUserImage(string id)
         {
             ApplicationUser user = userService.GetUserByID(id);
             byte[] photoBack = user.image;
             return File(photoBack, "image/png");
         }
+        public ActionResult RenderGroupImage(int id)
+        {
+            GroupModel group = groupService.GetGroupByID(id);
+            byte[] photoBack = group.image;
+            return File(photoBack, "image/png");
+        }
+
         public byte[] FileToByteArray(HttpPostedFileBase file)
         {
             Image imageIn = Image.FromStream(file.InputStream, true, true);
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             return ms.ToArray();
+        }
+
+        public ThreadModel FillThreadModel(FormCollection thread)
+        {
+            ThreadModel model = new ThreadModel();
+ 
+            HttpPostedFileBase file = Request.Files[0];
+            model.image = FileToByteArray(file);
+  
+            model.title = Convert.ToString(thread["titleInThread"]);
+            string userID = User.Identity.GetUserId();
+            ApplicationUser gettingName = db.Users.FirstOrDefault(x => x.Id == userID);
+            model.nameOfPoster = gettingName.firstName + " " + gettingName.lastName;
+            model.mainContent = Convert.ToString(thread["contentInThread"]);
+            model.dateCreated = DateTime.Now;
+            model.likes = 0;
+            model.currentUserLiked = false;
+
+            return model;
+
         }
 	}
 }

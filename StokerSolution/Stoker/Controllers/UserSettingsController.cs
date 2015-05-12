@@ -28,6 +28,18 @@ namespace Stoker.Controllers
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             ViewModel model = new ViewModel();
 
+            GroupModel group22 = new GroupModel();
+
+            /*group22.title = "Lionsklubburinn Kiddi";
+            group22.about = "BLABLABLA";
+            group22.numberOfGroupMembers = 1;
+
+            groupService.SetGroup(group22);
+            db.SaveChanges();*/
+
+            //groupService.SetUserGroup(userID, 2);
+            //db.SaveChanges();
+
             //groupService.SetUserGroup(User.Identity.GetUserId(), 1);
             //groupService.SetUserGroup(User.Identity.GetUserId(), 2);
             //groupService.SetUserGroup(User.Identity.GetUserId(), 3);

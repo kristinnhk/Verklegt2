@@ -1,14 +1,14 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Stoker.Services;  
-
-
 using Stoker.Models;
-using Stoker.Models.UnionModels;
+
 
 namespace Stoker.Controllers
 {
@@ -25,7 +25,16 @@ namespace Stoker.Controllers
         {
             //create a new union model
          //   UserInterestUnion union = new UserInterestUnion();
+<<<<<<< HEAD
 
+=======
+        /*    GroupModel groupnew = new GroupModel();
+
+            groupnew.title = "hözzl";
+            groupnew.about = "Við elskum hözzlið!";
+            groupnew.numberOfGroupMembers = 1337;
+            gs.SetGroup(groupnew);*/
+>>>>>>> master
             //adding an interest to the database
             //do not need to specify the primary key
            /* CommentModel comment = new CommentModel();
@@ -96,70 +105,6 @@ namespace Stoker.Controllers
             
             return View();
         }
-
-				public ActionResult Test()
-				{
-					List<TemporaryThreadObjectModel> ThreadList = new List<TemporaryThreadObjectModel>();
-					ThreadList.Add(new TemporaryThreadObjectModel() { 
-						threadID = 1,
-						user = User,
-						title = "cute cats",
-						interest = "Cats",
-						mainContent = "lolololololol",
-						comments = new List<CommentModel>() {
-							new CommentModel() {
-								commentID = 1,
-								commentAuthor = "Skúli",
-								content = "bad status bro",
-								dateCreated = DateTime.Now,
-								likes = 100,
-								currentUserLiked = false
-							},
-							new CommentModel() {
-								commentID = 2,
-								commentAuthor = "Steinn",
-								content = "yolo",
-								dateCreated = DateTime.Now,
-								likes = 0,
-								currentUserLiked = false
-							}
-						},
-						dateCreated = DateTime.Now,
-						likes = 5,
-						currentUserLiked = false
-					});
-					ThreadList.Add(new TemporaryThreadObjectModel()
-					{
-						threadID = 2,
-						user = User,
-						title = "CoolGoal",
-						interest = "Football",
-						mainContent = "RONALDOOOOOOO!!",
-						comments = new List<CommentModel>() {
-							new CommentModel() {
-								commentID = 1,
-								commentAuthor = "h.ki",
-								content = "bbbbbbb",
-								dateCreated = DateTime.Now,
-								likes = 100,
-								currentUserLiked = false
-							},
-							new CommentModel() {
-								commentID = 2,
-								commentAuthor = "Steinn",
-								content = "yolo",
-								dateCreated = DateTime.Now,
-								likes = 0,
-								currentUserLiked = false
-							}
-						},
-						dateCreated = DateTime.Now,
-						likes = 5,
-						currentUserLiked = false
-					});
-					ViewBag.List = ThreadList;
-					return View("NewsFeedPartial");
-				}
 
         public ActionResult About()
         {

@@ -5,6 +5,7 @@ using System.Web;
 
 using Stoker.Models;
 using Stoker.Models.UnionModels;
+using System.IO;
 
 namespace Stoker.Services
 {
@@ -25,6 +26,10 @@ namespace Stoker.Services
         {
             try
             {
+                if (newGroup.image == null)
+                {
+                    SetImageDefault(newGroup);
+                }
                 db.groups.Add(newGroup);
                 db.SaveChanges();
                 return;
@@ -197,5 +202,35 @@ namespace Stoker.Services
             }
                 
         }
+
+        /// <summary>
+        /// Changes image of the current group
+        /// </summary>
+        /// <param name="groupID">current group ID</param>
+        /// <param name="image">the new image you want to set</param>
+        public void SetImage(int groupID, byte[] image)
+        {
+            try
+            {
+                GetGroupByID(groupID).image = image;
+                db.SaveChanges();
+                return;
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        public void SetImageDefault(GroupModel group)
+        {
+            string pathPrefix = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images"), "default-group.jpg");
+            System.Drawing.Image imageIn = System.Drawing.Image.FromFile(pathPrefix);
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            group.image = ms.ToArray();
+ 
+        }
+
     }
 }

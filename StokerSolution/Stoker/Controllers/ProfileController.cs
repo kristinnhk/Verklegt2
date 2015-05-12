@@ -31,13 +31,21 @@ namespace Stoker.Controllers
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
-
+						model.sidebar = new SidebarModel();
+						model.sidebar.userGroups = new List<GroupModel>();
+						model.sidebar.userInterests = new List<InterestModel>();
+					
+						groupService.SetUserGroup(User.Identity.GetUserId(), 13);
+						groupService.SetUserGroup(User.Identity.GetUserId(), 16);
+						groupService.SetUserGroup(User.Identity.GetUserId(), 18);
+						groupService.SetUserGroup(User.Identity.GetUserId(), 20);
             if (user.Id != null)
             {
                 var groups = GetUserGroups(user.Id);
                 foreach (GroupModel group in groups)
                 {
                     model.groups.Add(group);
+										model.sidebar.userGroups.Add(group);
                 }
             }
 
@@ -45,6 +53,7 @@ namespace Stoker.Controllers
             foreach (InterestModel interest in interests)
             {
                 model.interests.Add(interest);
+								model.sidebar.userInterests.Add(interest);
             }
 
             model.Users.Add(user);
@@ -61,21 +70,12 @@ namespace Stoker.Controllers
             return interestService.GetUserInterests(userID).ToList();
         }
         [HttpPost]
-        public ActionResult SubmitThread(FormCollection thread)
+        public ActionResult SubmitUserThread(FormCollection thread)
         {
             ThreadModel model = new ThreadModel();
-            string title = Convert.ToString(thread["titleInUserThread"]);
-            HttpPostedFileBase file = Request.Files[0];
 
-            model.image = FileToByteArray(file);
-            //Image image = thread["imageInUserThread"];
-            string content = Convert.ToString(thread["contentInUserThread"]);
-            model.title = title;
-            model.mainContent = content;
-            model.dateCreated = DateTime.Now;
-            //model.image = image;
-            model.likes = 0;
-            model.currentUserLiked = false;
+            model = FillThreadModel(thread);
+            
             
             threadService.SetUserThread(User.Identity.GetUserId(), model);
             return RedirectToAction("Index", "Profile");
