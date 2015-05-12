@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 
 using Stoker.Models;
+using Stoker.Models.UnionModels;
 using Stoker.Services;
 using System.Drawing;
 using System.IO;
+
 
 namespace Stoker.Controllers
 {

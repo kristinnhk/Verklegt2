@@ -32,6 +32,9 @@ namespace Stoker.Controllers
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
             model.threads = new List<ThreadModel>();
+			model.sidebar = new SidebarModel();
+			model.sidebar.userGroups = new List<GroupModel>();
+			model.sidebar.userInterests = new List<InterestModel>();
 
             if (user.Id != null)
             {
@@ -39,6 +42,7 @@ namespace Stoker.Controllers
                 foreach (GroupModel group in groups)
                 {
                     model.groups.Add(group);
+										model.sidebar.userGroups.Add(group);
                 }
             }
 
@@ -46,6 +50,7 @@ namespace Stoker.Controllers
             foreach (InterestModel interest in interests)
             {
                 model.interests.Add(interest);
+								model.sidebar.userInterests.Add(interest);
             }
 
             var Threads = threadService.GetUserThreads(userID);

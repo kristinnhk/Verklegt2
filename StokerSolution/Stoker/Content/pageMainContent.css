@@ -1,14 +1,8 @@
 ﻿.pageMainContent {
-	border: 5px solid blue;
+	position: relative;
 	width: calc(100% - 250px);
 	float: right;
-	height: 100%;
+	height: 87vh;
 	margin-bottom: 40px;
+	overflow-y: scroll;
 }
-
-/*.mainNewsFeed {
-	position: relative;
-	border: 3px solid green;
-	width: 50%;
-	align-content: center;
-}*/

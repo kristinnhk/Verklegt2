@@ -1,22 +1,46 @@
 ﻿@model Stoker.Models.ViewModel
-<nav class="navbar-left" id="sidebarEveryPage">
-    <!--<link href="~/Content/SidebarStyleSheet.css" rel="stylesheet" />-->
-    <div>
-        <h3>Interests</h3>
-        <ul>
-            @*foreach (var m in Model.interests)
-            {
-                <li>@Html.ActionLink(@m.name, "InterestViewController", @m.interestID)</li>
-            }*@
-        </ul>
-    </div>
-    <div>
-        <h3>Groups</h3>
-        <ul>
-            @*foreach(var m in Model.groups)
-            {
-                <li><a>@m.title</a></li>
-            }*@
-        </ul>
-    </div>
+
+<nav class="navbar-left col-md-2" id="sidebarEveryPage">
+	<!--<link href="~/Content/SidebarStyleSheet.css" rel="stylesheet" />-->
+	<link href="~/Content/FrameStyleSheet.css" rel="stylesheet" />
+	<div class="interestsSidebar">
+		<h3>Interests</h3>
+		<ul>
+			@*@for (int i = 1; i <= 15; i++)
+			{
+				<li>interest @i</li>
+			}*@
+			@if ((Model.sidebar.userInterests == null) || (Model.sidebar.userInterests.Count == 0))
+			{
+				<li>No interests</li>
+			}
+			else
+			{
+				foreach (var interests in Model.sidebar.userInterests)
+				{
+					<li>@Html.ActionLink(interests.name, "GroupProfile", new { interestID = interests.interestID })</li>
+				}
+			}
+		</ul>
+	</div>
+	<div class="groupsSidebar">
+		<h3>Groups</h3>
+		<ul>
+			@*@for (int i = 1; i <= 15; i++)
+			{
+				<li>group @i</li>
+			}*@
+			@if ((Model.sidebar.userGroups == null) || (Model.sidebar.userGroups.Count == 0))
+			{
+				<li>No groups</li>
+			}
+			else
+			{ 
+				foreach (var group in Model.sidebar.userGroups)
+				{
+					<li>@Html.ActionLink(group.title, "GroupProfile", new { groupID = group.groupID })</li>
+				}
+			}
+		</ul>
+	</div>
 </nav>

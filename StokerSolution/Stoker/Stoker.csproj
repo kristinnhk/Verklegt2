@@ -178,6 +178,7 @@
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InterestModel.cs" />
+    <Compile Include="Models\SidebarModel.cs" />
     <Compile Include="Models\TemporaryThreadObjectModel.cs" />
     <Compile Include="Models\ThreadModel.cs" />
     <Compile Include="Models\UnionModels\CommentLikeUnion.cs" />
@@ -275,6 +276,7 @@
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\GroupProfile\GroupProfile.cshtml" />
+    <Content Include="Views\Shared\_LayoutNoSidebar.cshtml" />
     <Content Include="Views\GroupSettings\GroupSettings.cshtml" />
     <Content Include="Views\AddGroup\AddGroup.cshtml" />
   </ItemGroup>
