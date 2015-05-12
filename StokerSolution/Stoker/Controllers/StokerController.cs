@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 using Stoker.Models;
 using Stoker.Services;
@@ -30,6 +31,13 @@ namespace Stoker.Controllers
             byte[] photoBack = user.image;
             return File(photoBack, "image/png");
         }
+        public ActionResult RenderGroupImage(int id)
+        {
+            GroupModel group = groupService.GetGroupByID(id);
+            byte[] photoBack = group.image;
+            return File(photoBack, "image/png");
+        }
+
         public byte[] FileToByteArray(HttpPostedFileBase file)
         {
             Image imageIn = Image.FromStream(file.InputStream, true, true);
@@ -41,20 +49,16 @@ namespace Stoker.Controllers
         public ThreadModel FillThreadModel(FormCollection thread)
         {
             ThreadModel model = new ThreadModel();
-            string title = Convert.ToString(thread["titleInUserThread"]);
+ 
             HttpPostedFileBase file = Request.Files[0];
-
             model.image = FileToByteArray(file);
-            //Image image = thread["imageInUserThread"];
-            string content = Convert.ToString(thread["contentInUserThread"]);
-            model.title = title;
-            var temp = userService.GetUsersByName(User.Identity.Name).First();
-            string userID = temp.Id;
+  
+            model.title = Convert.ToString(thread["titleInThread"]);
+            string userID = User.Identity.GetUserId();
             ApplicationUser gettingName = db.Users.FirstOrDefault(x => x.Id == userID);
             model.nameOfPoster = gettingName.firstName + " " + gettingName.lastName;
-            model.mainContent = content;
+            model.mainContent = Convert.ToString(thread["contentInThread"]);
             model.dateCreated = DateTime.Now;
-
             model.likes = 0;
             model.currentUserLiked = false;
 
