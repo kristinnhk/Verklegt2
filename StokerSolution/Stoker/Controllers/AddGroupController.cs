@@ -29,7 +29,11 @@ namespace Stoker.Controllers
             model.title = collection["titleInGroup"];
             model.about = collection["aboutInGroup"];
             HttpPostedFileBase file = Request.Files[0];
-            model.image = FileToByteArray(file);
+            if (file.ContentLength != 0)
+            {
+                model.image = FileToByteArray(file);
+            }
+            
             model.numberOfGroupMembers = 1;
             service.SetGroup(model);
             return RedirectToAction("GroupProfile", "GroupProfile", new { groupID =  model.groupID});
