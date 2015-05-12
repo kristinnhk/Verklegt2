@@ -14,7 +14,6 @@
             document.getElementById("submitGroup").disabled = true;
         }
     };
-    //$('#about').keydown(isValid());
     $('#about').keyup(isValid);
     $('#title').keyup(isValid);
 });
