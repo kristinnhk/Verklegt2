@@ -24,16 +24,16 @@
 </div>
         <div>
             <fieldset>
-                <legend>About me</legend>
-                <textarea id="AboutTextarea"> @if (Model.Users[0] != null)
-                                              {
-                                                  @Model.Users[0].about
-                                              }
+                <label for="AboutTextarea">About me</label>
+                <textarea id="AboutTextarea" class="form-control">
+                    @if (Model.Users[0] != null)
+                    {
+                        @Model.Users[0].about
+                    }
                 </textarea>
-                <span id="AboutMeError">About me section can not be empty</span>
                 <button id="AboutSubmit">Change about me</button>
-                <button>Create new interest</button>
             </fieldset>
+            <button>Create new interest</button>
         </div>
         <div class="col-md-4" id="groupDiv">
             <fieldset>
@@ -59,7 +59,7 @@
             </fieldset>
         </div>
         <div class="col-md-4">
-            <button>Create new group</button>
+            @Html.ActionLink("Create new group", "AddGroup", "AddGroup")
         </div>
 
                     @Html.Partial("FooterPartialView")
