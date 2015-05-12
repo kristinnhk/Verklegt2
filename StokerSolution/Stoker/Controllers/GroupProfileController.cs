@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Stoker.Controllers
 {
-    public class GroupProfileController : Controller
+    public class GroupProfileController : StokerController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserService userService = new UserService();

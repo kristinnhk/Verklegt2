@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Stoker.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : StokerController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserService userService = new UserService();
