@@ -31,6 +31,7 @@ namespace Stoker.Controllers
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
+            model.threads = new List<ThreadModel>();
 
             if (user.Id != null)
             {
@@ -47,8 +48,13 @@ namespace Stoker.Controllers
                 model.interests.Add(interest);
             }
 
+            var Threads = threadService.GetUserThreads(userID);
+            foreach (ThreadModel thread in Threads)
+            {
+                model.threads.Add(thread);
+            }
             model.Users.Add(user);
-
+            
             return View(model);
         }
         public List<GroupModel> GetUserGroups(string userID)

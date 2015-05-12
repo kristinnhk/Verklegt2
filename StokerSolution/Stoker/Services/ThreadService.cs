@@ -17,6 +17,14 @@ namespace Stoker.Services
             db = context ?? new ApplicationDbContext();
         }
 
+        public IEnumerable<ThreadModel> GetLatestThreadsAll()
+        {
+            IEnumerable<ThreadModel> threads = (from t in db.threads
+                                                orderby t.dateCreated descending
+                                                select t).Take(10);
+            return threads;
+        }
+
         /// <summary>
         /// Gets all of the threads that have been posted to the group being queried for
         /// </summary>
@@ -29,6 +37,14 @@ namespace Stoker.Services
                                                where t.Group.groupID == groupID
                                                select t.Thread;
             return threads;
+        }
+
+        public ThreadModel GetThreadByID(int threadID)
+        {
+            ThreadModel thread = (from t in db.threads
+                                 where t.threadID == threadID
+                                 select t).SingleOrDefault();
+            return thread;
         }
 
         /// <summary>

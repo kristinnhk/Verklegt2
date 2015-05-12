@@ -1,63 +1,66 @@
 ﻿@model Stoker.Models.ViewModel
 
 <div class="mainNewsfeed">
-    @foreach (var item in Model.threads)
+    @if (Model.threads != null)
     {
-        <div class="threadItem">
-            <div class="threadTop">
-                <span class="threadTitle">
-                    @item.title
-                </span>
-
-                <span  class="threadUsername">
-                    @item.nameOfPoster
-                </span>
-                <span>
-                    @item.dateCreated
-                </span>
-                
-                @if (!item.currentUserLiked)
-                {
-                    <span id="UserLike">
-                        <input type="button" id="likebutton" name="likeButton" />
+        foreach (var item in Model.threads)
+        {
+            <div class="threadItem">
+                <div class="threadTop">
+                    <span class="threadTitle">
+                        @item.title
                     </span>
-                }
-                <span id="likeCount">
-                    @item.likes
-                </span>
 
-                <span class="threadInterestOrGroup">
-                    TODO link to that page
+                    <span  class="threadUsername">
+                        @item.nameOfPoster
+                    </span>
+                    <span>
+                        @item.dateCreated
+                    </span>
+                
+                    @if (!item.currentUserLiked)
+                    {
+                        <span id="UserLike">
+                            <input type="button" id="likebutton" name="likeButton" />
+                        </span>
+                    }
+                    <span id="likeCount">
+                        @item.likes
+                    </span>
+                </div>
+                <div class="threadContent">
+                    @if (item.image != null)
+                    {
+                        <img src="@Url.Action("RenderThreadImage", new { id = item.threadID })" alt="Photo change" width="100" height="100" />
+                    }
+                    @*TODO setja myndadótið*@
+                    <span id="textContent">
+                        @item.mainContent
+                    </span>
+                </div>
+                <span class="DetailView">
+                    <a href="#">Detailed view with comment //TODO rename this</a>
                 </span>
-            </div>
-            <div class="threadContent">
-                @*TODO setja myndadótið*@
-                <span id="textContent">
-                    @item.mainContent
-                </span>
-            </div>
-            <div class="DetailView">
-                <a href="#">Detailed view with comment //TODO rename this</a>
-            </div>
-       @*    <div class="threadComments">
-                @foreach (var comment in Model.comments)
-                {
-                    <div class="singleComment">
-                        <div class="singleCommentAuthor">
-                            @comment.commentAuthor
+           @*    <div class="threadComments">
+                    @foreach (var comment in Model.comments)
+                    {
+                        <div class="singleComment">
+                            <div class="singleCommentAuthor">
+                                @comment.commentAuthor
+                            </div>
+                            <div class="singleCommentContent">
+                                @comment.content
+                            </div>
                         </div>
-                        <div class="singleCommentContent">
-                            @comment.content
-                        </div>
-                    </div>
-                }
+                    }
+                </div>
+                <div class="threadNewComment">
+                    <form>
+                        <input type="text" />
+                        <input type="submit" value="Post Comment" />
+                    </form>
+                </div>*@
             </div>
-            <div class="threadNewComment">
-                <form>
-                    <input type="text" />
-                    <input type="submit" value="Post Comment" />
-                </form>
-            </div>*@
-        </div>
+        }
     }
 </div>
