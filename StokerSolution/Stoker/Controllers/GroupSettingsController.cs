@@ -12,7 +12,7 @@ using System.Drawing;
 
 namespace Stoker.Controllers
 {
-    public class GroupSettingsController : Controller
+    public class GroupSettingsController : StokerController
     {
         
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,6 +36,19 @@ namespace Stoker.Controllers
             string aboutGroupString = Request["aboutGroup"].ToString();
             int groupID = Convert.ToInt32(Request["groupID"]);
            groupService.SetGroupAbout(groupID, aboutGroupString);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateImage(FormCollection collection)
+        {
+            //  string file = collection["imgFileInUserSettings"];
+            HttpPostedFileBase file = Request.Files[0];
+            byte[] image = FileToByteArray(file);
+            int thisGroupID = Convert.ToInt32(collection["hiddenGroupID"]);
+            groupService.SetImage(thisGroupID, image);
+
+
+            return RedirectToAction("GroupSettings", "GroupSettings", new { groupID = thisGroupID });
         }
 	}
 }

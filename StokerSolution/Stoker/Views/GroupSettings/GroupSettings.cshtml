@@ -10,9 +10,10 @@
 <body>
     @Html.Partial("HeaderPartialView")
     <div id="photoContainer">
-       
+        <img src="@Url.Action("RenderGroupImage", new { id = Model.groups[0].groupID })" alt="Photo change" width="100" height="100" />
         <form action="UpdateImage" method="post" enctype="multipart/form-data">
-            <input type="file" name="imgFileInUserSettings" id="ImageFile" accept="image/*" />
+            <input type="file" name="imgFileInSettings" id="ImageFile" accept="image/*" />
+            <input type="hidden" name="hiddenGroupID" value=@Model.groups.First().groupID />
             <input type="submit" value="Change Photo" />
         </form>
         <p id="groupIDText">@Model.groups[0].groupID</p>
