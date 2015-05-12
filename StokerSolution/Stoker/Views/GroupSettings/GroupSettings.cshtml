@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "GroupSettingsView";
+}
+@model Stoker.Models.ViewModel
+
+
+<head>
+    <title>"Group settings"</title>
+</head>
+<body>
+    @Html.Partial("HeaderPartialView")
+    @*@Html.Partial("SidebarPartialView"
+        {)*@
+    <div id="photoContainer">
+       
+        <form action="UpdateImage" method="post" enctype="multipart/form-data">
+            <input type="file" name="imgFileInUserSettings" id="ImageFile" accept="image/*" />
+            <input type="submit" value="Change Photo" />
+        </form>
+        <p id="groupIDText">@Model.groups[0].groupID</p>
+
+    </div>
+    <div>
+        <fieldset>
+            <legend>About Group</legend>
+            <textarea id="AboutTextarea">
+                @if (Model.groups[0] != null)
+                {
+                    @Model.groups[0].about
+                }
+            </textarea>
+            <span id="AboutGroupError">About group section can not be empty</span>
+            <button id="AboutSubmit">Change about group</button>
+        </fieldset>
+    </div>
+    <div class="col-md-4" id="groupDiv">
+        
+    </div>
+
+    @Html.Partial("FooterPartialView")
+
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/GroupSettingScripts.js" type="text/javascript"></script>
+</body>
