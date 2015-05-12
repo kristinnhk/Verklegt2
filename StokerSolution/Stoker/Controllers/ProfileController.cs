@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace Stoker.Controllers
 {
-    public class ProfileController : Controller
+    public class ProfileController : StokerController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserService userService = new UserService();
@@ -21,7 +21,7 @@ namespace Stoker.Controllers
         
         // GET: Profile
         [Authorize]
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             string userID = User.Identity.GetUserId();
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
@@ -65,6 +65,9 @@ namespace Stoker.Controllers
         {
             ThreadModel model = new ThreadModel();
             string title = Convert.ToString(thread["titleInUserThread"]);
+            HttpPostedFileBase file = Request.Files[0];
+
+            model.image = FileToByteArray(file);
             //Image image = thread["imageInUserThread"];
             string content = Convert.ToString(thread["contentInUserThread"]);
             model.title = title;

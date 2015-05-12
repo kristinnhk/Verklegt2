@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Stoker.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : StokerController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserService userService = new UserService();
@@ -30,7 +30,7 @@ namespace Stoker.Controllers
         /// </summary>
         /// <returns>Function returns a json object that includes everything thatsatisfies the query</returns>
         public ActionResult SearchJson()
-        {
+       {
             ViewModel results = new ViewModel();
             ViewModel realResult = new ViewModel();
             realResult.Users = new List<ApplicationUser>();

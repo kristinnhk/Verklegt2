@@ -1,8 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Collections.Generic;
+
 using Stoker.Services;
 using Stoker.Tests;
 using Stoker.Models;
+using Stoker.Models.UnionModels;
+
 
 namespace Stoker.Tests.Services
 {
@@ -11,6 +18,7 @@ namespace Stoker.Tests.Services
     public class GroupServiceTest
     {
         private GroupService service;
+        private UserService service2;
 
         [TestInitialize]
         public void Initialize()
@@ -41,7 +49,17 @@ namespace Stoker.Tests.Services
             };
             mockDb.groups.Add(f3);
 
+            ApplicationUser user = new ApplicationUser();
+
+            user.Id = "Steinn";
+            user.gender = "male";
+            user.firstName = "Ellidi";
+            user.PasswordHash = "LALALAL";
+            mockDb.Users.Add(user);
+            
+
             service = new GroupService(mockDb);
+            service2 = new UserService(mockDb);
         }
 
 
@@ -65,6 +83,44 @@ namespace Stoker.Tests.Services
             Assert.AreEqual(result4, null);
 
 
+        }
+
+        [TestMethod]
+        public void TestGetGroupByTitle()
+        {
+            //Arrange:
+            const string title1 = "s";
+            const string title2 = "e";
+            const string title3 = "d";
+            //Act:
+            var result1 = service.GetGroupByTitle(title1);
+            var result2 = service.GetGroupByTitle(title2);
+            var result3 = service.GetGroupByTitle(title3);
+
+            List<GroupModel> finalResult1 = new List<GroupModel>();
+            List<GroupModel> finalResult2 = new List<GroupModel>();
+            List<GroupModel> finalResult3 = new List<GroupModel>();
+
+            foreach (GroupModel group in result1)
+            {
+                finalResult1.Add(group);
+            }
+            foreach (GroupModel group in result2)
+            {
+                finalResult2.Add(group);
+            }
+            foreach (GroupModel group in result3)
+            {
+                finalResult3.Add(group);
+            }
+
+            //Assert:
+            Assert.AreEqual(finalResult1.Count, 1);
+            Assert.AreEqual(finalResult2.Count, 1);
+            Assert.AreEqual(finalResult3.Count, 2);
+            Assert.AreEqual(finalResult1[0].title, "dabs");
+            Assert.AreEqual(finalResult3[1].title, "Ellidi");
+            Assert.AreEqual(finalResult3[0], finalResult1[0]);
         }
     }
 }
