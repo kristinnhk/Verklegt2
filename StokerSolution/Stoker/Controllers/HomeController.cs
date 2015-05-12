@@ -13,7 +13,7 @@ using Stoker.Models.UnionModels;
 namespace Stoker.Controllers
 {
     [Authorize]
-    public class HomeController : StokerController
+    public class HomeController : Controller
     {
         //add private member db context so we dont have to make a new one everytime
         //each service will have this. this is just here in controller for testing atm
@@ -21,16 +21,11 @@ namespace Stoker.Controllers
         private InterestService Is = new InterestService();
         private ThreadService ts = new ThreadService();
         private GroupService gs = new GroupService();
-        public override ActionResult Index()
+        public ActionResult Index()
         {
             //create a new union model
          //   UserInterestUnion union = new UserInterestUnion();
-       /*     GroupModel groupnew = new GroupModel();
 
-            groupnew.title = "Kósí heitapottsferðir Hössa og Skúla á þriðjudögum";
-            groupnew.about = "Við elskum pottinn!";
-            groupnew.numberOfGroupMembers = 1000;
-            gs.SetGroup(groupnew);*/
             //adding an interest to the database
             //do not need to specify the primary key
            /* CommentModel comment = new CommentModel();
