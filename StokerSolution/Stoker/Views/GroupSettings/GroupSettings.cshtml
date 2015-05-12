@@ -9,8 +9,6 @@
 </head>
 <body>
     @Html.Partial("HeaderPartialView")
-    @*@Html.Partial("SidebarPartialView"
-        {)*@
     <div id="photoContainer">
        
         <form action="UpdateImage" method="post" enctype="multipart/form-data">
@@ -20,10 +18,10 @@
         <p id="groupIDText">@Model.groups[0].groupID</p>
 
     </div>
-    <div>
+    <div class="form-control">
         <fieldset>
-            <legend>About Group</legend>
-            <textarea id="AboutTextarea">
+            <label for="AboutTextarea">About group</label>
+            <textarea id="AboutTextarea" class="form-control">
                 @if (Model.groups[0] != null)
                 {
                     @Model.groups[0].about
