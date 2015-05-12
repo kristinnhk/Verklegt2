@@ -45,5 +45,10 @@ namespace Stoker.Controllers
 
             return RedirectToAction("GroupProfile", "GroupProfile", new { groupID = currentGroupID });
         }
+
+        public ActionResult GroupSettings(int goToGroupID)
+        {
+            return RedirectToAction("GroupSettings", "GroupSettings", new { groupID = goToGroupID });
+        }
     }
 }
