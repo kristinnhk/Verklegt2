@@ -1,13 +1,15 @@
-﻿$(document).ready(function (){
+﻿$(document).ready(function () {
+
     $("#searchbarInSearchView").keyup(function () {
        
             $("#loader").show();
-        
+            //$("#searchbarInSearchView").attr("disabled", "disabled");
             if (!$("#searchbarInSearchView").val()) {
                 $("#loader").hide();
                 $("#userTable tbody tr").remove();
                 $("#interestTable tbody tr").remove();
                 $("#groupTable tbody tr").remove();
+               // $("#searchbarInSearchView").removeAttr("disabled");
             return false;
         }
         else{
@@ -16,6 +18,7 @@
             var posting = $.post('/Search/SearchJson/', returnString);
             
             posting.done(function (result) {
+                //$("#searchbarInSearchView").removeAttr("disabled");
                 $("#loader").hide();
             $("#userTable tbody tr").remove();
             for(var i = 0; i < result.Users.length; i++) {
