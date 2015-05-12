@@ -5,18 +5,36 @@
     {
         <div class="threadItem">
             <div class="threadTop">
-                <div class="threadUsername">
-                    @item.nameOfPoster
-                </div>
-                <div class="threadTitle">
+                <span class="threadTitle">
                     @item.title
-                </div>
-                <div class="threadInterestOrGroup">
+                </span>
+
+                <span  class="threadUsername">
+                    @item.nameOfPoster
+                </span>
+                <span>
+                    @item.dateCreated
+                </span>
+                
+                @if (!item.currentUserLiked)
+                {
+                    <span id="UserLike">
+                        <input type="button" id="likebutton" name="likeButton" />
+                    </span>
+                }
+                <span id="likeCount">
+                    @item.likes
+                </span>
+
+                <span class="threadInterestOrGroup">
                     TODO link to that page
-                </div>
+                </span>
             </div>
             <div class="threadContent">
-                @item.mainContent
+                @*TODO setja myndadótið*@
+                <span id="textContent">
+                    @item.mainContent
+                </span>
             </div>
             <div class="DetailView">
                 <a href="#">Detailed view with comment //TODO rename this</a>
