@@ -20,6 +20,8 @@ namespace Stoker.Models
         [Required]
         public int likes { get; set; }
         [Required]
+        public string nameOfPoster { get; set; }
+        [Required]
         public bool currentUserLiked { get; set; }
 
 				public string commentAuthor { get; set; }

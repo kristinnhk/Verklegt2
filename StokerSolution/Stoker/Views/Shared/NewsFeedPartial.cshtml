@@ -1,41 +1,42 @@
-﻿@using Stoker.Models;
+﻿@model Stoker.Models.ViewModel
+
 <div class="mainNewsfeed">
-	@foreach (TemporaryThreadObjectModel item in ViewBag.List)
-	{
-		<div class="threadItem">
-			<div class="threadTop">
-				<div class="threadUsername">
-					Jon Jonsson
-				</div>
-				<div class="threadTitle">
-					@item.title
-				</div>
-				<div class="threadInterestOrGroup">
-					Cats
-				</div>
-			</div>
-			<div class="threadContent">
-				@item.mainContent
-			</div>
-			<div class="threadComments">
-				@foreach (var comment in item.comments)
-				{
-					<div class="singleComment">
-						<div class="singleCommentAuthor">
-							@comment.commentAuthor
-						</div>
-						<div class="singleCommentContent">
-							@comment.content
-						</div>
-					</div>
-				}
-			</div>
-			<div class="threadNewComment">
-				<form>
-					<input type="text" />
-					<input type="submit" value="Post Comment" />
-				</form>
-			</div>
-		</div>
-	}
+    @foreach (var item in Model.threads)
+    {
+        <div class="threadItem">
+            <div class="threadTop">
+                <div class="threadUsername">
+                    Jönné Jésnssen
+                </div>
+                <div class="threadTitle">
+                    @item.title
+                </div>
+                <div class="threadInterestOrGroup">
+                    Cats
+                </div>
+            </div>
+            <div class="threadContent">
+                @item.mainContent
+            </div>
+            <div class="threadComments">
+                @foreach (var comment in Model.comments)
+                {
+                    <div class="singleComment">
+                        <div class="singleCommentAuthor">
+                            @comment.commentAuthor
+                        </div>
+                        <div class="singleCommentContent">
+                            @comment.content
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="threadNewComment">
+                <form>
+                    <input type="text" />
+                    <input type="submit" value="Post Comment" />
+                </form>
+            </div>
+        </div>
+    }
 </div>

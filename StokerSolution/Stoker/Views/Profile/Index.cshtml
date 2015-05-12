@@ -17,7 +17,7 @@
 <div class="col-lg-12 container">
     <fieldset>
         <legend>New Thread</legend>
-        @using (@Html.BeginForm("SubmitThread", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (@Html.BeginForm("SubmitUserThread", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {  
             <div class="container">
                 <input type="text" value="Title" name="titleInUserThread" class="col-lg-3 form-control" />

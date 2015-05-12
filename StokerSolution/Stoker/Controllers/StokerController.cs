@@ -37,5 +37,29 @@ namespace Stoker.Controllers
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             return ms.ToArray();
         }
+
+        public ThreadModel FillThreadModel(FormCollection thread)
+        {
+            ThreadModel model = new ThreadModel();
+            string title = Convert.ToString(thread["titleInUserThread"]);
+            HttpPostedFileBase file = Request.Files[0];
+
+            model.image = FileToByteArray(file);
+            //Image image = thread["imageInUserThread"];
+            string content = Convert.ToString(thread["contentInUserThread"]);
+            model.title = title;
+            var temp = userService.GetUsersByName(User.Identity.Name).First();
+            string userID = temp.Id;
+            ApplicationUser gettingName = db.Users.FirstOrDefault(x => x.Id == userID);
+            model.nameOfPoster = gettingName.firstName + " " + gettingName.lastName;
+            model.mainContent = content;
+            model.dateCreated = DateTime.Now;
+
+            model.likes = 0;
+            model.currentUserLiked = false;
+
+            return model;
+
+        }
 	}
 }
