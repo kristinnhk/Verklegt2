@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,12 +25,12 @@ namespace Stoker.Controllers
         {
             //create a new union model
          //   UserInterestUnion union = new UserInterestUnion();
-            GroupModel groupnew = new GroupModel();
+        /*    GroupModel groupnew = new GroupModel();
 
-
-
-
-
+            groupnew.title = "hözzl";
+            groupnew.about = "Við elskum hözzlið!";
+            groupnew.numberOfGroupMembers = 1337;
+            gs.SetGroup(groupnew);*/
             //adding an interest to the database
             //do not need to specify the primary key
            /* CommentModel comment = new CommentModel();

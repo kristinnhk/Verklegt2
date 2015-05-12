@@ -3,6 +3,8 @@ using Stoker.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Identity;
+
 using System.Web;
 using System.Web.Mvc;
 
@@ -30,6 +32,23 @@ namespace Stoker.Controllers
                 model.groups.Add(group); 
             
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SubmitGroupThread(FormCollection thread)
+        {
+            ThreadModel model = new ThreadModel();
+            int currentGroupID = Convert.ToInt32(thread["groupID"]);
+            model = FillThreadModel(thread);
+            string userID = User.Identity.GetUserId();
+            threadService.SetGroupThread(currentGroupID, userID, model);
+
+            return RedirectToAction("GroupProfile", "GroupProfile", new { groupID = currentGroupID });
+        }
+
+        public ActionResult GroupSettings(int goToGroupID)
+        {
+            return RedirectToAction("GroupSettings", "GroupSettings", new { groupID = goToGroupID });
         }
     }
 }

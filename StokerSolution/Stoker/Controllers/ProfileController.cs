@@ -70,21 +70,12 @@ namespace Stoker.Controllers
             return interestService.GetUserInterests(userID).ToList();
         }
         [HttpPost]
-        public ActionResult SubmitThread(FormCollection thread)
+        public ActionResult SubmitUserThread(FormCollection thread)
         {
             ThreadModel model = new ThreadModel();
-            string title = Convert.ToString(thread["titleInUserThread"]);
-            HttpPostedFileBase file = Request.Files[0];
 
-            model.image = FileToByteArray(file);
-            //Image image = thread["imageInUserThread"];
-            string content = Convert.ToString(thread["contentInUserThread"]);
-            model.title = title;
-            model.mainContent = content;
-            model.dateCreated = DateTime.Now;
-            //model.image = image;
-            model.likes = 0;
-            model.currentUserLiked = false;
+            model = FillThreadModel(thread);
+            
             
             threadService.SetUserThread(User.Identity.GetUserId(), model);
             return RedirectToAction("Index", "Profile");

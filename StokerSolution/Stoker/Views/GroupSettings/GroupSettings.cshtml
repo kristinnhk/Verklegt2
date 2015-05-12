@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "GroupSettingsView";
+}
+@model Stoker.Models.ViewModel
+
+
+<head>
+    <title>"Group settings"</title>
+</head>
+<body>
+    @Html.Partial("HeaderPartialView")
+    <div id="photoContainer" class="col-md-6">
+        <h3>Change the image of your group</h3>
+        <img src="@Url.Action("RenderGroupImage", new { id = Model.groups[0].groupID })" alt="Photo change" width="100" height="100" />
+        <form action="UpdateImage" method="post" enctype="multipart/form-data">
+            <input type="file" name="imgFileInSettings" id="ImageFile" accept="image/*" />
+            <input type="hidden" name="hiddenGroupID" value=@Model.groups.First().groupID />
+            <input type="submit" value="Change Photo" class="btn btn-default"/>
+        </form>
+        <p id="groupIDText">@Model.groups[0].groupID</p>
+    </div>
+    <div class="col-md-6">
+            <h3>Change the about section of your group</h3>
+            <textarea id="AboutTextarea" class="form-control">
+                @if (Model.groups[0] != null)
+                {
+                    @Model.groups[0].about
+                }
+            </textarea>
+        <button id="AboutSubmit" class="btn btn-default">Change about group</button>
+    </div>
+    @Html.Partial("FooterPartialView")
+
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/GroupSettingScripts.js" type="text/javascript"></script>
+</body>
