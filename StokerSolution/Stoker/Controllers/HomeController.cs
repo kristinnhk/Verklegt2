@@ -23,12 +23,12 @@ namespace Stoker.Controllers
         {
             //create a new union model
          //   UserInterestUnion union = new UserInterestUnion();
-       /*     GroupModel groupnew = new GroupModel();
+            GroupModel groupnew = new GroupModel();
 
-            groupnew.title = "Kósí heitapottsferðir Hössa og Skúla á þriðjudögum";
-            groupnew.about = "Við elskum pottinn!";
-            groupnew.numberOfGroupMembers = 1000;
-            gs.SetGroup(groupnew);*/
+
+
+
+
             //adding an interest to the database
             //do not need to specify the primary key
            /* CommentModel comment = new CommentModel();

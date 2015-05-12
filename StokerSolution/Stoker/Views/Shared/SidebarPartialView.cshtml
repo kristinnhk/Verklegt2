@@ -5,14 +5,21 @@
 	<div class="interestsSidebar">
 		<h3>Interests</h3>
 		<ul>
-			@for (int i = 1; i <= 15; i++)
+			@*@for (int i = 1; i <= 15; i++)
 			{
 				<li>interest @i</li>
-			}
-			@*@foreach (Stoker.Models.InterestModel interest in Model.interests)
-			{
-				<li><input type="checkbox" name=@interest.name value=@interest.name /> @interest.name</li>
 			}*@
+			@if ((Model.sidebar.userInterests == null) || (Model.sidebar.userInterests.Count == 0))
+			{
+				<li>No interests</li>
+			}
+			else
+			{
+				foreach (var interests in Model.sidebar.userInterests)
+				{
+					<li>@Html.ActionLink(interests.name, "GroupProfile", new { interestID = interests.interestID })</li>
+				}
+			}
 		</ul>
 	</div>
 	<div class="groupsSidebar">
@@ -22,9 +29,16 @@
 			{
 				<li>group @i</li>
 			}*@
-		  @foreach (var group in Model.groups)
+			@if ((Model.sidebar.userGroups == null) || (Model.sidebar.userGroups.Count == 0))
 			{
-				<li>@Html.ActionLink("@group.title", "GroupProfile", "GroupProfile", @group.groupID, new { id = @group.groupID })</li>
+				<li>No groups</li>
+			}
+			else
+			{ 
+				foreach (var group in Model.sidebar.userGroups)
+				{
+					<li>@Html.ActionLink(group.title, "GroupProfile", new { groupID = group.groupID })</li>
+				}
 			}
 		</ul>
 	</div>

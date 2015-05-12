@@ -31,13 +31,21 @@ namespace Stoker.Controllers
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
-
+						model.sidebar = new SidebarModel();
+						model.sidebar.userGroups = new List<GroupModel>();
+						model.sidebar.userInterests = new List<InterestModel>();
+					
+						groupService.SetUserGroup(User.Identity.GetUserId(), 13);
+						groupService.SetUserGroup(User.Identity.GetUserId(), 16);
+						groupService.SetUserGroup(User.Identity.GetUserId(), 18);
+						groupService.SetUserGroup(User.Identity.GetUserId(), 20);
             if (user.Id != null)
             {
                 var groups = GetUserGroups(user.Id);
                 foreach (GroupModel group in groups)
                 {
                     model.groups.Add(group);
+										model.sidebar.userGroups.Add(group);
                 }
             }
 
@@ -45,6 +53,7 @@ namespace Stoker.Controllers
             foreach (InterestModel interest in interests)
             {
                 model.interests.Add(interest);
+								model.sidebar.userInterests.Add(interest);
             }
 
             model.Users.Add(user);
