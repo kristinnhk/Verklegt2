@@ -203,6 +203,25 @@ namespace Stoker.Services
                 
         }
 
+        /// <summary>
+        /// Changes image of the current group
+        /// </summary>
+        /// <param name="groupID">current group ID</param>
+        /// <param name="image">the new image you want to set</param>
+        public void SetImage(int groupID, byte[] image)
+        {
+            try
+            {
+                GetGroupByID(groupID).image = image;
+                db.SaveChanges();
+                return;
+            }
+            catch
+            {
+                return;
+            }
+        }
+
         public void SetImageDefault(GroupModel group)
         {
             string pathPrefix = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images"), "default-group.jpg");

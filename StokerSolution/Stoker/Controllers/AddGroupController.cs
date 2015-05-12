@@ -12,7 +12,7 @@ using System.Drawing;
 
 namespace Stoker.Controllers
 {
-    public class AddGroupController : Controller
+    public class AddGroupController : StokerController
     {
         GroupService service = new GroupService();
         //
@@ -22,8 +22,14 @@ namespace Stoker.Controllers
             return View();
         }
 
-        public ActionResult Add(GroupModel model)
+        public ActionResult Add(FormCollection collection)
         {
+            GroupModel model = new GroupModel();
+
+            model.title = collection["titleInGroup"];
+            model.about = collection["aboutInGroup"];
+            HttpPostedFileBase file = Request.Files[0];
+            model.image = FileToByteArray(file);
             model.numberOfGroupMembers = 1;
             service.SetGroup(model);
             return RedirectToAction("GroupProfile", "GroupProfile", new { groupID =  model.groupID});
