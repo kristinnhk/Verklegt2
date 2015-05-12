@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 
 using Stoker.Models;
+using Stoker.Models.UnionModels;
 using Stoker.Services;
 using System.Drawing;
 using System.IO;
+
 
 namespace Stoker.Controllers
 {
@@ -18,11 +20,21 @@ namespace Stoker.Controllers
         private UserService userService = new UserService();
         private GroupService groupService = new GroupService();
         private InterestService interestService = new InterestService();
+        private ThreadService threadservice = new ThreadService();
         //
         // GET: /Stoker/
         public virtual ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult RenderThreadImage(int id)
+        {
+
+            ThreadModel thread = threadservice.GetThreadByID(id);
+
+            byte[] photoBack = thread.image;
+            return File(photoBack, "image/png");
         }
 
         public ActionResult RenderUserImage(string id)
@@ -51,7 +63,10 @@ namespace Stoker.Controllers
             ThreadModel model = new ThreadModel();
  
             HttpPostedFileBase file = Request.Files[0];
-            model.image = FileToByteArray(file);
+            if (file.ContentLength != 0)
+            {
+                model.image = FileToByteArray(file);
+            }
   
             model.title = Convert.ToString(thread["titleInThread"]);
             string userID = User.Identity.GetUserId();

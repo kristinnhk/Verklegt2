@@ -12,16 +12,13 @@
 </head>
 <body>
 	@Html.Partial("HeaderPartialView")
-	<div class="body-content">
-		@Html.Partial("SidebarPartialView")
-		<div class="pageMainContent col-md-10 clearfix">
-			@RenderBody()
-		</div>
+	<div class="body-content container">
+		@RenderBody()
 	</div>
 	@Html.Partial("FooterPartialView")
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
 	@RenderSection("scripts", required: false)
-    @RenderSection("JavaScript", required: false)
+	@RenderSection("JavaScript", required: false)
 </body>
 </html>

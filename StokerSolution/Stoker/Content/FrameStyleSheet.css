@@ -35,21 +35,39 @@ header #headerLogo {
 }
 
 footer {
-	
 	bottom: 0;
 	width: 100%;
 	height: 40px;
 }
 
-#sidebarEveryPage{
+#sidebarEveryPage{	
 	float: left;
 	width: 250px;
-	border: 5px solid red;
+	height: 87vh;
 }
+
+.interestsSidebar {
+	position: relative;
+	border: 3px solid black;
+	max-height: 50%;
+	width: 100%;
+	overflow-y: scroll;
+}
+
+.groupsSidebar {
+	position: relative;
+	border: 3px solid black;
+	max-height: 50%;
+	width: 100%;
+	overflow-y: scroll;
+}
+
 #loginBody {
     background-image: url(Images/logo.jpg);
 }
+
 #loginBody div h1{
     margin-left: auto;
     margin-right: auto;
 }
+

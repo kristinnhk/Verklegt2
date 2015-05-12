@@ -17,6 +17,14 @@ namespace Stoker.Services
             db = context ?? new ApplicationDbContext();
         }
 
+        public IEnumerable<ThreadModel> GetLatestThreadsAll()
+        {
+            IEnumerable<ThreadModel> threads = (from t in db.threads
+                                                orderby t.dateCreated descending
+                                                select t).Take(10);
+            return threads;
+        }
+
         /// <summary>
         /// Gets a thread by its ID
         /// </summary>
