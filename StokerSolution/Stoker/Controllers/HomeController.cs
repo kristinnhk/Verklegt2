@@ -15,26 +15,38 @@ namespace Stoker.Controllers
     [Authorize]
     public class HomeController : StokerController
     {
-        //add private member db context so we dont have to make a new one everytime
-        //each service will have this. this is just here in controller for testing atm
 
-        public override ActionResult Index()
+        public ActionResult Index()
         {
+            //instanciating necessary lists
             ViewModel model = new ViewModel();
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
-            model.threads = new List<ThreadModel>();
-						model.sidebar = new SidebarModel();
-						model.sidebar.userInterests = new List<InterestModel>();
-						model.sidebar.userGroups = new List<GroupModel>();
+			model.sidebar = new SidebarModel();
 
-            var threads = threadService.GetLatestThreadsAll();
-            foreach (var thread in threads)
+            string userID = User.Identity.GetUserId();
+            ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
+            model.Users.Add(user);
+            if (userID != null)
             {
-                model.threads.Add(thread);
+                model.sidebar.userGroups = groupService.GetUserGroups(userID).ToList();
+                model.sidebar.userInterests = interestService.GetUserInterests(userID).ToList();
+                model.threads = threadService.GetFrontPageThreads(userID).ToList();
             }
-
+            // if any of the lists above are empty we instanciate them.
+            if (model.sidebar.userGroups == null)
+            {
+                model.sidebar.userGroups = new List<GroupModel>();
+            }
+            if (model.sidebar.userInterests == null)
+            {
+                model.sidebar.userInterests = new List<InterestModel>();
+            }
+            if (model.threads == null)
+            {
+                model.threads = new List<ThreadModel>();
+            }
 
             return View(model);
         }

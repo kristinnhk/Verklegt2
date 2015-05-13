@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
+using System.IO;
+using System.Drawing;
 
 using Microsoft.AspNet.Identity;
 using System.Drawing;
@@ -15,43 +18,56 @@ namespace Stoker.Controllers
     {
 
         // GET: Profile
+
         [Authorize]
-        public override ActionResult Index()
+        public ActionResult Index()
         {
-            string userID = User.Identity.GetUserId();
-            ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
-            
+            return UserIndex(User.Identity.GetUserId());
+        }
+        [Authorize]
+        public ActionResult FriendIndex(string userID)
+        {
+            return UserIndex(userID);
+        }
+
+        [Authorize]
+        public ActionResult UserIndex(string userID)
+        {
+            ApplicationUser user = userService.GetUserByID(userID);
             ViewModel model = new ViewModel();
             //Initiating the parts of the view model needed. 
             model.Users = new List<ApplicationUser>();
-            model.groups = new List<GroupModel>();
-            model.interests = new List<InterestModel>();
-            model.threads = new List<ThreadModel>();
+            model.Users.Add(user);
 			model.sidebar = new SidebarModel();
 			model.sidebar.userGroups = new List<GroupModel>();
 			model.sidebar.userInterests = new List<InterestModel>();
-
-            if (user.Id != null)
+            //Getting the current users groups and interests
+            ApplicationUser thisUser = userService.GetUserByID(User.Identity.GetUserId());
+            if (thisUser.Id != null)
             {
-                var groups = GetUserGroups(user.Id);
-                foreach (GroupModel group in groups)
-                {
-                    model.groups.Add(group);
-				    model.sidebar.userGroups.Add(group);
-                }
+                model.groups = GetUserGroups(thisUser.Id);
+                model.interests = GetUserInterests(thisUser.Id);
             }
-
-            var interests = GetUserInterests(user.Id);
-            foreach (InterestModel interest in interests)
+            else
             {
-                model.interests.Add(interest);
-			    model.sidebar.userInterests.Add(interest);
+                model.groups = new List<GroupModel>();
+                model.interests = new List<InterestModel>();
             }
-
-            var Threads = threadService.GetUserThreads(userID);
-            foreach (ThreadModel thread in Threads)
+            //Getting the threads on this users profile
+            model.threads = threadService.GetUserThreads(userID).ToList();
+            if (model.threads == null)
             {
-                model.threads.Add(thread);
+                model.threads = new List<ThreadModel>();
+            }
+            //Getting the users friend requests if this is the current users profile
+            if (userID == thisUser.Id)
+            {
+                model.friendRequests = userService.GetFriendRequests(userID).ToList();
+            }
+            else if(userService.FriendRequestSent(thisUser.Id, userID) == false)
+            {
+                model.friendRequests = new List<ApplicationUser>();
+                model.friendRequests.Add(user);
             }
             model.Users.Add(user);
             
@@ -81,6 +97,15 @@ namespace Stoker.Controllers
         public ActionResult ChangeAboutMe()
         {
             return View("UserSettings", "UserSettings");
+        }
+
+        [HttpPost]
+        public ActionResult AddFriend()
+        {
+            string thisUserID = User.Identity.GetUserId();
+            string friendID = Request["userID"].ToString();
+            userService.SendFriendRequest(thisUserID, friendID);
+            return UserIndex(friendID);
         }
     }
 }

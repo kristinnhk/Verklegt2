@@ -18,9 +18,9 @@ namespace Stoker.Controllers
         {
 
             ViewModel model = new ViewModel();
-
+            string userID = User.Identity.GetUserId();
             GroupModel group = db.groups.FirstOrDefault(x => x.groupID == groupId);
-
+            ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
@@ -33,6 +33,22 @@ namespace Stoker.Controllers
             {
                 model.threads.Add(thread);
             }
+
+            if (user.Id != null)
+            {
+                var groups = groupService.GetUserGroups(User.Identity.GetUserId());
+                foreach (GroupModel g in groups)
+                {
+                    model.sidebar.userGroups.Add(g);
+                }
+            }
+
+            var interests = interestService.GetUserInterests(User.Identity.GetUserId());
+            foreach (InterestModel i in interests)
+            {
+                model.sidebar.userInterests.Add(i);
+            }
+
             model.groups.Add(group); 
          
             return View(model);

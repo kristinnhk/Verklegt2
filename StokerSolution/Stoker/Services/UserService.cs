@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Microsoft.SqlServer.Server;
-using Stoker.Models;
 using System.IO;
+using System.Linq.Expressions;
+
+using Microsoft.SqlServer.Server;
+
+using Stoker.Models;
+
 
 
 namespace Stoker.Services
@@ -148,6 +152,89 @@ namespace Stoker.Services
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             GetUserByID(userID).image = ms.ToArray();
             db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Sends a friend request from one user to another
+        /// </summary>
+        /// <param name="userSendingID">user sending request</param>
+        /// <param name="userReceivingID">user receiving request</param>
+        public void SendFriendRequest(string userSendingID, string userReceivingID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser sender = serviceUser.GetUserByID(userSendingID);
+            ApplicationUser receiver = serviceUser.GetUserByID(userReceivingID);
+            sender.friendRequestSent.Add(receiver);
+            receiver.friendRequestReceived.Add(sender);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Accepts a friend request from another user.
+        /// </summary>
+        /// <param name="userAcceptingID">User acting and accepting the request</param>
+        /// <param name="friendID">user that previously sent the request.</param>
+        public void AcceptFriendRequest(string userAcceptingID, string friendID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser accepter = serviceUser.GetUserByID(userAcceptingID);
+            ApplicationUser friend = serviceUser.GetUserByID(friendID);
+            accepter.friendRequestSent.Add(friend);
+            friend.friendRequestReceived.Add(accepter);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Returns the friend requests this user has received
+        /// </summary>
+        /// <param name="userID">id of said user</param>
+        /// <returns>IEnumerable of application users that have sent him requests</returns>
+        public IEnumerable<ApplicationUser> GetFriendRequests(string userID)
+        {
+            /*Below is code getting only friend requests gotten that this user has not answered,
+             * this corresponds to these calculations where A is sentRequests, B is gottenRequests
+             * C is xORSentGotten, D is unionXorSent and E is returnResult.
+             * A B 
+             * C = A XOR B
+             * D = C U A
+             * E = D XOR A
+             * E = B but not and not both A and B
+            */ 
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = GetUserByID(userID);
+            IEnumerable<ApplicationUser> sentRequests = user.friendRequestSent;
+            IEnumerable<ApplicationUser> gottenRequests = user.friendRequestReceived.ToList();
+            //filtering users only in one list.
+            IEnumerable<ApplicationUser> xORSentGotten = gottenRequests.Where(p => !sentRequests.Any(p2 => p2.Id == p.Id));
+            List<ApplicationUser> bla = xORSentGotten.ToList();
+            IEnumerable<ApplicationUser> unionXorSent = xORSentGotten.Union(sentRequests);
+            //filtering users only in the gottenRequests list but not both.
+            IEnumerable<ApplicationUser> returnResult = unionXorSent.Where(p => !sentRequests.Any(p2 => p2.Id == p.Id));
+            return returnResult;
+        }
+
+        /// <summary>
+        /// Checks if a current user has sent another user a friend request
+        /// </summary>
+        /// <param name="currentUserID">user that sends requests</param>
+        /// <param name="otherUserID">user receiving requests</param>
+        /// <returns>true if current user has sent other user a friend request
+        /// false otherwise</returns>
+        public bool FriendRequestSent(string currentUserID, string otherUserID)
+        {
+            ApplicationUser currentUser = GetUserByID(currentUserID);
+            ApplicationUser otherUser = GetUserByID(otherUserID);
+            var friendSent = (from ApplicationUser user in currentUser.friendRequestSent 
+                              where user.Id == otherUserID
+                              select user).SingleOrDefault();
+            if (friendSent == otherUser)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

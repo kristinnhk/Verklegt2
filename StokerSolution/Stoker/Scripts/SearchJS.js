@@ -32,7 +32,7 @@ $(document).ready(function () {
                 $("#loader").hide();
                 $("#userTable tbody tr").remove();
                 for (var i = 0; i < result.Users.length; i++) {
-                    $("#userTable tbody").append('<tr><td>' + (i + 1) + '</td><td><a href="/Search/RedirectToProfile?userId=' +
+                    $("#userTable tbody").append('<tr><td>' + (i + 1) + '</td><td><a href="/Profile/FriendIndex?userID=' +
                         result.Users[i].Id + '">' + result.Users[i].firstName + " " + result.Users[i].lastName + '</a></td></tr>');
                 }
                 $("#interestTable tbody tr").remove();

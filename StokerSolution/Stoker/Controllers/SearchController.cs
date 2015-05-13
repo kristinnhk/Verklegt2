@@ -29,14 +29,6 @@ namespace Stoker.Controllers
             interestService.SetNewInterest(model);*/
             return View();
         }
-        public ActionResult RedirectToProfile(string userId)
-        {
-            return RedirectToAction("Search", "Search");
-        }
-        public ActionResult RedirectToInterest(int interestId)
-        {
-            return RedirectToAction("Search", "Search");
-        }
         /// <summary>
         /// This function uses a ajax script in the SearchJS.js file to search for all
         /// objects in the database with a recieved value. It does this by taking the value
