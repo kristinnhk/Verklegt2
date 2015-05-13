@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.SqlServer.Server;
 using Stoker.Models;
 using System.IO;
+using System.Linq.Expressions;
 
 
 namespace Stoker.Services
@@ -162,6 +163,7 @@ namespace Stoker.Services
             ApplicationUser receiver = serviceUser.GetUserByID(userReceivingID);
             sender.friendRequestSent.Add(receiver);
             receiver.friendRequestReceived.Add(sender);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -176,13 +178,36 @@ namespace Stoker.Services
             ApplicationUser friend = serviceUser.GetUserByID(friendID);
             accepter.friendRequestSent.Add(friend);
             friend.friendRequestReceived.Add(accepter);
+            db.SaveChanges();
         }
 
-       /* public ICollection<ApplicationUser> GetFriendRequests(string userID)
+        /// <summary>
+        /// Returns the friend requests this user has received
+        /// </summary>
+        /// <param name="userID">id of said user</param>
+        /// <returns>IEnumerable of application users that have sent him requests</returns>
+        public IEnumerable<ApplicationUser> GetFriendRequests(string userID)
         {
+            /*Below is code getting only friend requests gotten that this user has not answered,
+             * this corresponds to these calculations where A is sentRequests, B is gottenRequests
+             * C is xORSentGotten, D is unionXorSent and E is returnResult.
+             * A B 
+             * C = A XOR B
+             * D = C U A
+             * E = D XOR A
+             * E = B but not and not both A and B
+            */ 
             UserService serviceUser = new UserService(db);
             ApplicationUser user = GetUserByID(userID);
-
-        }*/
+            IEnumerable<ApplicationUser> sentRequests = user.friendRequestSent;
+            IEnumerable<ApplicationUser> gottenRequests = user.friendRequestReceived.ToList();
+            //filtering users only in one list.
+            IEnumerable<ApplicationUser> xORSentGotten = gottenRequests.Where(p => !sentRequests.Any(p2 => p2.Id == p.Id));
+            List<ApplicationUser> bla = xORSentGotten.ToList();
+            IEnumerable<ApplicationUser> unionXorSent = xORSentGotten.Union(sentRequests);
+            //filtering users only in the gottenRequests list but not both.
+            IEnumerable<ApplicationUser> returnResult = unionXorSent.Where(p => !sentRequests.Any(p2 => p2.Id == p.Id));
+            return returnResult;
+        }
     }
 }
