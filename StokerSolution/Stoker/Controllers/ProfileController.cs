@@ -37,7 +37,7 @@ namespace Stoker.Controllers
                 foreach (GroupModel group in groups)
                 {
                     model.groups.Add(group);
-										model.sidebar.userGroups.Add(group);
+				    model.sidebar.userGroups.Add(group);
                 }
             }
 
@@ -45,7 +45,7 @@ namespace Stoker.Controllers
             foreach (InterestModel interest in interests)
             {
                 model.interests.Add(interest);
-								model.sidebar.userInterests.Add(interest);
+			    model.sidebar.userInterests.Add(interest);
             }
 
             var Threads = threadService.GetUserThreads(userID);

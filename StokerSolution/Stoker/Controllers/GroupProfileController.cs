@@ -34,7 +34,7 @@ namespace Stoker.Controllers
                 model.threads.Add(thread);
             }
             model.groups.Add(group); 
-            
+         
             return View(model);
         }
 

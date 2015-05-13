@@ -25,6 +25,9 @@ namespace Stoker.Controllers
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
             model.threads = new List<ThreadModel>();
+						model.sidebar = new SidebarModel();
+						model.sidebar.userInterests = new List<InterestModel>();
+						model.sidebar.userGroups = new List<GroupModel>();
 
             var threads = threadService.GetFrontPageThreads();
             foreach (var thread in threads)

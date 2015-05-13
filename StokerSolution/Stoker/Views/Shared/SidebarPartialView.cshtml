@@ -18,7 +18,7 @@
 			{
 				foreach (var interests in Model.sidebar.userInterests)
 				{
-					<li>@Html.ActionLink(interests.name, "GroupProfile", new { interestID = interests.interestID })</li>
+					<li>@Html.ActionLink(interests.name, "Interest", "Interest", new { interestID = interests.interestID },null)</li>
 				}
 			}
 		</ul>
@@ -38,7 +38,7 @@
 			{ 
 				foreach (var group in Model.sidebar.userGroups)
 				{
-					<li>@Html.ActionLink(group.title, "GroupProfile", new { groupID = group.groupID })</li>
+					<li>@Html.ActionLink(group.title, "GroupProfile", "GroupProfile",new { groupID = group.groupID }, null)</li>
 				}
 			}
 		</ul>
