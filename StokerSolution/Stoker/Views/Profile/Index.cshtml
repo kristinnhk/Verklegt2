@@ -16,11 +16,15 @@
 </div>
 <div class="col-lg-12 container">
     <fieldset>
-        <legend>New comment</legend>
+        <legend>New Thread</legend>
         @using (@Html.BeginForm("SubmitUserThread", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {  
+        {
             <div class="container">
-                <textarea name="commentContent" class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
+                <input type="text" value="Title" name="titleInThread" class="col-lg-3 form-control" />
+                <input type="file" name="imgFileInThread" id="ImageFile" accept="image/*" />
+            </div>
+            <div class="container">
+                <textarea name="contentInThread" class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         }
