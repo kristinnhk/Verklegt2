@@ -25,14 +25,19 @@ namespace Stoker.Controllers
 
             GroupModel group = db.groups.FirstOrDefault(x => x.groupID == groupId);
 
-                model.Users = new List<ApplicationUser>();
-                model.groups = new List<GroupModel>();
-                model.interests = new List<InterestModel>();
-								model.sidebar = new SidebarModel();
-								model.sidebar.userGroups = new List<GroupModel>();
-								model.sidebar.userInterests = new List<InterestModel>();
-
-                model.groups.Add(group); 
+            model.Users = new List<ApplicationUser>();
+            model.groups = new List<GroupModel>();
+            model.interests = new List<InterestModel>();
+            model.threads = new List<ThreadModel>();
+			model.sidebar = new SidebarModel();
+			model.sidebar.userGroups = new List<GroupModel>();
+			model.sidebar.userInterests = new List<InterestModel>();
+            var threads = threadService.GetGroupThreads(groupId);
+            foreach (ThreadModel thread in threads)
+            {
+                model.threads.Add(thread);
+            }
+            model.groups.Add(group); 
             
             return View(model);
         }
