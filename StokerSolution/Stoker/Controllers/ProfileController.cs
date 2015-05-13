@@ -18,11 +18,13 @@ namespace Stoker.Controllers
     {
 
         // GET: Profile
-        public override ActionResult Index()
+
+        [Authorize]
+        public ActionResult Index()
         {
             return UserIndex(User.Identity.GetUserId());
         }
-
+        [Authorize]
         public ActionResult FriendIndex(string userID)
         {
             return UserIndex(userID);
