@@ -1,0 +1,34 @@
+﻿@model Stoker.Models.ViewModel
+
+@{
+    ViewBag.Title = "Interest";
+}
+@section JavaScript
+{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/InterestJS.js")"></script>
+}
+<div class="container">
+    <input type="hidden" value="@Model.interests[0].interestID" id="idInterest" />
+    <h2>@Model.interests[0].name</h2>
+    <input type="button" class="btn btn-primary" value="Follow" id="interestButton"/>
+</div>
+<div class="col-lg-12 container">
+    <fieldset>
+        <legend>New Thread</legend>
+        @using (@Html.BeginForm("SubmitInterestThread", "Interest", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="container">
+                <input type="text" value="Title" name="titleInThread" class="col-lg-3 form-control" />
+                <input type="file" name="imgFileInThread" id="ImageFile" accept="image/*" />
+            </div>
+            <div class="container">
+                <textarea name="contentInThread" class="col-lg-12 form-control" style="max-width: 300px">Content</textarea>
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        }
+    </fieldset>
+</div>
+@Html.Partial("NewsFeedPartial")
+
+<script src="~/Scripts/InterestJS.js"></script>

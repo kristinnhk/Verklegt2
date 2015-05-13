@@ -28,9 +28,9 @@ namespace Stoker.Controllers
                 model.Users = new List<ApplicationUser>();
                 model.groups = new List<GroupModel>();
                 model.interests = new List<InterestModel>();
-								model.sidebar = new SidebarModel();
-								model.sidebar.userGroups = new List<GroupModel>();
-								model.sidebar.userInterests = new List<InterestModel>();
+			    model.sidebar = new SidebarModel();
+				model.sidebar.userGroups = new List<GroupModel>();
+				model.sidebar.userInterests = new List<InterestModel>();
 
                 model.groups.Add(group); 
             
