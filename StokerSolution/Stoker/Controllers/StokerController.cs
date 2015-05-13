@@ -31,7 +31,7 @@ namespace Stoker.Controllers
             interestService = new InterestService(db);
             threadService = new ThreadService(db);
         }
-        public virtual ActionResult Index()
+        public virtual ActionResult StopAmbigiousNameError()
         {
             return View();
         }

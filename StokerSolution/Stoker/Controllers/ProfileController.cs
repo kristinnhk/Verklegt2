@@ -16,7 +16,7 @@ namespace Stoker.Controllers
 
         // GET: Profile
         [Authorize]
-        public override ActionResult Index()
+        public ActionResult Index()
         {
             string userID = User.Identity.GetUserId();
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
