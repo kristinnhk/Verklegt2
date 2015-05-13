@@ -62,7 +62,8 @@ namespace Stoker.Controllers
 
         public void UnFollowInterest()
         {
-
+            int id = Convert.ToInt32(Request["id"]);
+            //interestService.DeleteUserInterest(User.Identity.GetUserId(), id);
         }
         public ActionResult SubmitInterestThread(FormCollection thread)
         {
