@@ -15,9 +15,6 @@ namespace Stoker.Controllers
     public class GroupSettingsController : StokerController
     {
 
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        private GroupService groupService = new GroupService(db);
-
         public ActionResult GroupSettings(int groupID)
         {
             ViewModel model = new ViewModel();

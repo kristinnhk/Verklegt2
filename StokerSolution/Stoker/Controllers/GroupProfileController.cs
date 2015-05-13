@@ -12,11 +12,7 @@ namespace Stoker.Controllers
 {
     public class GroupProfileController : StokerController
     {
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService(db);
-        private GroupService groupService = new GroupService(db);
-        private InterestService interestService = new InterestService(db);
-        private ThreadService threadService = new ThreadService(db);
+ 
         // GET: GroupProfile
         public ActionResult GroupProfile(int groupId)
         {
@@ -25,15 +21,20 @@ namespace Stoker.Controllers
 
             GroupModel group = db.groups.FirstOrDefault(x => x.groupID == groupId);
 
-                model.Users = new List<ApplicationUser>();
-                model.groups = new List<GroupModel>();
-                model.interests = new List<InterestModel>();
-			    model.sidebar = new SidebarModel();
-				model.sidebar.userGroups = new List<GroupModel>();
-				model.sidebar.userInterests = new List<InterestModel>();
-
-                model.groups.Add(group); 
-            
+            model.Users = new List<ApplicationUser>();
+            model.groups = new List<GroupModel>();
+            model.interests = new List<InterestModel>();
+            model.threads = new List<ThreadModel>();
+			model.sidebar = new SidebarModel();
+			model.sidebar.userGroups = new List<GroupModel>();
+			model.sidebar.userInterests = new List<InterestModel>();
+            var threads = threadService.GetGroupThreads(groupId).ToList();
+            foreach (ThreadModel thread in threads)
+            {
+                model.threads.Add(thread);
+            }
+            model.groups.Add(group); 
+         
             return View(model);
         }
 

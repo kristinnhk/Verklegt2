@@ -15,13 +15,22 @@ namespace Stoker.Controllers
 {
     public class StokerController : Controller
     {
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService(db);
-        private GroupService groupService = new GroupService(db);
-        private InterestService interestService = new InterestService(db);
-        private ThreadService threadservice = new ThreadService(db);
+
+        protected ApplicationDbContext db = new ApplicationDbContext();
+        protected UserService userService;
+        protected GroupService groupService;
+        protected InterestService interestService;
+        protected ThreadService threadService;
         //
         // GET: /Stoker/
+
+        public StokerController()
+        {
+            userService = new UserService(db);
+            groupService = new GroupService(db);
+            interestService = new InterestService(db);
+            threadService = new ThreadService(db);
+        }
         public virtual ActionResult Index()
         {
             return View();
@@ -30,7 +39,7 @@ namespace Stoker.Controllers
         public ActionResult RenderThreadImage(int id)
         {
 
-            ThreadModel thread = threadservice.GetThreadByID(id);
+            ThreadModel thread = threadService.GetThreadByID(id);
 
             byte[] photoBack = thread.image;
             return File(photoBack, "image/png");

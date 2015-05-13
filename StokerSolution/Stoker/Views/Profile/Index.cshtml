@@ -18,7 +18,7 @@
     <fieldset>
         <legend>New Thread</legend>
         @using (@Html.BeginForm("SubmitUserThread", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {  
+        {
             <div class="container">
                 <input type="text" value="Title" name="titleInThread" class="col-lg-3 form-control" />
                 <input type="file" name="imgFileInThread" id="ImageFile" accept="image/*" />

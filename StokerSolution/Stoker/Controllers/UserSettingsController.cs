@@ -16,10 +16,6 @@ namespace Stoker.Controllers
 {
     public class UserSettingsController : StokerController
     {
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService(db);
-        private GroupService groupService = new GroupService(db);
-        private InterestService interestService = new InterestService(db);
         //
         // GET: /UserSettings/
         public ActionResult UserSettings()
@@ -34,15 +30,11 @@ namespace Stoker.Controllers
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
 
-
-            if (user.Id != null)
-            {
                 var groups = GetUserGroups(user.Id);
                 foreach (GroupModel group in groups)
                 {
-                    model.groups.Add(group);
+                        model.groups.Add(group);
                 }
-            }
 
             if (user.image == null)
             {
@@ -84,17 +76,21 @@ namespace Stoker.Controllers
 
         public void DeleteUserGroups()
         {
-            foreach (int ID in Request["groupIds[]"])
+            string userID = User.Identity.GetUserId();
+            foreach(char ID in Request["groupIds[]"])
             {
-               // groupService.DeleteUserGroup(User.Identity.GetUserId(), ID);
+                int groupID = (int)Char.GetNumericValue(ID);
+                groupService.DeleteUserGroup(userID, groupID);
             }
         }
 
         public void DeleteUserInterests()
         {
-            foreach (int ID in Request["interestIds[]"])
+            string userID = User.Identity.GetUserId();
+            foreach (char ID in Request["interestIds[]"])
             {
-                //   interestService.DeleteUserInterest(User.Identity.GetUserId(), ID);
+                int interestID = (int)Char.GetNumericValue(ID);
+                interestService.DeleteUserInterest(userID, interestID);
             }
         }
 
@@ -104,7 +100,8 @@ namespace Stoker.Controllers
           //  string file = collection["imgFileInUserSettings"];
             HttpPostedFileBase file = Request.Files[0];
             byte[] image = FileToByteArray(file);
-            userService.SetImage(User.Identity.GetUserId(), image);
+            string userID = User.Identity.GetUserId();
+            userService.SetImage(userID, image);
 
             return RedirectToAction("UserSettings","UserSettings");
         }
