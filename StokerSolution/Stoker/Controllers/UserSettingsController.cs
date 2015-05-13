@@ -76,19 +76,21 @@ namespace Stoker.Controllers
 
         public void DeleteUserGroups()
         {
+            string userID = User.Identity.GetUserId();
             foreach(char ID in Request["groupIds[]"])
             {
                 int groupID = (int)Char.GetNumericValue(ID);
-                groupService.DeleteUserGroup(User.Identity.GetUserId(), groupID);
+                groupService.DeleteUserGroup(userID, groupID);
             }
         }
 
         public void DeleteUserInterests()
         {
+            string userID = User.Identity.GetUserId();
             foreach (char ID in Request["interestIds[]"])
             {
                 int interestID = (int)Char.GetNumericValue(ID);
-                interestService.DeleteUserInterest(User.Identity.GetUserId(), interestID);
+                interestService.DeleteUserInterest(userID, interestID);
             }
         }
 
@@ -98,7 +100,8 @@ namespace Stoker.Controllers
           //  string file = collection["imgFileInUserSettings"];
             HttpPostedFileBase file = Request.Files[0];
             byte[] image = FileToByteArray(file);
-            userService.SetImage(User.Identity.GetUserId(), image);
+            string userID = User.Identity.GetUserId();
+            userService.SetImage(userID, image);
 
             return RedirectToAction("UserSettings","UserSettings");
         }
