@@ -276,6 +276,7 @@
     <Content Include="Views\AddGroup\AddGroup.cshtml" />
     <Content Include="Views\Interest\Interest.cshtml" />
     <Content Include="Views\ThreadDetail\Index.cshtml" />
+    <Content Include="Views\ThreadDetail\ThreadDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
