@@ -16,9 +16,7 @@ namespace Stoker.Controllers
 {
     public class AddGroupController : StokerController
     {
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        GroupService service = new GroupService(db);
-        UserService userService = new UserService(db);
+
         //
         // GET: /AddGroup/
         public ActionResult AddGroup()
@@ -43,7 +41,7 @@ namespace Stoker.Controllers
             }
             
             model.numberOfGroupMembers = 1;
-            service.SetGroup(model);
+            groupService.SetGroup(model);
             return RedirectToAction("GroupProfile", "GroupProfile", new { groupID =  model.groupID});
         }
 	}
