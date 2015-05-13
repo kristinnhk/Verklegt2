@@ -30,22 +30,6 @@ namespace Stoker.Controllers
 
             GroupModel group22 = new GroupModel();
 
-            /*group22.title = "Lionsklubburinn Kiddi";
-            group22.about = "BLABLABLA";
-            group22.numberOfGroupMembers = 1;
-
-            groupService.SetGroup(group22);
-            db.SaveChanges();*/
-
-            //groupService.SetUserGroup(userID, 2);
-            //db.SaveChanges();
-
-            //groupService.SetUserGroup(User.Identity.GetUserId(), 1);
-            //groupService.SetUserGroup(User.Identity.GetUserId(), 2);
-            //groupService.SetUserGroup(User.Identity.GetUserId(), 3);
-            //groupService.SetUserGroup(User.Identity.GetUserId(), 4);
-
-            //Initiating the parts of the view model needed. 
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
@@ -59,7 +43,7 @@ namespace Stoker.Controllers
                     model.groups.Add(group);
                 }
             }
-            //kristinn bætti við hax
+
             if (user.image == null)
             {
                 userService.SetImageDefault(user.Id);
@@ -114,19 +98,6 @@ namespace Stoker.Controllers
             }
         }
 
-    /*    [HttpPost]
-        public ActionResult UpdateImage(HttpPostedFileBase file)
-        {   
-      //       HttpPostedFileBase file = collection["imgFileInUserSettings"];
-            Image imageIn = Image.FromStream(file.InputStream, true, true);
-            MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-            byte[] image = ms.ToArray();
-            userService.SetImage(User.Identity.GetUserId(), image);
-            
-            return View();
-        }*/
-
         [HttpPost]
         public ActionResult UpdateImage(FormCollection collection)
         {
@@ -136,6 +107,11 @@ namespace Stoker.Controllers
             userService.SetImage(User.Identity.GetUserId(), image);
 
             return RedirectToAction("UserSettings","UserSettings");
+        }
+
+        public ActionResult AddGroup()
+        {
+            return RedirectToAction("AddGroup", "AddGroup");
         }
 
 	}
