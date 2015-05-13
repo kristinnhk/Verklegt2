@@ -235,7 +235,7 @@ namespace Stoker.Services
             }
             thread.comments.Add(model);
             model.commentAuthor = threadUser;
-            if (model.likes == null)
+            if (model.likes != 0)
             {
                 model.likes = 0;
             }

@@ -272,7 +272,7 @@
     <Content Include="Views\Shared\_LayoutNoSidebar.cshtml" />
     <Content Include="Views\GroupSettings\GroupSettings.cshtml" />
     <Content Include="Views\AddGroup\AddGroup.cshtml" />
-    <Content Include="Views\ThreadDetail\Index.cshtml" />
+    <Content Include="Views\ThreadDetail\ThreadDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
