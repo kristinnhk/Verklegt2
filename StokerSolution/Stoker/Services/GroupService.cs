@@ -36,6 +36,12 @@ namespace Stoker.Services
                     newGroup.threads = new List<ThreadModel>();
                 }
                 db.groups.Add(newGroup);
+                UserService service = new UserService(db);
+                if (newGroup.groupAdmin.groups == null)
+                {
+                    newGroup.groupAdmin.groups = new List<GroupModel>();
+                }
+                newGroup.groupAdmin.groups.Add(newGroup);
                 db.SaveChanges();
                 return;
         }
@@ -47,15 +53,14 @@ namespace Stoker.Services
         /// <param name="title">New title of the group</param>
         public void SetGroupTitle(int groupID, string title)
         {
-            try
-            {
-                GetGroupByID(groupID).title = title;
+
+            GroupModel group = GetGroupByID(groupID);
+               if(group == null)
+               {
+                   return;
+               } 
+                   group.title = title;
                 db.SaveChanges();
-            }
-            catch
-            {
-                return;
-            }
         }
 
         /// <summary>
@@ -65,15 +70,14 @@ namespace Stoker.Services
         /// <param name="about">New about section of the group</param>
         public void SetGroupAbout(int groupID, string about)
         {
-            try
-            {
-                GetGroupByID(groupID).about = about;
-                db.SaveChanges();
-            }
-            catch
+                
+            GroupModel group = GetGroupByID(groupID);
+            if(group == null)
             {
                 return;
             }
+                    group.about = about;
+                db.SaveChanges();
         }
 
         /// <summary>
@@ -81,17 +85,10 @@ namespace Stoker.Services
         /// </summary>
         /// <param name="groupID">ID of the group</param>
         /// <param name="members">New number of members of the group</param>
-        public void SetGroupMembers(int groupID, int members)
+        public void SetNumberOfGroupMembers(int groupID, int members)
         {
-            try
-            {
                 GetGroupByID(groupID).numberOfGroupMembers = members;
                 db.SaveChanges();
-            }
-            catch
-            {
-                return;
-            }
         }
 
         /// <summary>
@@ -223,6 +220,21 @@ namespace Stoker.Services
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             group.image = ms.ToArray();
  
+        }
+
+        /// <summary>
+        /// deletes a user from a group
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="groupID">id of the interest</param>
+        public void DeleteUserGroup(string userID, int groupID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+            GroupModel group = GetGroupByID(groupID);
+            user.groups.Remove(group);
+            group.users.Remove(user);
+            db.SaveChanges();
         }
 
     }

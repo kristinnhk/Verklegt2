@@ -30,15 +30,11 @@ namespace Stoker.Controllers
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
 
-
-            if (user.Id != null)
-            {
                 var groups = GetUserGroups(user.Id);
                 foreach (GroupModel group in groups)
                 {
-                    model.groups.Add(group);
+                        model.groups.Add(group);
                 }
-            }
 
             if (user.image == null)
             {
@@ -80,17 +76,19 @@ namespace Stoker.Controllers
 
         public void DeleteUserGroups()
         {
-            foreach (int ID in Request["groupIds[]"])
+            foreach(char ID in Request["groupIds[]"])
             {
-               // groupService.DeleteUserGroup(User.Identity.GetUserId(), ID);
+                int groupID = (int)Char.GetNumericValue(ID);
+                groupService.DeleteUserGroup(User.Identity.GetUserId(), groupID);
             }
         }
 
         public void DeleteUserInterests()
         {
-            foreach (int ID in Request["interestIds[]"])
+            foreach (char ID in Request["interestIds[]"])
             {
-                //   interestService.DeleteUserInterest(User.Identity.GetUserId(), ID);
+                int interestID = (int)Char.GetNumericValue(ID);
+                interestService.DeleteUserInterest(User.Identity.GetUserId(), interestID);
             }
         }
 

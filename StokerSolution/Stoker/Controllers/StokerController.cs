@@ -15,6 +15,7 @@ namespace Stoker.Controllers
 {
     public class StokerController : Controller
     {
+
         protected static ApplicationDbContext db = new ApplicationDbContext();
         protected UserService userService = new UserService(db);
         protected GroupService groupService = new GroupService(db);

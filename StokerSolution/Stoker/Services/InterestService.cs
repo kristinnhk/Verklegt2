@@ -4,13 +4,12 @@ using System.Linq;
 using System.Web;
 
 using Stoker.Models;
+using Stoker.Services;
 
 namespace Stoker.Services
 {
     public class InterestService
     {
-       
-        private UserService us = new UserService();
 
          private readonly IAppDataContext db;
 
@@ -144,6 +143,21 @@ namespace Stoker.Services
                                                    where i.name.Contains(title)
                                                    select i;
             return interests;
+        }
+
+        /// <summary>
+        /// Deletes a user from an interest
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="interestID">id of the interest</param>
+        public void DeleteUserInterest(string userID, int interestID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+            InterestModel interest = GetInterestByID(interestID);
+            user.interests.Remove(interest);
+            interest.users.Remove(user);
+            db.SaveChanges();
         }
     }
 }
