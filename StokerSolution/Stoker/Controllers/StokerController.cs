@@ -16,10 +16,10 @@ namespace Stoker.Controllers
     public class StokerController : Controller
     {
         private static ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService(db);
-        private GroupService groupService = new GroupService(db);
-        private InterestService interestService = new InterestService(db);
-        private ThreadService threadservice = new ThreadService(db);
+        protected UserService userService = new UserService(db);
+        protected GroupService groupService = new GroupService(db);
+        protected InterestService interestService = new InterestService(db);
+        protected ThreadService threadservice = new ThreadService(db);
         //
         // GET: /Stoker/
         public virtual ActionResult Index()
