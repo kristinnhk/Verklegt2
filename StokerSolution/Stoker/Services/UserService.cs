@@ -149,5 +149,40 @@ namespace Stoker.Services
             GetUserByID(userID).image = ms.ToArray();
             db.SaveChanges();
         }
+
+        /// <summary>
+        /// Sends a friend request from one user to another
+        /// </summary>
+        /// <param name="userSendingID">user sending request</param>
+        /// <param name="userReceivingID">user receiving request</param>
+        public void SendFriendRequest(string userSendingID, string userReceivingID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser sender = serviceUser.GetUserByID(userSendingID);
+            ApplicationUser receiver = serviceUser.GetUserByID(userReceivingID);
+            sender.friendRequestSent.Add(receiver);
+            receiver.friendRequestReceived.Add(sender);
+        }
+
+        /// <summary>
+        /// Accepts a friend request from another user.
+        /// </summary>
+        /// <param name="userAcceptingID">User acting and accepting the request</param>
+        /// <param name="friendID">user that previously sent the request.</param>
+        public void AcceptFriendRequest(string userAcceptingID, string friendID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser accepter = serviceUser.GetUserByID(userAcceptingID);
+            ApplicationUser friend = serviceUser.GetUserByID(friendID);
+            accepter.friendRequestSent.Add(friend);
+            friend.friendRequestReceived.Add(accepter);
+        }
+
+       /* public ICollection<ApplicationUser> GetFriendRequests(string userID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = GetUserByID(userID);
+
+        }*/
     }
 }
