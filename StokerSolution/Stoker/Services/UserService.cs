@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Microsoft.SqlServer.Server;
-using Stoker.Models;
 using System.IO;
 using System.Linq.Expressions;
+
+using Microsoft.SqlServer.Server;
+
+using Stoker.Models;
+
 
 
 namespace Stoker.Services
@@ -208,6 +211,30 @@ namespace Stoker.Services
             //filtering users only in the gottenRequests list but not both.
             IEnumerable<ApplicationUser> returnResult = unionXorSent.Where(p => !sentRequests.Any(p2 => p2.Id == p.Id));
             return returnResult;
+        }
+
+        /// <summary>
+        /// Checks if a current user has sent another user a friend request
+        /// </summary>
+        /// <param name="currentUserID">user that sends requests</param>
+        /// <param name="otherUserID">user receiving requests</param>
+        /// <returns>true if current user has sent other user a friend request
+        /// false otherwise</returns>
+        public bool FriendRequestSent(string currentUserID, string otherUserID)
+        {
+            ApplicationUser currentUser = GetUserByID(currentUserID);
+            ApplicationUser otherUser = GetUserByID(otherUserID);
+            var friendSent = (from ApplicationUser user in currentUser.friendRequestSent 
+                              where user.Id == otherUserID
+                              select user).SingleOrDefault();
+            if (friendSent == otherUser)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

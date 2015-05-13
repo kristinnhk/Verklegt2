@@ -32,7 +32,6 @@ namespace Stoker.Controllers
         public ActionResult UserIndex(string userID)
         {
             ApplicationUser user = userService.GetUserByID(userID);
-            //userService.SendFriendRequest("31307c68-78d1-4749-8bb4-5a402ba4646d", userID);
             ViewModel model = new ViewModel();
             //Initiating the parts of the view model needed. 
             model.Users = new List<ApplicationUser>();
@@ -62,6 +61,11 @@ namespace Stoker.Controllers
             if (userID == thisUser.Id)
             {
                 model.friendRequests = userService.GetFriendRequests(userID).ToList();
+            }
+            else if(userService.FriendRequestSent(thisUser.Id, userID) == false)
+            {
+                model.friendRequests = new List<ApplicationUser>();
+                model.friendRequests.Add(user);
             }
             model.Users.Add(user);
             
