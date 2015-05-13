@@ -16,10 +16,10 @@ namespace Stoker.Controllers
 {
     public class UserSettingsController : StokerController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService();
-        private GroupService groupService = new GroupService();
-        private InterestService interestService = new InterestService();
+        private static ApplicationDbContext db = new ApplicationDbContext();
+        private UserService userService = new UserService(db);
+        private GroupService groupService = new GroupService(db);
+        private InterestService interestService = new InterestService(db);
         //
         // GET: /UserSettings/
         public ActionResult UserSettings()

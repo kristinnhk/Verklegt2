@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 
 using Stoker.Models;
-using Stoker.Models.UnionModels;
 
 namespace Stoker.Services
 {

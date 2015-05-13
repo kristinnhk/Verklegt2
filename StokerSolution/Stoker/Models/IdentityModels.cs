@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
-using Stoker.Models.UnionModels;
 using System.IO;
 using System.Collections.Generic;
 
@@ -42,13 +41,7 @@ namespace Stoker.Models
         IDbSet<GroupModel> groups { get; set; }
         IDbSet<InterestModel> interests { get; set; }
         IDbSet<ThreadModel> threads { get; set; }
-        IDbSet<UserInterestUnion> userInterestUnion { get; set; }
-        IDbSet<CommentLikeUnion> commentLikeUnion { get; set; }
-        IDbSet<ThreadLikeUnion> threadLikeUnion { get; set; }
-        IDbSet<UserCommentUnion> userCommentUnion { get; set; }
-        IDbSet<UserFriendsUnion> userFriendsUnion { get; set; }
-        IDbSet<UserGroupsUnion> userGroupsUnion { get; set; }
-        IDbSet<ThreadOriginUnion> threadOriginUnion { get; set; }
+    
         int SaveChanges();
     }
 
@@ -59,13 +52,6 @@ namespace Stoker.Models
         public IDbSet<GroupModel> groups { get; set; }
         public IDbSet<InterestModel> interests { get; set; }
         public IDbSet<ThreadModel> threads { get; set; }
-        public IDbSet<UserInterestUnion> userInterestUnion { get; set; }
-        public IDbSet<CommentLikeUnion> commentLikeUnion { get; set; }
-        public IDbSet<ThreadLikeUnion> threadLikeUnion { get; set; }
-        public IDbSet<UserCommentUnion> userCommentUnion { get; set; }
-        public IDbSet<UserFriendsUnion> userFriendsUnion { get; set; }
-        public IDbSet<UserGroupsUnion> userGroupsUnion { get; set; }
-        public IDbSet<ThreadOriginUnion> threadOriginUnion { get; set; }
 
 
         public ApplicationDbContext()

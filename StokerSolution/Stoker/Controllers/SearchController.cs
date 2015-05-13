@@ -10,11 +10,11 @@ namespace Stoker.Controllers
 {
     public class SearchController : StokerController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService();
-        private ThreadService threadService = new ThreadService();
-        private InterestService interestService = new InterestService();
-        private GroupService groupService = new GroupService();
+        private static ApplicationDbContext db = new ApplicationDbContext();
+        private UserService userService = new UserService(db);
+        private ThreadService threadService = new ThreadService(db);
+        private InterestService interestService = new InterestService(db);
+        private GroupService groupService = new GroupService(db);
 
         // GET: Search
         public ActionResult Search()
@@ -48,7 +48,7 @@ namespace Stoker.Controllers
             {
                 string query = Request["Search"].ToString();
 
-                List<ApplicationUser> users = userService.GetUsersByName(query).ToList();
+               List<ApplicationUser> users = userService.GetUsersByName(query).ToList();
                 List<GroupModel> groups = groupService.GetGroupByTitle(query).ToList();
                 List<InterestModel> interests = interestService.GetInterestsByTitle(query).ToList();
                 results.interests = interests;
