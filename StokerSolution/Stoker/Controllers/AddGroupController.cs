@@ -30,7 +30,8 @@ namespace Stoker.Controllers
 
             model.title = collection["titleInGroup"];
             model.about = collection["aboutInGroup"];
-            model.groupAdmin = userService.GetUserByID(User.Identity.GetUserId());
+            string userID = User.Identity.GetUserId();
+            model.groupAdmin = userService.GetUserByID(userID);
             model.users = new List<ApplicationUser>();
             model.users.Add(model.groupAdmin);
 

@@ -72,9 +72,9 @@ namespace Stoker.Controllers
             ThreadModel model = new ThreadModel();
 
             model = FillThreadModel(thread);
-            
-            
-            threadService.SetUserThread(User.Identity.GetUserId(), model);
+
+            string userID = User.Identity.GetUserId();
+            threadService.SetUserThread(userID, model);
             return RedirectToAction("Index", "Profile");
         }
 
