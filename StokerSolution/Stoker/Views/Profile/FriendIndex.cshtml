@@ -8,25 +8,19 @@
         <div class="container">
             <img src="@Url.Action("RenderUserImage", new { id = Model.Users[0].Id })" alt="Photo change" width="100" height="100" />
             <p class="col-lg-6" style="overflow: scroll; overflow-x: hidden; max-height: 150px;">@Model.Users[0].about </p>
-            @Html.ActionLink("Settings", "UserSettings", "UserSettings", null, new { @class = "btn btn-primary" })
         </div>
         <div class="container">
             <h2>@Model.Users[0].firstName @Model.Users[0].lastName</h2>
         </div>
     </div>
     <div class="col-md-4">
-        <h3>Friend requests</h3>
-        <ul class="list-group">
-            @{
-                foreach (var name in Model.friendRequests)
-                {
-                    string fullName = @name.firstName + ' ' + @name.lastName;
-                    <li class="list-group-item">
-                        @Html.ActionLink(@fullName, "FriendIndex", new { @userID = @name.Id }, null)
-                    <button value=@name.Id class="btn btn-primary" id="acceptFriendRequest">Accept</button></li>
-                }
+        @{
+            if (@Model.friendRequests != null) 
+            {
+                <h3>Add this user as a friend</h3>
+                <button value=@Model.friendRequests[0].Id class="btn btn-primary" id="acceptFriendRequest">Add friend</button>
             }
-        </ul>
+        }
     </div>
 </div>
 <div class="col-md-12 container">

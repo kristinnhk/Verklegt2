@@ -17,6 +17,7 @@ namespace Stoker.Models
         public List<ThreadModel> threads { get; set; }
         public List<CommentModel> comments { get; set; }
 				public SidebarModel sidebar { get; set; }
+                public List<ApplicationUser> friendRequests { get; set; }
 
     }
 }

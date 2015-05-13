@@ -16,12 +16,35 @@ namespace Stoker.Services
             db = context ?? new ApplicationDbContext();
         }
 
-        public IEnumerable<ThreadModel> GetLatestThreadsAll()
+        public ICollection<ThreadModel> GetFrontPageThreads(int threadsShown = 0, int orderBy = 0)
         {
-            IEnumerable<ThreadModel> threads = (from t in db.threads
-                                                orderby t.dateCreated descending
-                                                select t).Take(10);
-            return threads;
+            ICollection<ThreadModel> threads = (from t in db.threads
+                                                // orderby t.likes descending when like works
+                                                //some logic to not show all userprofile threads but only those of friends
+                                                //some logic to only show interests followed by user
+                                                //some logic to only show group posts user is in
+                                                select t).ToList();
+            return FilterSkipTake(threads, threadsShown, orderBy);
+        }
+
+        public ICollection<ThreadModel> FilterSkipTake(ICollection<ThreadModel> threads, int threadsShown, int orderBy)
+        {
+            if (orderBy == 0) //show newest first
+            {
+                return threads.OrderByDescending(ThreadModel => ThreadModel.dateCreated).Skip(threadsShown).Take(5).ToList();
+            }
+            else if (orderBy == 1) // show oldest first
+            {
+                return threads.OrderBy(ThreadModel => ThreadModel.dateCreated).Skip(threadsShown).Take(5).ToList();
+            }
+            else if (orderBy == 2) // show most liked first
+            {
+                return threads.OrderByDescending(ThreadModel => ThreadModel.likes).Skip(threadsShown).Take(5).ToList();
+            }
+            else
+            {
+                return threads;
+            }
         }
 
         /// <summary>
@@ -42,7 +65,7 @@ namespace Stoker.Services
         /// <param name="groupID">The ID of the group being queried for</param>
         /// <returns>ICollection of threads of a group or null
         ///  if the group does not exist</returns>
-        public ICollection<ThreadModel> GetGroupThreads(int groupID)
+        public ICollection<ThreadModel> GetGroupThreads(int groupID, int threadsShown = 0, int orderBy = 0)
         {
             GroupService serviceGroup = new GroupService(db);
             GroupModel group = serviceGroup.GetGroupByID(groupID);
@@ -54,7 +77,7 @@ namespace Stoker.Services
             {
                 group.threads = new List<ThreadModel>();
             }
-            return group.threads;
+            return FilterSkipTake(group.threads, threadsShown, orderBy);
         }
 
         /// <summary>
@@ -62,7 +85,7 @@ namespace Stoker.Services
         /// </summary>
         /// <param name="interestID">The ID of the interest being queried for</param>
         /// <returns></returns>
-        public IEnumerable<ThreadModel> GetInterestThreads(int interestID)
+        public ICollection<ThreadModel> GetInterestThreads(int interestID, int threadsShown = 0, int orderBy = 0)
         {
             InterestService serviceInterest = new InterestService(db);
             InterestModel interest = serviceInterest.GetInterestByID(interestID);
@@ -74,7 +97,7 @@ namespace Stoker.Services
             {
                 interest.threads = new List<ThreadModel>();
             }
-            return interest.threads;
+            return FilterSkipTake(interest.threads, threadsShown, orderBy);
         }
 
         /// <summary>
@@ -82,7 +105,7 @@ namespace Stoker.Services
         /// </summary>
         /// <param name="userID">The ID of the user being queried for</param>
         /// <returns>null if user does not exist list of users threads if he does</returns>
-        public ICollection<ThreadModel> GetUserThreads(string userID)
+        public ICollection<ThreadModel> GetUserThreads(string userID, int threadsShown = 0, int orderBy = 0)
         {
             UserService serviceUser = new UserService(db);
             ApplicationUser user = serviceUser.GetUserByID(userID);
@@ -94,7 +117,7 @@ namespace Stoker.Services
             {
                 user.threads = new List<ThreadModel>();
             }
-            return user.threads;
+            return FilterSkipTake(user.threads, threadsShown, orderBy);
         }
 
         /// <summary>
