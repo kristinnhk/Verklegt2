@@ -34,25 +34,27 @@
         <div class="col-md-10">
             <div class="col-md-3" id="groupDiv">
                 <h3>Manage your groups</h3>
-                <fieldset>
-                    <ul>
-                        @foreach (Stoker.Models.GroupModel group in Model.groups)
-                        {
-                            <li><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
-                        }
-                    </ul>
-                    <button id="deleteGroupButton" class="btn btn-danger">Leave selected groups</button>
-                </fieldset>
+							<fieldset>
+								<ul class="list-group manageScrollBox">
+									@foreach (Stoker.Models.GroupModel group in Model.groups)
+									{
+										<li class="list-group-item"><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
+									}
+								</ul>
+								<button id="deleteGroupButton" class="btn btn-danger">Leave selected groups</button>
+							</fieldset>
+
             </div>
             <div class="col-md-3" id="interestDiv">
                 <h3>Manage your interests</h3>
                 <fieldset>
-                    <ul>
-                        @foreach (Stoker.Models.InterestModel interest in Model.interests)
-                        {
-                            <li><input type="checkbox" class="userInterests" name=@interest.name value=@interest.name /> @interest.name</li>
-                        }
-                    </ul>
+									<ul class="list-group manageScrollBox">
+										@foreach (Stoker.Models.InterestModel interest in Model.interests)
+										{
+											<li class="list-group-item"><input type="checkbox" class="userInterests" name=@interest.name value=@interest.name /> @interest.name</li>
+										}
+									</ul>
+
                     <button id="deleteInterestButton" class="btn btn-danger"> Unfollow selected interests</button>
                 </fieldset>
             </div>

@@ -6,3 +6,9 @@
 	margin-bottom: 40px;
 	overflow-y: scroll;
 }
+
+.manageScrollBox {
+	position: relative;
+	max-height: 35vh;
+	overflow-y: scroll;
+}
