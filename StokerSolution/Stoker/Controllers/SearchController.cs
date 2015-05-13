@@ -15,7 +15,7 @@ namespace Stoker.Controllers
         // GET: Search
         public ActionResult Search()
         {
-            InterestModel model = new InterestModel();
+            /*InterestModel model = new InterestModel();
             model.name = "Grindverk Satans";
             model.numberOfUsersInterested = 1;
             if (model.users == null)
@@ -26,7 +26,7 @@ namespace Stoker.Controllers
             {
                 model.threads = new List<ThreadModel>();
             }
-            interestService.SetNewInterest(model);
+            interestService.SetNewInterest(model);*/
             return View();
         }
         public ActionResult RedirectToProfile(string userId)

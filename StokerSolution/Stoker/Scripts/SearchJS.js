@@ -37,7 +37,7 @@ $(document).ready(function () {
                 }
                 $("#interestTable tbody tr").remove();
                 for (var i = 0; i < result.interests.length; i++) {
-                    $("#interestTable tbody").append('<tr><td>' + (i + 1) + '</td><td><a href="/Search/RedirectToInterest?interestId=' +
+                    $("#interestTable tbody").append('<tr><td>' + (i + 1) + '</td><td><a href="/Interest/Interest?interestId=' +
                         result.interests[i].interestID + '">' + result.interests[i].name + '</a></td><td>' + result.interests[i].numberOfUsersInterested + '</td></tr>');
                 }
                 $("#groupTable tbody tr").remove();
