@@ -28,8 +28,23 @@ namespace Stoker.Controllers
 						model.sidebar = new SidebarModel();
 						model.sidebar.userInterests = new List<InterestModel>();
 						model.sidebar.userGroups = new List<GroupModel>();
-
+                        string userID = User.Identity.GetUserId();
+            ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             var threads = threadService.GetLatestThreadsAll();
+            if (user.Id != null)
+            {
+                var groups = groupService.GetUserGroups(User.Identity.GetUserId());
+                foreach (GroupModel group in groups)
+                {
+                    model.sidebar.userGroups.Add(group);
+                }
+            }
+
+            var interests = interestService.GetUserInterests(User.Identity.GetUserId());
+            foreach (InterestModel i in interests)
+            {
+                model.sidebar.userInterests.Add(i);
+            }
             foreach (var thread in threads)
             {
                 model.threads.Add(thread);

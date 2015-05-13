@@ -24,30 +24,33 @@ namespace Stoker.Controllers
 
             InterestModel interest = db.interests.FirstOrDefault(x => x.interestID == interestId);
 
-
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
             model.sidebar = new SidebarModel();
             model.sidebar.userGroups = new List<GroupModel>();
             model.sidebar.userInterests = new List<InterestModel>();
-
+            model.threads = new List<ThreadModel>();
+            var threads = threadService.GetInterestThreads(interestId).ToList();
+            foreach (ThreadModel thread in threads)
+            {
+                model.threads.Add(thread);
+            }
 
             if (user.Id != null)
             {
-                var groups = groupService.GetUserGroups(userID);
+                var groups = groupService.GetUserGroups(User.Identity.GetUserId());
                 foreach (GroupModel group in groups)
                 {
                     model.sidebar.userGroups.Add(group);
                 }
             }
 
-            var interests = interestService.GetUserInterests(userID);
+            var interests = interestService.GetUserInterests(User.Identity.GetUserId());
             foreach (InterestModel i in interests)
             {            
                 model.sidebar.userInterests.Add(i);
             }
-
             model.interests.Add(interest);
             return View(model);
         }
@@ -61,5 +64,16 @@ namespace Stoker.Controllers
         {
 
         }
+        public ActionResult SubmitInterestThread(FormCollection thread)
+        {
+            ThreadModel model = new ThreadModel();
+
+            model = FillThreadModel(thread);
+            int currentInterestID = Convert.ToInt32(thread["interestID"]);
+            string userID = User.Identity.GetUserId();
+            threadService.SetInterestThread(currentInterestID,userID, model);
+            return RedirectToAction("Interest", "Interest", new { interestId = currentInterestID});
+        }
+
     }
 }
