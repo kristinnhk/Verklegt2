@@ -165,6 +165,7 @@
     <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\GroupSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InterestController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StokerController.cs" />
@@ -207,6 +208,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\GroupSettingScripts.js" />
+    <Content Include="Scripts\InterestJS.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -273,8 +275,10 @@
     <Content Include="Views\Shared\_LayoutNoSidebar.cshtml" />
     <Content Include="Views\GroupSettings\GroupSettings.cshtml" />
     <Content Include="Views\AddGroup\AddGroup.cshtml" />
+    <Content Include="Views\Interest\Interest.cshtml" />
     <Content Include="Views\ThreadDetail\Index.cshtml" />
     <Content Include="Views\Profile\FriendIndex.cshtml" />
+    <Content Include="Views\ThreadDetail\ThreadDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

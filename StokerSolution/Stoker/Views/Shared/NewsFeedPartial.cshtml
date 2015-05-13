@@ -5,26 +5,29 @@
     {
         foreach (var item in Model.threads)
         {
-            <div class="threadItem">
+            <div class="threadItem well well-lg">
                 <div class="threadTop">
                     <span class="threadTitle">
                         @item.title
                     </span>
 
-                    <span  class="threadUsername">
-                        @item.originalPoster.firstName  @item.originalPoster.lastName
+                    <span class="threadUsername">
+                        Posted by: <a href="http://localhost:65443/Profile/Index">@item.originalPoster.firstName  @item.originalPoster.lastName</a>
                     </span>
                     <span>
                         @item.dateCreated
                     </span>
-                
-                        <span id="UserLike">
-                            <input type="button" id="likebutton" name="likeButton" />
-                        </span>
-                    
-                   @* <span id="likeCount">
-        @item.likes
-    </span>*@
+
+                    <span id="UserLike">
+                        <input type="button" id="likebutton" name="likeButton" />
+                    </span>
+                    <span>
+                        Likes: @item.likes
+                    </span>
+
+                    @* <span id="likeCount">
+                            @item.likes
+                        </span>*@
                 </div>
                 <div class="threadContent">
                     @if (item.image != null)
@@ -37,27 +40,27 @@
                     </span>
                 </div>
                 <span class="DetailView">
-                    <a href="#">Detailed view with comment //TODO rename this</a>
+                    <a href="localhost:65443/ThreadDetail/ThreadDetail?threadID=@item.threadID">Go to comments</a>
                 </span>
-           @*    <div class="threadComments">
-                    @foreach (var comment in Model.comments)
-                    {
-                        <div class="singleComment">
-                            <div class="singleCommentAuthor">
-                                @comment.commentAuthor
+                @*    <div class="threadComments">
+                        @foreach (var comment in Model.comments)
+                        {
+                            <div class="singleComment">
+                                <div class="singleCommentAuthor">
+                                    @comment.commentAuthor
+                                </div>
+                                <div class="singleCommentContent">
+                                    @comment.content
+                                </div>
                             </div>
-                            <div class="singleCommentContent">
-                                @comment.content
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="threadNewComment">
-                    <form>
-                        <input type="text" />
-                        <input type="submit" value="Post Comment" />
-                    </form>
-                </div>*@
+                        }
+                    </div>
+                    <div class="threadNewComment">
+                        <form>
+                            <input type="text" />
+                            <input type="submit" value="Post Comment" />
+                        </form>
+                    </div>*@
             </div>
         }
     }
