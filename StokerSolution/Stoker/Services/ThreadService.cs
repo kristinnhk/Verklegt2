@@ -16,7 +16,7 @@ namespace Stoker.Services
             db = context ?? new ApplicationDbContext();
         }
 
-        public ICollection<ThreadModel> GetFrontPageThreads(int threadsShown = 0, int orderBy = 0)
+        public ICollection<ThreadModel> GetFrontPageThreads(string userID, int threadsShown = 0, int orderBy = 0)
         {
             ICollection<ThreadModel> threads = (from t in db.threads
                                                 // orderby t.likes descending when like works

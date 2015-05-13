@@ -48,7 +48,7 @@ namespace Stoker.Controllers
             }
 
 
-            var threads = threadService.GetFrontPageThreads();
+            var threads = threadService.GetFrontPageThreads(userID);
 
             foreach (var thread in threads)
             {
