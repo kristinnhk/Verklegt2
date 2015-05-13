@@ -31,6 +31,10 @@ namespace Stoker.Services
                 {
                     SetImageDefault(newGroup);
                 }
+                if (newGroup.threads == null)
+                {
+                    newGroup.threads = new List<ThreadModel>();
+                }
                 db.groups.Add(newGroup);
                 db.SaveChanges();
                 return;

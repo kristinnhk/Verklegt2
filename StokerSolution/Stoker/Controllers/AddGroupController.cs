@@ -16,8 +16,9 @@ namespace Stoker.Controllers
 {
     public class AddGroupController : StokerController
     {
-        GroupService service = new GroupService();
-        UserService userService = new UserService();
+        private static ApplicationDbContext db = new ApplicationDbContext();
+        GroupService service = new GroupService(db);
+        UserService userService = new UserService(db);
         //
         // GET: /AddGroup/
         public ActionResult AddGroup()
