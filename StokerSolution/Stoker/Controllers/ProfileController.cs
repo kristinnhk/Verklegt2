@@ -13,12 +13,7 @@ namespace Stoker.Controllers
 {
     public class ProfileController : StokerController
     {
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService(db);
-        private GroupService groupService = new GroupService(db);
-        private InterestService interestService = new InterestService(db);
-        private ThreadService threadService = new ThreadService(db);
-        
+
         // GET: Profile
         [Authorize]
         public override ActionResult Index()

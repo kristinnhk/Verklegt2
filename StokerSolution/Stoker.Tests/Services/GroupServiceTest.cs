@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using Stoker.Services;
 using Stoker.Tests;
 using Stoker.Models;
-using Stoker.Models.UnionModels;
 
 
 namespace Stoker.Tests.Services

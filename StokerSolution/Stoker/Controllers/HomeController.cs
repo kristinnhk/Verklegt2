@@ -17,10 +17,6 @@ namespace Stoker.Controllers
     {
         //add private member db context so we dont have to make a new one everytime
         //each service will have this. this is just here in controller for testing atm
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        private InterestService Is = new InterestService(db);
-        private ThreadService ts = new ThreadService(db);
-        private GroupService gs = new GroupService(db);
 
         public override ActionResult Index()
         {
@@ -30,7 +26,7 @@ namespace Stoker.Controllers
             model.interests = new List<InterestModel>();
             model.threads = new List<ThreadModel>();
 
-            var threads = ts.GetLatestThreadsAll();
+            var threads = threadService.GetLatestThreadsAll();
             foreach (var thread in threads)
             {
                 model.threads.Add(thread);

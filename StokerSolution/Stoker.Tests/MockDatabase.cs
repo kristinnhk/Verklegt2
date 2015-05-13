@@ -2,7 +2,7 @@
 using System.Data.Entity;
 
 using Stoker.Models;
-using Stoker.Models.UnionModels;
+
 
 namespace Stoker.Tests
 {
@@ -23,13 +23,7 @@ namespace Stoker.Tests
             groups = new InMemoryDbSet<GroupModel>();
             interests = new InMemoryDbSet<InterestModel>();
             threads = new InMemoryDbSet<ThreadModel>();
-            userInterestUnion = new InMemoryDbSet<UserInterestUnion>();
-            commentLikeUnion = new InMemoryDbSet<CommentLikeUnion>();
-            threadLikeUnion = new InMemoryDbSet<ThreadLikeUnion>();
-            userCommentUnion = new InMemoryDbSet<UserCommentUnion>();
-            userFriendsUnion = new InMemoryDbSet<UserFriendsUnion>();
-            userGroupsUnion = new InMemoryDbSet<UserGroupsUnion>();
-            threadOriginUnion = new InMemoryDbSet<ThreadOriginUnion>();
+
         }
 
         public IDbSet<ApplicationUser> Users { get; set; }
@@ -37,13 +31,6 @@ namespace Stoker.Tests
         public IDbSet<GroupModel> groups { get; set; }
         public IDbSet<InterestModel> interests { get; set; }
         public IDbSet<ThreadModel> threads { get; set; }
-        public IDbSet<UserInterestUnion> userInterestUnion { get; set; }
-        public IDbSet<CommentLikeUnion> commentLikeUnion { get; set; }
-        public IDbSet<ThreadLikeUnion> threadLikeUnion { get; set; }
-        public IDbSet<UserCommentUnion> userCommentUnion { get; set; }
-        public IDbSet<UserFriendsUnion> userFriendsUnion { get; set; }
-        public IDbSet<UserGroupsUnion> userGroupsUnion { get; set; }
-        public IDbSet<ThreadOriginUnion> threadOriginUnion { get; set; }
 
         public int SaveChanges()
         {
