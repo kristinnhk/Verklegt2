@@ -68,7 +68,7 @@ namespace Stoker.Services
                                          where thread.groupPost == groups
                                          select thread).ToList();
                 threads.AddRange(temp);
-            }
+            } 
             return FilterSkipTake(threads, 0, 0);
         }
 
