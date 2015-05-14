@@ -10,7 +10,6 @@ using System.IO;
 using System.Drawing;
 
 using Microsoft.AspNet.Identity;
-using System.Drawing;
 
 namespace Stoker.Controllers
 {
@@ -57,7 +56,8 @@ namespace Stoker.Controllers
                 model.interests = new List<InterestModel>();
             }
             //Getting the threads on this users profile
-            model.threads = threadService.GetUserThreads(userID).ToList();
+            int userProfile = -1;
+            model.threads = threadService.GetFilteredThreads(userID,0,0,userProfile).ToList();
             if (model.threads == null)
             {
                 model.threads = new List<ThreadModel>();
