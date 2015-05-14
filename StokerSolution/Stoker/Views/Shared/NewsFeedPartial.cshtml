@@ -1,18 +1,29 @@
 ﻿@model Stoker.Models.ViewModel
 
-<div class="mainNewsfeed">
-    @if (Model.threads != null)
-    {
-        foreach (var item in Model.threads)
+@if (Model.threads != null)
+{
+    <div id="orderByDiv">
+        <span>
+            <label id="orderByLabel"> Order threads by: </label>
+            <select name="orderBy" id="orderBy">
+                <option value="0">Newest</option>
+                <option value="1">Oldest</option>
+                <option value="2">Most Liked</option>
+            </select>
+        </span>
+        <img src="~/Content/Images/ajax-loader.gif" id="loader1" style="display: none; width:20px;" />
+    </div>
+    <div class="mainNewsFeed">
+        <input type="hidden" id="threadsOnPage" name="threadsOnPage" value="5" />
+        @foreach (var item in Model.threads)
         {
-            <div class="threadItem well well-lg">
+            <div class="threadItem well well-lg" >
                 <div class="threadTop">
                     <span class="threadTitle">
                         @item.title
                     </span>
-
                     <span class="threadUsername">
-                        Posted by: <a href="http://localhost:65443/Profile/FriendIndex?userID=@item.originalPoster.Id">@item.originalPoster.firstName  @item.originalPoster.lastName</a>
+                        Posted by: <a href="/Profile/FriendIndex?userID=@item.originalPoster.Id">@item.originalPoster.firstName  @item.originalPoster.lastName</a>
                     </span>
                     <span>
                         @item.dateCreated
@@ -38,5 +49,12 @@
                 </span>
             </div>
         }
-    }
-</div>
+        
+    </div>
+    <span>
+        <input type="button" name="loadMoreNews" id="loadMoreNews" value="loadMoreNews" />
+        <img src="~/Content/Images/ajax-loader.gif" id="loader2" style="display: none; width:20px;" />
+    </span>
+}
+        
+   
