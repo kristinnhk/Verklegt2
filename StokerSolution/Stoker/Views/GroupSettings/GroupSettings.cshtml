@@ -16,7 +16,7 @@
         <form action="UpdateImage" method="post" enctype="multipart/form-data">
             <input type="file" name="imgFileInSettings" id="ImageFile" accept="image/*" />
             <input type="hidden" name="hiddenGroupID" value=@Model.groups.First().groupID />
-            <input type="submit" value="Change Photo" class="btn btn-default"/>
+            <input type="submit" value="Change Photo" class="btn btn-default" id="photoSubmit"/>
         </form>
         <p id="groupIDText" style="display:none;">@Model.groups[0].groupID</p>
     </div>

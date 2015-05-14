@@ -18,8 +18,6 @@
     };
     $('#AboutTextarea').keyup(isValid);
 
-
-
     $('#AboutSubmit').click(function () {
         if (!$('textarea#AboutTextarea').val().trim()) { //if the about section is empty
             $('#AboutGroupError').text("About me can not be empty");
@@ -33,4 +31,19 @@
 
         }
     });
+
+    function checkInputFile()
+    {
+        if (document.getElementById("ImageFile").files.length == 0)
+        {
+            document.getElementById("photoSubmit").disabled = true;
+        }
+        else
+        {
+            document.getElementById("photoSubmit").disabled = false;
+        }
+    }
+    checkInputFile();
+
+    $(document).on('change', '#ImageFile', function () {checkInputFile(); });
 });

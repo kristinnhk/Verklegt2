@@ -15,7 +15,7 @@
             <img src="@Url.Action("RenderUserImage", new { id = Model.Users[0].Id })" alt="Photo change" width="100" height="100" />
             <form action="UpdateImage" method="post" enctype="multipart/form-data">
                 <input type="file" name="imgFileInSettings" id="ImageFile" accept="image/*" />
-                <input type="submit" value="Change Photo" class="btn btn-default" />
+                <input type="submit" value="Change Photo" class="btn btn-default" id="photoSubmit"/>
             </form>
         </div>
         <div class="col-md-6">

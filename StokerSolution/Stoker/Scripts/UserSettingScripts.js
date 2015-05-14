@@ -58,4 +58,16 @@ $(document).ready(function () {
         }
     };
     $('#AboutTextarea').keyup(isValid);
+
+    function checkInputFile() {
+        if (document.getElementById("ImageFile").files.length == 0) {
+            document.getElementById("photoSubmit").disabled = true;
+        }
+        else {
+            document.getElementById("photoSubmit").disabled = false;
+        }
+    }
+    checkInputFile();
+
+    $(document).on('change', '#ImageFile', function () { checkInputFile(); });
 });
