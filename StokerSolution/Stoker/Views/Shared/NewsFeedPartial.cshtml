@@ -18,10 +18,9 @@
                         @item.dateCreated
                     </span>
                     <div>
-                        <input type="hidden" id="threadID" value="@item.threadID" />
                         <p>@item.likes</p>
                         <span id="UserLike">
-                            <input type="button" id="likebutton" name="likeButton" value="Like" />
+                            <button class="likeButton" value=@item.threadID>Like</button>
                         </span>
                     </div>
                     <span>
