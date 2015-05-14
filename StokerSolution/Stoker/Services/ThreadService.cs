@@ -317,6 +317,18 @@ namespace Stoker.Services
         }
 
         /// <summary>
+        /// gets a comment from the database based on its ID
+        /// </summary>
+        /// <param name="commentID">id of the comment</param>
+        /// <returns>commentmodel of the comment</returns>
+        public CommentModel GetCommentByID(int commentID)
+        {
+            return (from comment in db.comments
+                    where comment.commentID == commentID
+                    select comment).SingleOrDefault();
+        }
+
+        /// <summary>
         /// Adds a new comment to a thread
         /// </summary>
         /// <param name="threadID">id of the thread</param>
@@ -350,8 +362,142 @@ namespace Stoker.Services
             db.SaveChanges();
         }
 
+        /// <summary>
+        /// Adds a user to a list of users that have liked the thread.
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="threadID">id of the thread</param>
+        public void LikeThread(string userID, int threadID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+            ThreadModel thread = GetThreadByID(threadID);
+            if (user == null)
+            {
+                return;
+            }
+            if (thread.usersLiked == null)
+            {
+                thread.usersLiked = new List<ApplicationUser>();
+            }
+            thread.likes += 1;
+            thread.usersLiked.Add(user);
+        }
 
+        /// <summary>
+        /// deletes a user from a list of users that have liked a thread.
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="threadID">id of the thread</param>
+        public void UnLikeThread(string userID, int threadID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+            ThreadModel thread = GetThreadByID(threadID);
+            if (user == null)
+            {
+                return;
+            }
+            if (thread.usersLiked == null)
+            {
+                thread.usersLiked = new List<ApplicationUser>();
+                return;
+            }
+            if (thread.usersLiked.Remove(user) == true)
+            {
+                thread.likes -= 1;
+            }
+        }
 
+        /// <summary>
+        /// checks if a user has liked a thread
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="threadID">id of the thread</param>
+        /// <returns>true if user has liked a thread false otherwise.</returns>
+        public bool UserHasLiked(string userID, int threadID)
+        {
+            ThreadModel thread = GetThreadByID(threadID);
+            ApplicationUser liked = (from u in thread.usersLiked
+                                         where u.Id == userID
+                                         select u).SingleOrDefault();
+            if (liked == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
+        /// <summary>
+        /// Adds a user to a list of users that have liked the comment.
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="commentID">id of the thread</param>
+        public void LikeComment(string userID, int commentID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+            CommentModel comment = GetCommentByID(commentID);
+            if (user == null)
+            {
+                return;
+            }
+            if (comment.usersLiked == null)
+            {
+                comment.usersLiked = new List<ApplicationUser>();
+            }
+            comment.usersLiked.Add(user);
+            comment.likes += 1;
+        }
+
+        /// <summary>
+        /// deletes a user from a list of users that have liked a comment.
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="commentID">id of the comment</param>
+        public void UnLikeComment(string userID, int commentID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+            CommentModel comment = GetCommentByID(commentID);
+            if (user == null)
+            {
+                return;
+            }
+            if (comment.usersLiked == null)
+            {
+                comment.usersLiked = new List<ApplicationUser>();
+                return;
+            }
+            if (comment.usersLiked.Remove(user) == true)
+            {
+                comment.likes -= 1;
+            }
+        }
+
+        /// <summary>
+        /// checks if a user has liked a comment
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="commentID">id of the comment</param>
+        /// <returns>true if user has liked a comment false otherwise.</returns>
+        public bool UserHasLiked(string userID, int commentID)
+        {
+            CommentModel comment = GetCommentByID(commentID);
+            ApplicationUser liked = (from u in comment.usersLiked
+                                     where u.Id == userID
+                                     select u).SingleOrDefault();
+            if (liked == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
