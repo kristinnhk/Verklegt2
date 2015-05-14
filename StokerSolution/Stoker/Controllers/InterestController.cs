@@ -63,7 +63,7 @@ namespace Stoker.Controllers
         public void UnFollowInterest()
         {
             int id = Convert.ToInt32(Request["id"]);
-            //interestService.DeleteUserInterest(User.Identity.GetUserId(), id);
+            interestService.DeleteUserInterest(User.Identity.GetUserId(), id);
         }
         public ActionResult SubmitInterestThread(FormCollection thread)
         {
@@ -74,6 +74,14 @@ namespace Stoker.Controllers
             string userID = User.Identity.GetUserId();
             threadService.SetInterestThread(currentInterestID,userID, model);
             return RedirectToAction("Interest", "Interest", new { interestId = currentInterestID});
+        }
+
+        public bool IsFollowing()
+        {
+            string userID = User.Identity.GetUserId();
+            int interestID = Convert.ToInt32(Request["interestID"]);
+            bool result = interestService.IsFollowingInterest(userID, interestID);
+            return result;
         }
 
     }

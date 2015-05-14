@@ -159,5 +159,29 @@ namespace Stoker.Services
             interest.users.Remove(user);
             db.SaveChanges();
         }
+
+        /// <summary>
+        /// Returns true if user is following an interest
+        /// but false otherwise
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="interestID">id of the interest</param>
+        /// <returns>Returns true if user is following an interest
+        /// but false otherwise</returns>
+        public bool IsFollowingInterest(string userID, int interestID)
+        {
+            InterestModel interest = GetInterestByID(interestID);
+            ApplicationUser following = (from u in interest.users
+                             where u.Id == userID
+                             select u).SingleOrDefault();
+            if (following == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

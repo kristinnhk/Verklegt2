@@ -70,5 +70,27 @@ namespace Stoker.Controllers
         {
             return RedirectToAction("GroupSettings", "GroupSettings", new { groupID = goToGroupID });
         }
+
+        public bool IsGroupMember()
+        {
+            string userID = User.Identity.GetUserId();
+            int groupID = Convert.ToInt32(Request["groupID"]);
+            bool result = groupService.IsMemberOfGroup(userID, groupID);
+            return result;
+        }
+
+        public void LeaveGroup()
+        {
+            string userID = User.Identity.GetUserId();
+            int groupID = Convert.ToInt32(Request["groupID"]);
+            groupService.DeleteUserGroup(userID, groupID);
+        }
+
+        public void JoinGroup()
+        {
+            string userID = User.Identity.GetUserId();
+            int groupID = Convert.ToInt32(Request["groupID"]);
+            groupService.SetUserGroup(userID, groupID);
+        }
     }
 }

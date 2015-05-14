@@ -3,6 +3,11 @@
 @{
     ViewBag.Title = "GroupProfile";
 }
+@section JavaScript
+{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/GroupProfileScripts.js")"></script>
+}
 
 <div class="container">
     <div class="container">
@@ -12,7 +17,9 @@
         @Html.ActionLink("Settings", "GroupSettings", new { goToGroupID = @Model.groups[0].groupID }, new { @class = "btn btn-primary" })
     </div>
     <div class="container">
+        <input type="hidden" value="@Model.groups[0].groupID" id="idGroup" />
         <h2>@Model.groups[0].title</h2>
+        <input type="button" class="btn btn-primary" value="Join group" id="groupButton" />
     </div>
 </div>
 <div class="col-lg-12 container">

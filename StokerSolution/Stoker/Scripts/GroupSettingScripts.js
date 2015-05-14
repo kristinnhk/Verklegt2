@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     //Sends an ajax post request to the controller to update the about me section of the users page.
-    $('#groupIDText').hide();
     if ($('#AboutTextarea').val().trim() == '') { //if the about section is empty
         document.getElementById("AboutSubmit").disabled = true;
         $("#AboutSubmit").text("About me section can not be empty");

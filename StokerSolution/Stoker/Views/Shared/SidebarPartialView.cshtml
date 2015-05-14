@@ -5,40 +5,40 @@
 	<link href="~/Content/FrameStyleSheet.css" rel="stylesheet" />
 	<div class="interestsSidebar">
 		<h3>Interests</h3>
-		<ul>
+		<ul class="list-group">
 			@*@for (int i = 1; i <= 15; i++)
 			{
 				<li>interest @i</li>
 			}*@
 			@if ((Model.sidebar.userInterests == null) || (Model.sidebar.userInterests.Count == 0))
 			{
-				<li>No interests</li>
+				<li class="list-group-item">No interests</li>
 			}
 			else
 			{
 				foreach (var interests in Model.sidebar.userInterests)
 				{
-					<li>@Html.ActionLink(interests.name, "Interest", "Interest", new { interestID = interests.interestID },null)</li>
+					<li class="list-group-item">@Html.ActionLink(interests.name, "Interest", "Interest", new { interestID = interests.interestID },null)</li>
 				}
 			}
 		</ul>
 	</div>
 	<div class="groupsSidebar">
 		<h3>Groups</h3>
-		<ul>
+		<ul class="list-group">
 			@*@for (int i = 1; i <= 15; i++)
 			{
 				<li>group @i</li>
 			}*@
 			@if ((Model.sidebar.userGroups == null) || (Model.sidebar.userGroups.Count == 0))
 			{
-				<li>No groups</li>
+				<li class="list-group-item">No groups</li>
 			}
 			else
 			{ 
 				foreach (var group in Model.sidebar.userGroups)
 				{
-					<li>@Html.ActionLink(group.title, "GroupProfile", "GroupProfile",new { groupID = group.groupID }, null)</li>
+					<li class="list-group-item">@Html.ActionLink(group.title, "GroupProfile", "GroupProfile",new { groupID = group.groupID }, null)</li>
 				}
 			}
 		</ul>
