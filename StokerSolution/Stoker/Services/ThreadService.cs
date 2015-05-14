@@ -415,7 +415,7 @@ namespace Stoker.Services
         /// <param name="userID">id of the user</param>
         /// <param name="threadID">id of the thread</param>
         /// <returns>true if user has liked a thread false otherwise.</returns>
-        public bool UserHasLiked(string userID, int threadID)
+        public bool UserHasLikedThread(string userID, int threadID)
         {
             ThreadModel thread = GetThreadByID(threadID);
             ApplicationUser liked = (from u in thread.usersLiked
@@ -484,7 +484,7 @@ namespace Stoker.Services
         /// <param name="userID">id of the user</param>
         /// <param name="commentID">id of the comment</param>
         /// <returns>true if user has liked a comment false otherwise.</returns>
-        public bool UserHasLiked(string userID, int commentID)
+        public bool UserHasLikedComment(string userID, int commentID)
         {
             CommentModel comment = GetCommentByID(commentID);
             ApplicationUser liked = (from u in comment.usersLiked
