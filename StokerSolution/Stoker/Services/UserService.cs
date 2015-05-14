@@ -164,6 +164,14 @@ namespace Stoker.Services
             UserService serviceUser = new UserService(db);
             ApplicationUser sender = serviceUser.GetUserByID(userSendingID);
             ApplicationUser receiver = serviceUser.GetUserByID(userReceivingID);
+            if (sender.friendRequestSent == null)
+            {
+                sender.friendRequestSent = new List<ApplicationUser>();
+            }
+            if (receiver.friendRequestReceived == null)
+            {
+                receiver.friendRequestReceived = new List<ApplicationUser>();
+            }
             sender.friendRequestSent.Add(receiver);
             receiver.friendRequestReceived.Add(sender);
             db.SaveChanges();
@@ -179,6 +187,14 @@ namespace Stoker.Services
             UserService serviceUser = new UserService(db);
             ApplicationUser accepter = serviceUser.GetUserByID(userAcceptingID);
             ApplicationUser friend = serviceUser.GetUserByID(friendID);
+            if (accepter.friendRequestSent == null)
+            {
+                accepter.friendRequestSent = new List<ApplicationUser>();
+            }
+            if (friend.friendRequestReceived == null)
+            {
+                friend.friendRequestReceived = new List<ApplicationUser>();
+            }
             accepter.friendRequestSent.Add(friend);
             friend.friendRequestReceived.Add(accepter);
             db.SaveChanges();
@@ -191,25 +207,19 @@ namespace Stoker.Services
         /// <returns>IEnumerable of application users that have sent him requests</returns>
         public IEnumerable<ApplicationUser> GetFriendRequests(string userID)
         {
-            /*Below is code getting only friend requests gotten that this user has not answered,
-             * this corresponds to these calculations where A is sentRequests, B is gottenRequests
-             * C is xORSentGotten, D is unionXorSent and E is returnResult.
-             * A B 
-             * C = A XOR B
-             * D = C U A
-             * E = D XOR A
-             * E = B but not and not both A and B
-            */ 
             UserService serviceUser = new UserService(db);
             ApplicationUser user = GetUserByID(userID);
+            if (user.friendRequestSent == null)
+            {
+                user.friendRequestSent = new List<ApplicationUser>();
+            }
+            if (user.friendRequestReceived == null)
+            {
+                user.friendRequestReceived = new List<ApplicationUser>();
+            }
             IEnumerable<ApplicationUser> sentRequests = user.friendRequestSent;
             IEnumerable<ApplicationUser> gottenRequests = user.friendRequestReceived.ToList();
-            //filtering users only in one list.
-            IEnumerable<ApplicationUser> xORSentGotten = gottenRequests.Where(p => !sentRequests.Any(p2 => p2.Id == p.Id));
-            List<ApplicationUser> bla = xORSentGotten.ToList();
-            IEnumerable<ApplicationUser> unionXorSent = xORSentGotten.Union(sentRequests);
-            //filtering users only in the gottenRequests list but not both.
-            IEnumerable<ApplicationUser> returnResult = unionXorSent.Where(p => !sentRequests.Any(p2 => p2.Id == p.Id));
+            IEnumerable<ApplicationUser> returnResult = gottenRequests.Except(sentRequests);
             return returnResult;
         }
 

@@ -36,7 +36,10 @@ namespace Stoker.Services
         {
             UserService serviceUser = new UserService(db);
             ApplicationUser user = serviceUser.GetUserByID(userID);
-
+            if (user.groups == null)
+            {
+                return new List<ThreadModel>();
+            }
             List<ThreadModel> threads = new List<ThreadModel>();
             foreach (GroupModel groups in user.groups)
             {
@@ -57,7 +60,10 @@ namespace Stoker.Services
         {
             UserService serviceUser = new UserService(db);
             ApplicationUser user = serviceUser.GetUserByID(userID);
-
+            if (user.interests == null)
+            {
+                return new List<ThreadModel>();
+            }
             List<ThreadModel> threads = new List<ThreadModel>();
             foreach (InterestModel interests in user.interests)
             {
@@ -73,14 +79,23 @@ namespace Stoker.Services
         /// Gets the threads posted by the users friends.
         /// </summary>
         /// <param name="userID">id of the user</param>
-        /// <returns>ICollection of threads posted by the users friends</returns>
+        /// <returns>ICollection of threads posted by the users friends or an empty collection 
+        /// if no threads exist</returns>
         public ICollection<ThreadModel> GetUserFriendsThreads(string userID)
         {
             UserService serviceUser = new UserService(db);
             ApplicationUser user = serviceUser.GetUserByID(userID);
-
+            if (user == null)
+            {
+                return new List<ThreadModel>();
+            }
+            if (user.friendRequestSent == null || user.friendRequestReceived == null)
+            {
+                return new List<ThreadModel>();
+            }
             List<ThreadModel> threads = new List<ThreadModel>();
             // Collect a list of user friends
+
             List<ApplicationUser> userFriends = (from rUser in user.friendRequestReceived
                                                 join sUser in user.friendRequestSent on rUser.Id equals sUser.Id
                                                 select rUser).ToList();
