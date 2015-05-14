@@ -23,7 +23,7 @@ namespace Stoker.Controllers
             string userID = User.Identity.GetUserId();
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             ViewModel model = new ViewModel();
-
+            
             GroupModel group22 = new GroupModel();
 
             model.Users = new List<ApplicationUser>();
@@ -87,7 +87,12 @@ namespace Stoker.Controllers
         public void DeleteUserInterests()
         {
             string userID = User.Identity.GetUserId();
-            foreach (char ID in Request["interestIds[]"])
+            string interestIDs = Request["interestIds[]"];
+            if (interestIDs == null)
+            {
+                return;
+            }
+            foreach (char ID in interestIDs)
             {
                 int interestID = (int)Char.GetNumericValue(ID);
                 interestService.DeleteUserInterest(userID, interestID);

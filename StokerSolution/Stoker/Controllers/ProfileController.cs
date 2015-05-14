@@ -58,7 +58,7 @@ namespace Stoker.Controllers
             if (model.threads == null)
             {
                 model.threads = new List<ThreadModel>();
-            }
+            } 
             //Getting the users friend requests if this is the current users profile
             if (userID == thisUser.Id)
             {
