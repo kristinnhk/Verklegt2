@@ -23,7 +23,7 @@ namespace Stoker.Controllers
             string userID = User.Identity.GetUserId();
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             ViewModel model = new ViewModel();
-
+            
             GroupModel group22 = new GroupModel();
 
             model.Users = new List<ApplicationUser>();

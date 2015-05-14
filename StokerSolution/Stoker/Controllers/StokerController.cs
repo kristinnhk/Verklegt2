@@ -85,6 +85,58 @@ namespace Stoker.Controllers
             model.likes = 0;
 
             return model;
+        }
+
+        public ActionResult GetMoreNews()
+        {
+            int filterBy = Convert.ToInt32(Request["filterBy"]);
+            int orderBy = Convert.ToInt32(Request["orderBy"]);
+            int threadsShown = Convert.ToInt32(Request["threadsShown"]);
+            
+            
+
+            ViewModel model = new ViewModel();
+            model.groups = new List<GroupModel>();
+            model.interests = new List<InterestModel>();
+            model.Users = new List<ApplicationUser>();
+            model.threads = new List<ThreadModel>();
+            byte[] bit = new byte[] { 0x1 }; // Used so Json request doesnt get too large
+            List<ThreadModel> templist = new List<ThreadModel>();
+            if (filterBy == -1)
+            {
+                string profileID = Request["profileID"];
+                ApplicationUser temp = userService.GetUserByID(profileID);
+                templist = threadService.GetFrontPageThreads(temp.Id, threadsShown, orderBy, filterBy).ToList();
+            }
+            else
+            {
+                templist = threadService.GetFrontPageThreads(User.Identity.GetUserId(), threadsShown, orderBy, filterBy).ToList();
+            }
+            
+            foreach (var item in templist)
+            {
+                ThreadModel newModel = new ThreadModel();
+                newModel.title = item.title;
+                newModel.likes = item.likes;
+                newModel.dateCreated = item.dateCreated;
+                newModel.mainContent = item.mainContent;
+                if (item.image != null)
+                {
+                    newModel.image = bit;
+                }
+                newModel.threadID = item.threadID;
+                newModel.originalPoster = new ApplicationUser();
+                newModel.originalPoster.Id = item.originalPoster.Id;
+                newModel.originalPoster.firstName = item.originalPoster.firstName;
+                newModel.originalPoster.lastName = item.originalPoster.lastName;
+                newModel.usersLiked = item.usersLiked;
+             //   newModel.profilePost = item.profilePost;
+             //   newModel.interestPost = item.interestPost;
+              //  newModel.groupPost = item.groupPost;
+              //  newModel.comments = item.comments;
+                model.threads.Add(newModel);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
 
         }
 	}

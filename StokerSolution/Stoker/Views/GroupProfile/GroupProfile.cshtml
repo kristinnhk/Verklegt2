@@ -1,5 +1,9 @@
 ﻿@model Stoker.Models.ViewModel 
 
+@section JavaScript{
+    <script type="text/javascript" src="@Url.Content("/Scripts/NewsFeed.js")"></script>
+}
+
 @{
     ViewBag.Title = "GroupProfile";
 }
@@ -31,5 +35,10 @@
             </div>
         }
     </fieldset>
+    <div>
+        <select name="filterBy" id="filterBy">
+            <option value="1">Group</option>
+        </select>
+    </div>
     @Html.Partial("NewsFeedPartial");
 </div>

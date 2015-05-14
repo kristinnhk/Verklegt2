@@ -16,15 +16,36 @@ namespace Stoker.Services
             db = context ?? new ApplicationDbContext();
         }
 
-        public ICollection<ThreadModel> GetFrontPageThreads(string userID, int threadsShown = 0, int orderBy = 0)
+        public ICollection<ThreadModel> GetFrontPageThreads(string userID, int threadsShown = 0, int orderBy = 0, int filterBy = 0)
         {
-            ICollection<ThreadModel> threads = (from t in db.threads
-                                                // orderby t.likes descending when like works
-                                                //some logic to not show all userprofile threads but only those of friends
-                                                //some logic to only show interests followed by user
-                                                //some logic to only show group posts user is in
-                                                select t).ToList();
-            return FilterSkipTake(threads, threadsShown, orderBy);
+            if(filterBy == 1){
+                ICollection<ThreadModel> threads = GetUserGroupsThreads(userID);
+                return FilterSkipTake(threads, threadsShown, orderBy);
+            }
+            else if(filterBy == 2){
+                ICollection<ThreadModel> threads = GetUserInterestsThreads(userID);
+                return FilterSkipTake(threads, threadsShown, orderBy);
+            }
+            else if (filterBy == 3)
+            {
+                ICollection<ThreadModel> threads = GetUserFriendsThreads(userID);
+                return FilterSkipTake(threads, threadsShown, orderBy);
+            }
+            else if(filterBy == 0)
+            {
+                ICollection<ThreadModel> threads = (from t in db.threads
+                                                    // orderby t.likes descending when like works
+                                                    //some logic to NOT show all userprofile threads that ARENT freinds
+                                                    //some logic to NOT show group posts user ISNT in
+                                                    select t).ToList();
+                return FilterSkipTake(threads, threadsShown, orderBy);
+            }
+            else
+            {
+                ICollection<ThreadModel> threads = GetUserThreads(userID);
+                return FilterSkipTake(threads, threadsShown, orderBy);
+            }
+            
         }
 
         /// <summary>

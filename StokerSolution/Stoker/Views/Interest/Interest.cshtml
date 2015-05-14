@@ -7,6 +7,7 @@
 {
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/InterestJS.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/NewsFeed.js")"></script>
 }
 <div class="container">
     <input type="hidden" value="@Model.interests[0].interestID" id="idInterest" />
@@ -29,6 +30,11 @@
             </div>
         }
     </fieldset>
+</div>
+<div>
+    <select name="filterBy" id="filterBy">
+        <option value="2">Interests you are following</option>
+    </select>
 </div>
 @Html.Partial("NewsFeedPartial")
 

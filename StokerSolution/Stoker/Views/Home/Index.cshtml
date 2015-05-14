@@ -5,7 +5,9 @@
 		
 }
 
-
+@section JavaScript{
+<script type="text/javascript" src="@Url.Content("/Scripts/NewsFeed.js")"></script>
+}
 @Html.Partial("HeaderPartialView")
 
 <div class="jumbotron">
@@ -14,7 +16,19 @@
 
 <div class="row">
     <div class="col-md-8">
+        <div id="filterByDiv">
+            <span>
+                <label id="filterByLabel">Filter threads by: </label>
+                <select name="filterBy" id="filterBy">
+                    <option value="0">All</option>  
+                    <option value="1">Groups you are following</option>
+                    <option value="2">Interests you are following</option>
+                    <option value="3">Friends</option>
+                </select>
+            </span>
+        </div>
        @Html.Partial("NewsFeedPartial")
+        
     </div>
    
 </div>
