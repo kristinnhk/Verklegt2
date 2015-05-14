@@ -87,7 +87,12 @@ namespace Stoker.Controllers
         public void DeleteUserInterests()
         {
             string userID = User.Identity.GetUserId();
-            foreach (char ID in Request["interestIds[]"])
+            string interestIDs = Request["interestIds[]"];
+            if (interestIDs == null)
+            {
+                return;
+            }
+            foreach (char ID in interestIDs)
             {
                 int interestID = (int)Char.GetNumericValue(ID);
                 interestService.DeleteUserInterest(userID, interestID);

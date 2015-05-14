@@ -336,6 +336,10 @@ namespace Stoker.Services
         /// <param name="model">the comment model</param>
         public void SetThreadComment(int threadID, string userID, CommentModel model)
         {
+            if (model.content == "")
+            {
+                return;
+            }
             UserService serviceUser = new UserService(db);
 
             ApplicationUser threadUser = serviceUser.GetUserByID(userID);

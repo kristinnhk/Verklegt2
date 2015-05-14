@@ -8,16 +8,15 @@
         });
         for (var i = 0; i < likes.length; i++) {
             var str = likes[i];
-            console.log("bla" + likes[i]);
             var postString = { "threadID": likes[i] };
             var isLiked = $.post('/Stoker/IsLikedThread/', postString);
             isLiked.done(function (result) {
                 if (result != 0) {
-                    $('.likeButton[value=' + str + ']').text("Unlike");
+                    $('.likeButton[value=' + str + ']').html("Unlike");
                 }
                 else
                 {
-                    $('.likeButton[value=' + str + ']').text("Like");
+                    $('.likeButton[value=' + str + ']').html("Like");
                 }
             });
         };
@@ -43,9 +42,9 @@
     }
     $(".likeButton").click(function () 
     {
-        if ($(this).text() == "Like") 
+        if ($(this).html() == "Like") 
         {
-            $(this).attr('text', 'Unlike');
+            $(this).html('Unlike');
             var turnString = { 'threadID': $(this).val() };
             var posting = $.post('/Stoker/LikeThread/', turnString);
             posting.done(function ()
@@ -56,7 +55,7 @@
             
         } else 
         {
-            $(this).attr('text', 'Like');
+            $(this).html('Like');
             var turnString = { 'threadID': $(this).val() };
             var posting = $.post('/Stoker/UnLikeThread/', turnString);
             posting.done(function ()
