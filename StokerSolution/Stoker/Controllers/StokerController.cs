@@ -91,16 +91,25 @@ namespace Stoker.Controllers
         /// Checks if current user has liked a thread
         /// </summary>
         /// <returns>true if user has liked</returns>
-        public bool IsLikedThread()
+        public int IsLikedThread()
         {
             string userID = User.Identity.GetUserId();
-            int threadID = Convert.ToInt32(Request["threadID"]);
-            return threadService.UserHasLikedThread(userID, threadID);
+             int threadID = Convert.ToInt32(Request["threadID"]);
+            bool isLiked = threadService.UserHasLikedThread(userID, threadID);
+            if (isLiked == true)
+            {
+                return threadID;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         /// <summary>
         /// lets user like a thread
         /// </summary>
+        [HttpPost]
         public void LikeThread()
         {
             string userID = User.Identity.GetUserId();
@@ -111,6 +120,7 @@ namespace Stoker.Controllers
         /// <summary>
         /// lets user unlike a thread
         /// </summary>
+        [HttpPost]
         public void UnLikeThread()
         {
             string userID = User.Identity.GetUserId();
@@ -122,6 +132,7 @@ namespace Stoker.Controllers
         /// checks if user has liked a comment
         /// </summary>
         /// <returns>true if user has liked the comment</returns>
+        [HttpPost]
         public bool IsLikedComment()
         {
             string userID = User.Identity.GetUserId();
@@ -147,6 +158,14 @@ namespace Stoker.Controllers
             string userID = User.Identity.GetUserId();
             int threadID = Convert.ToInt32(Request["threadID"]);
             threadService.UnLikeComment(userID, threadID);
+        }
+
+        [HttpPost]
+        public int NumberOfLikes()
+        {
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            ThreadModel thread = threadService.GetThreadByID(threadID);
+            return thread.likes;
         }
 	}
 }

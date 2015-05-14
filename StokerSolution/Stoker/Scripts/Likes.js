@@ -1,53 +1,69 @@
 ﻿$(document).ready(function () {
-
-    var likes = [];
-
-   $(".likeButton").each(function ()
+    function checkLikes ()
     {
-        var value = $(this).val();
-        likes.push(value);
-   });
-
-   var likesString = likes.map(function (obj) {
-       return obj.toString();
-   });
-    for(var i = 0; i < likes.length; i++)
-    {
-        var postString = { "threadID": likes[i] };
-        var isLiked = $.post('/Stoker/IsLikedThread/', postString);
-        isLiked.done(function (result)
-        {
-            
-            
-            if (result != "True")
-            {
-                var likeString = ".likeButton[value='" + likesString[i] + "'";
-                alert(likeString);
-                //$(".likeButton[value=")
-            }
+        var likes = [];
+        $(".likeButton").each(function () {
+            var value = $(this).val();
+            likes.push(value.toString());
         });
-    };
-
-   /* var isFollowing = $.post('/Stoker/IsLikedThread/', likeString);
-    var following = isFollowing.done(function (result) 
+        for (var i = 0; i < likes.length; i++) {
+            var str = likes[i];
+            console.log("bla" + likes[i]);
+            var postString = { "threadID": likes[i] };
+            var isLiked = $.post('/Stoker/IsLikedThread/', postString);
+            isLiked.done(function (result) {
+                if (result != 0) {
+                    $('.likeButton[value=' + str + ']').text("Unlike");
+                }
+                else
+                {
+                    $('.likeButton[value=' + str + ']').text("Like");
+                }
+            });
+        };
+    }
+    checkLikes();
+    function updateLikes()
     {
-        if (result == "True") 
+        var likes = [];
+        $(".likeButton").each(function () {
+            var value = $(this).val();
+            likes.push(value.toString());
+        });
+        for(var i = 0; i < likes.length; i++)
         {
-            $('#likebutton').attr('value', 'Unlike');
+            var checkString = ".likeButton[value='" + likes[i] + "']";
+            var returnString = { 'threadID': likes[i] };
+            var posting = $.post('/Stoker/NumberOfLikes/', returnString);
+            posting.done(function (result)
+            {
+                $(checkString).next().text("Likes: " + result);
+            });
         }
-    });
-    $("#likebutton").click(function () 
+    }
+    $(".likeButton").click(function () 
     {
-        if ($(this).val() == "Like") 
+        if ($(this).text() == "Like") 
         {
-            $(this).attr('value', 'Unlike');
-            var returnString = { 'threadID': $('#threadID').val() };
-            var posting = $.post('/Stoker/LikeThread/', returnString);
+            $(this).attr('text', 'Unlike');
+            var turnString = { 'threadID': $(this).val() };
+            var posting = $.post('/Stoker/LikeThread/', turnString);
+            posting.done(function ()
+            {
+                checkLikes();
+                updateLikes();
+            });
+            
         } else 
         {
-            $(this).attr('value', 'Follow');
-            var returnString = { 'threadID': $('#threadID').val() };
-            var posting = $.post('/Stoker/UnLikeThread/', returnString);
+            $(this).attr('text', 'Like');
+            var turnString = { 'threadID': $(this).val() };
+            var posting = $.post('/Stoker/UnLikeThread/', turnString);
+            posting.done(function ()
+            {
+                checkLikes();
+                updateLikes();
+            });
         }
-    });*/
+    });
 });

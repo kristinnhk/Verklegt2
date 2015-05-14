@@ -382,6 +382,7 @@ namespace Stoker.Services
             }
             thread.likes += 1;
             thread.usersLiked.Add(user);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -407,6 +408,7 @@ namespace Stoker.Services
             {
                 thread.likes -= 1;
             }
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -451,6 +453,7 @@ namespace Stoker.Services
             }
             comment.usersLiked.Add(user);
             comment.likes += 1;
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -476,6 +479,7 @@ namespace Stoker.Services
             {
                 comment.likes -= 1;
             }
+            db.SaveChanges();
         }
 
         /// <summary>
