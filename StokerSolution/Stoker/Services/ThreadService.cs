@@ -236,6 +236,11 @@ namespace Stoker.Services
             UserService serviceUser = new UserService(db);
             GroupService serviceGroup = new GroupService(db);
 
+            if (model.title == "" || model.mainContent == "")
+            {
+                return;
+            }
+
             ApplicationUser threadUser = serviceUser.GetUserByID(userID);
             GroupModel threadGroup = serviceGroup.GetGroupByID(groupID);
             if (threadGroup == null || threadUser == null)
@@ -270,6 +275,11 @@ namespace Stoker.Services
             UserService serviceUser = new UserService(db);
             InterestService serviceInterest = new InterestService(db);
 
+            if (model.title == "" || model.mainContent == "")
+            {
+                return;
+            }
+
             ApplicationUser threadUser = serviceUser.GetUserByID(userID);
             InterestModel threadInterest = serviceInterest.GetInterestByID(interestID);
             if (threadInterest == null || threadUser == null)
@@ -299,6 +309,11 @@ namespace Stoker.Services
         /// <param name="model">The thread itself</param>
         public void SetUserThread(string userID, ThreadModel model)
         {
+            if (model.title == "" || model.mainContent == "")
+            {
+                return;
+            }
+
             UserService serviceUser = new UserService(db);
 
             ApplicationUser threadUser = serviceUser.GetUserByID(userID);

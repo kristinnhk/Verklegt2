@@ -60,6 +60,12 @@ namespace Stoker.Controllers
 
         public byte[] FileToByteArray(HttpPostedFileBase file)
         {
+            if (file.ContentLength == 0)
+            {
+                string userID = User.Identity.GetUserId();
+                ApplicationUser user = userService.GetUserByID(userID);
+                return user.image;
+            }
             Image imageIn = Image.FromStream(file.InputStream, true, true);
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
