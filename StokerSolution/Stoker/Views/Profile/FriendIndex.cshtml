@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-4">
         @{
-            if (@Model.friendRequests != null) 
+            if (@Model.friendRequests.Count != 0) 
             {
                 <h3>Add this user as a friend</h3>
                 <button value=@Model.friendRequests[0].Id class="btn btn-primary" id="acceptFriendRequest">Add friend</button>

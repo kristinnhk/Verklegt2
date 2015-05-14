@@ -27,6 +27,74 @@ namespace Stoker.Services
             return FilterSkipTake(threads, threadsShown, orderBy);
         }
 
+        /// <summary>
+        /// Gets the threads of all groups a user is a member of
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <returns>ICollection of threads posted in groups the user is a member of</returns>
+        public ICollection<ThreadModel> GetUserGroupsThreads(string userID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+
+            List<ThreadModel> threads = new List<ThreadModel>();
+            foreach (GroupModel groups in user.groups)
+            {
+                List<ThreadModel> temp = (from thread in db.threads
+                                         where thread.groupPost == groups
+                                         select thread).ToList();
+                threads.AddRange(temp);
+            }
+            return FilterSkipTake(threads, 0, 0);
+        }
+
+        /// <summary>
+        /// Gets the threads of all interests a user is a member of
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <returns>ICollection of threads posted in interests the user is a member of</returns>
+        public ICollection<ThreadModel> GetUserInterestsThreads(string userID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+
+            List<ThreadModel> threads = new List<ThreadModel>();
+            foreach (InterestModel interests in user.interests)
+            {
+                List<ThreadModel> temp = (from thread in db.threads
+                                          where thread.interestPost == interests
+                                          select thread).ToList();
+                threads.AddRange(temp);
+            }
+            return FilterSkipTake(threads, 0, 0);
+        }
+
+        /// <summary>
+        /// Gets the threads posted by the users friends.
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <returns>ICollection of threads posted by the users friends</returns>
+        public ICollection<ThreadModel> GetUserFriendsThreads(string userID)
+        {
+            UserService serviceUser = new UserService(db);
+            ApplicationUser user = serviceUser.GetUserByID(userID);
+
+            List<ThreadModel> threads = new List<ThreadModel>();
+            // Collect a list of user friends
+            List<ApplicationUser> userFriends = (from rUser in user.friendRequestReceived
+                                                join sUser in user.friendRequestSent on rUser.Id equals sUser.Id
+                                                select rUser).ToList();
+            // 
+            foreach (ApplicationUser users in userFriends)
+            {
+                List<ThreadModel> temp = (from thread in db.threads
+                                          where thread.originalPoster == users
+                                          select thread).ToList();
+                threads.AddRange(temp);
+            }
+            return FilterSkipTake(threads, 0, 0);
+        }
+
         public ICollection<ThreadModel> FilterSkipTake(ICollection<ThreadModel> threads, int threadsShown, int orderBy)
         {
             if (orderBy == 0) //show newest first
