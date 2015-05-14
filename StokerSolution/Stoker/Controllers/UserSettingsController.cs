@@ -115,6 +115,9 @@ namespace Stoker.Controllers
         {
             return RedirectToAction("AddGroup", "AddGroup");
         }
-
+        public ActionResult AddInterest()
+        {
+            return RedirectToAction("AddInterest", "AddInterest");
+        }
 	}
 }
