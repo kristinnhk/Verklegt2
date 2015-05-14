@@ -61,7 +61,8 @@
             <div class="col-md-5">
                 <h3>Create a new group or interest</h3>
                 @Html.ActionLink("Create new group", "AddGroup", null, new { @class = "btn btn-primary pull-left" })
-                <button class="btn btn-primary pull-right">Create new interest</button>
+                @Html.ActionLink("Create new interest", "AddInterest", null, new { @class = "btn btn-primary pull-right"})
+                <!--<button class="btn btn-primary pull-right">Create new interest</button>-->
             </div>
         </div>
 

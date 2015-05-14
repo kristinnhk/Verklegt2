@@ -45,7 +45,7 @@
                     </span>
                 </div>
                 <span class="DetailView">
-                    <a href="/ThreadDetail/ThreadDetail?threadID=@item.threadID">Go to comments</a>
+                    @Html.ActionLink("Go to comments", "ThreadDetail", "ThreadDetail", new { threadID = @item.threadID }, new { @class = "btn btn-default" })
                 </span>
             </div>
         }
