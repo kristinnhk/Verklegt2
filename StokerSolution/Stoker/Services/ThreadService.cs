@@ -65,7 +65,7 @@ namespace Stoker.Services
             foreach (GroupModel groups in user.groups)
             {
                 List<ThreadModel> temp = (from thread in db.threads
-                                         where thread.groupPost == groups
+                                         where thread.groupPost.groupID == groups.groupID
                                          select thread).ToList();
                 threads.AddRange(temp);
             } 
@@ -89,7 +89,7 @@ namespace Stoker.Services
             foreach (InterestModel interests in user.interests)
             {
                 List<ThreadModel> temp = (from thread in db.threads
-                                          where thread.interestPost == interests
+                                          where thread.interestPost.interestID == interests.interestID
                                           select thread).ToList();
                 threads.AddRange(temp);
             }
@@ -124,7 +124,7 @@ namespace Stoker.Services
             foreach (ApplicationUser users in userFriends)
             {
                 List<ThreadModel> temp = (from thread in db.threads
-                                          where thread.originalPoster == users
+                                          where thread.originalPoster.Id == users.Id
                                           select thread).ToList();
                 threads.AddRange(temp);
             }

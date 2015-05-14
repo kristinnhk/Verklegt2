@@ -97,9 +97,9 @@ namespace Stoker.Controllers
 
 
             ViewModel model = new ViewModel();
-            model.groups = new List<GroupModel>();
-            model.interests = new List<InterestModel>();
-            model.Users = new List<ApplicationUser>();
+         //   model.groups = new List<GroupModel>();
+        //    model.interests = new List<InterestModel>();
+         //   model.Users = new List<ApplicationUser>();
             model.threads = new List<ThreadModel>();
             byte[] bit = new byte[] { 0x1 }; // Used so Json request doesnt get too large
             List<ThreadModel> templist = new List<ThreadModel>();
@@ -130,7 +130,7 @@ namespace Stoker.Controllers
                 newModel.originalPoster.Id = item.originalPoster.Id;
                 newModel.originalPoster.firstName = item.originalPoster.firstName;
                 newModel.originalPoster.lastName = item.originalPoster.lastName;
-                newModel.usersLiked = item.usersLiked;
+                // newModel.usersLiked = item.usersLiked;
                 //   newModel.profilePost = item.profilePost;
                 //   newModel.interestPost = item.interestPost;
                 //  newModel.groupPost = item.groupPost;
