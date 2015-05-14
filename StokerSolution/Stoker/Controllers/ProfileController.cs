@@ -38,6 +38,7 @@ namespace Stoker.Controllers
             //Initiating the parts of the view model needed. 
             model.Users = new List<ApplicationUser>();
             model.Users.Add(user);
+            model.friendRequests = new List<ApplicationUser>();
 			model.sidebar = new SidebarModel();
 			model.sidebar.userGroups = new List<GroupModel>();
 			model.sidebar.userInterests = new List<InterestModel>();
@@ -47,6 +48,8 @@ namespace Stoker.Controllers
             {
                 model.groups = GetUserGroups(thisUser.Id);
                 model.interests = GetUserInterests(thisUser.Id);
+                model.sidebar.userGroups = GetUserGroups(thisUser.Id);
+                model.sidebar.userInterests = GetUserInterests(thisUser.Id);
             }
             else
             {

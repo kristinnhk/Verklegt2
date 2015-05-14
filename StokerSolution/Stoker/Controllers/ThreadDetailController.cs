@@ -22,7 +22,13 @@ namespace Stoker.Controllers
             model.sidebar = new SidebarModel();
             model.sidebar.userGroups = new List<GroupModel>();
             model.sidebar.userInterests = new List<InterestModel>();
-
+            ApplicationUser thisUser = userService.GetUserByID(User.Identity.GetUserId());
+            string userID = thisUser.Id;
+            if (thisUser.Id != null)
+            {
+                model.sidebar.userGroups = groupService.GetUserGroups(userID).ToList();
+                model.sidebar.userInterests = interestService.GetUserInterests(userID).ToList();
+            }
             ThreadModel thread = threadService.GetThreadByID(threadID);
             model.threads.Add(thread);
 
