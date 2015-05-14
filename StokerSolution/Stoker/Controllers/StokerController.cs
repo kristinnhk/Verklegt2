@@ -87,13 +87,14 @@ namespace Stoker.Controllers
             return model;
         }
 
+
         public ActionResult GetMoreNews()
         {
             int filterBy = Convert.ToInt32(Request["filterBy"]);
             int orderBy = Convert.ToInt32(Request["orderBy"]);
             int threadsShown = Convert.ToInt32(Request["threadsShown"]);
-            
-            
+
+
 
             ViewModel model = new ViewModel();
             model.groups = new List<GroupModel>();
@@ -112,7 +113,7 @@ namespace Stoker.Controllers
             {
                 templist = threadService.GetFrontPageThreads(User.Identity.GetUserId(), threadsShown, orderBy, filterBy).ToList();
             }
-            
+
             foreach (var item in templist)
             {
                 ThreadModel newModel = new ThreadModel();
@@ -130,14 +131,94 @@ namespace Stoker.Controllers
                 newModel.originalPoster.firstName = item.originalPoster.firstName;
                 newModel.originalPoster.lastName = item.originalPoster.lastName;
                 newModel.usersLiked = item.usersLiked;
-             //   newModel.profilePost = item.profilePost;
-             //   newModel.interestPost = item.interestPost;
-              //  newModel.groupPost = item.groupPost;
-              //  newModel.comments = item.comments;
+                //   newModel.profilePost = item.profilePost;
+                //   newModel.interestPost = item.interestPost;
+                //  newModel.groupPost = item.groupPost;
+                //  newModel.comments = item.comments;
                 model.threads.Add(newModel);
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Checks if current user has liked a thread
+        /// </summary>
+        /// <returns>true if user has liked</returns>
+        public int IsLikedThread()
+        {
+            string userID = User.Identity.GetUserId();
+             int threadID = Convert.ToInt32(Request["threadID"]);
+            bool isLiked = threadService.UserHasLikedThread(userID, threadID);
+            if (isLiked == true)
+            {
+                return threadID;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
+        /// <summary>
+        /// lets user like a thread
+        /// </summary>
+        [HttpPost]
+        public void LikeThread()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.LikeThread(userID, threadID);
+        }
+
+        /// <summary>
+        /// lets user unlike a thread
+        /// </summary>
+        [HttpPost]
+        public void UnLikeThread()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.UnLikeThread(userID, threadID);
+        }
+
+        /// <summary>
+        /// checks if user has liked a comment
+        /// </summary>
+        /// <returns>true if user has liked the comment</returns>
+        [HttpPost]
+        public bool IsLikedComment()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            return threadService.UserHasLikedComment(userID, threadID);
+        }
+
+
+        /// <summary>
+        /// lets user like a comment
+        /// </summary>
+        public void LikeComment()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.LikeComment(userID, threadID);
+        }
+
+        /// <summary>
+        /// lets a user unlike a comment
+        /// </summary>
+        public void UnLikeComment()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.UnLikeComment(userID, threadID);
+        }
+
+        [HttpPost]
+        public int NumberOfLikes()
+        {
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            ThreadModel thread = threadService.GetThreadByID(threadID);
+            return thread.likes;
         }
 	}
 }

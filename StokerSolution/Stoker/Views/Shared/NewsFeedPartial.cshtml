@@ -28,13 +28,12 @@
                     <span>
                         @item.dateCreated
                     </span>
-
-                    <span id="UserLike">
-                        <input type="button" id="likebutton" name="likeButton" />
-                    </span>
-                    <span>
-                        Likes: @item.likes
-                    </span>
+                    <div>
+                        <button class="likeButton" value=@item.threadID>Like</button>
+                        <span class="likeCount">
+                            Likes: @item.likes
+                        </span>
+                    </div>
                 </div>
                 <div class="threadContent">
                     @if (item.image != null)

@@ -237,5 +237,28 @@ namespace Stoker.Services
             db.SaveChanges();
         }
 
+        /// <summary>
+        /// Returns true if user is a member of a group
+        /// but false otherwise
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <param name="groupID">id of the group</param>
+        /// <returns>Returns true if user is following an interest
+        /// but false otherwise</returns>
+        public bool IsMemberOfGroup(string userID, int groupID)
+        {
+            GroupModel groups = GetGroupByID(groupID);
+            ApplicationUser following = (from u in groups.users
+                                         where u.Id == userID
+                                         select u).SingleOrDefault();
+            if (following == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

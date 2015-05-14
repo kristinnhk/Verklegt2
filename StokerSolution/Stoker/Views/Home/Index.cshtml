@@ -5,9 +5,13 @@
 		
 }
 
-@section JavaScript{
+@section JavaScript
+{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Likes.js")"></script>
 <script type="text/javascript" src="@Url.Content("/Scripts/NewsFeed.js")"></script>
 }
+
 @Html.Partial("HeaderPartialView")
 
 <div class="jumbotron">
