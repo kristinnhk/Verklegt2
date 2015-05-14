@@ -85,7 +85,68 @@ namespace Stoker.Controllers
             model.likes = 0;
 
             return model;
+        }
 
+        /// <summary>
+        /// Checks if current user has liked a thread
+        /// </summary>
+        /// <returns>true if user has liked</returns>
+        public bool IsLikedThread()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            return threadService.UserHasLikedThread(userID, threadID);
+        }
+
+        /// <summary>
+        /// lets user like a thread
+        /// </summary>
+        public void LikeThread()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.LikeThread(userID, threadID);
+        }
+
+        /// <summary>
+        /// lets user unlike a thread
+        /// </summary>
+        public void UnLikeThread()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.UnLikeThread(userID, threadID);
+        }
+
+        /// <summary>
+        /// checks if user has liked a comment
+        /// </summary>
+        /// <returns>true if user has liked the comment</returns>
+        public bool IsLikedComment()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            return threadService.UserHasLikedComment(userID, threadID);
+        }
+
+        /// <summary>
+        /// lets user like a comment
+        /// </summary>
+        public void LikeComment()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.LikeComment(userID, threadID);
+        }
+
+        /// <summary>
+        /// lets a user unlike a comment
+        /// </summary>
+        public void UnLikeComment()
+        {
+            string userID = User.Identity.GetUserId();
+            int threadID = Convert.ToInt32(Request["threadID"]);
+            threadService.UnLikeComment(userID, threadID);
         }
 	}
 }
