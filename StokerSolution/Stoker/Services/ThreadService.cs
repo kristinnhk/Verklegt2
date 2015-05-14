@@ -16,7 +16,7 @@ namespace Stoker.Services
             db = context ?? new ApplicationDbContext();
         }
 
-        public ICollection<ThreadModel> GetFrontPageThreads(string userID, int threadsShown = 0, int orderBy = 0, int filterBy = 0)
+        public ICollection<ThreadModel> GetFilteredThreads(string userID, int threadsShown = 0, int orderBy = 0, int filterBy = 0)
         {
             if(filterBy == 1){
                 ICollection<ThreadModel> threads = GetUserGroupsThreads(userID);
@@ -69,7 +69,7 @@ namespace Stoker.Services
                                          select thread).ToList();
                 threads.AddRange(temp);
             } 
-            return FilterSkipTake(threads, 0, 0);
+            return threads;
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Stoker.Services
                                           select thread).ToList();
                 threads.AddRange(temp);
             }
-            return FilterSkipTake(threads, 0, 0);
+            return threads;
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Stoker.Services
                                           select thread).ToList();
                 threads.AddRange(temp);
             }
-            return FilterSkipTake(threads, 0, 0);
+            return threads;
         }
 
         public ICollection<ThreadModel> FilterSkipTake(ICollection<ThreadModel> threads, int threadsShown, int orderBy)
@@ -221,7 +221,7 @@ namespace Stoker.Services
             {
                 user.threads = new List<ThreadModel>();
             }
-            return FilterSkipTake(user.threads, threadsShown, orderBy);
+            return user.threads;
         }
 
         /// <summary>

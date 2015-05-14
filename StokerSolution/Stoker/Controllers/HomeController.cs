@@ -32,7 +32,7 @@ namespace Stoker.Controllers
             {
                 model.sidebar.userGroups = groupService.GetUserGroups(userID).ToList();
                 model.sidebar.userInterests = interestService.GetUserInterests(userID).ToList();
-                model.threads = threadService.GetFrontPageThreads(userID).ToList();
+                model.threads = threadService.GetFilteredThreads(userID).ToList();
             }
             // if any of the lists above are empty we instanciate them.
             if (model.sidebar.userGroups == null)

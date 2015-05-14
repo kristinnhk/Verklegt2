@@ -24,15 +24,17 @@ namespace Stoker.Controllers
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
-            model.threads = new List<ThreadModel>();
+          //  model.threads = new List<ThreadModel>();
 			model.sidebar = new SidebarModel();
 			model.sidebar.userGroups = new List<GroupModel>();
 			model.sidebar.userInterests = new List<InterestModel>();
-            var threads = threadService.GetGroupThreads(groupId).ToList();
-            foreach (ThreadModel thread in threads)
+            //var threads = threadService.GetGroupThreads(groupId).ToList();
+            int groupProfile = 1;
+            model.threads = threadService.GetFilteredThreads(userID, 0, 0, groupProfile).ToList();
+          /*  foreach (ThreadModel thread in threads)
             {
                 model.threads.Add(thread);
-            }
+            }*/
 
             if (user.Id != null)
             {

@@ -25,7 +25,6 @@ namespace Stoker.Controllers
 
             ThreadModel thread = threadService.GetThreadByID(threadID);
             model.threads.Add(thread);
-
             return View(model);
         }
 

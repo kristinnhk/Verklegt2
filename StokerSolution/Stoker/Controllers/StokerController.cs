@@ -107,11 +107,11 @@ namespace Stoker.Controllers
             {
                 string profileID = Request["profileID"];
                 ApplicationUser temp = userService.GetUserByID(profileID);
-                templist = threadService.GetFrontPageThreads(temp.Id, threadsShown, orderBy, filterBy).ToList();
+                templist = threadService.GetFilteredThreads(temp.Id, threadsShown, orderBy, filterBy).ToList();
             }
             else
             {
-                templist = threadService.GetFrontPageThreads(User.Identity.GetUserId(), threadsShown, orderBy, filterBy).ToList();
+                templist = threadService.GetFilteredThreads(User.Identity.GetUserId(), threadsShown, orderBy, filterBy).ToList();
             }
 
             foreach (var item in templist)
