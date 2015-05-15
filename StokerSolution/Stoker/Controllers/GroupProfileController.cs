@@ -14,8 +14,6 @@ namespace Stoker.Controllers
     [Authorize]
     public class GroupProfileController : StokerController
     {
- 
-        // GET: GroupProfile
         public ActionResult GroupProfile(int groupID)
         {
             ViewModel model = new ViewModel();

@@ -23,8 +23,6 @@ namespace Stoker.Controllers
         protected GroupService groupService;
         protected InterestService interestService;
         protected ThreadService threadService;
-        //
-        // GET: /Stoker/
 
         public StokerController()
         {

@@ -18,16 +18,11 @@ namespace Stoker.Controllers
     [Authorize]
     public class UserSettingsController : StokerController
     {
-        //
-        // GET: /UserSettings/
         public ActionResult UserSettings()
         {
             string userID = User.Identity.GetUserId();
             ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
             ViewModel model = new ViewModel();
-            
-            GroupModel group22 = new GroupModel();
-
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
@@ -39,12 +34,11 @@ namespace Stoker.Controllers
             {
                 user.friendRequestSent = new List<ApplicationUser>();
             }
-                var groups = GetUserGroups(user.Id);
-                foreach (GroupModel group in groups)
-                {
-                        model.groups.Add(group);
-                }
-
+            var groups = GetUserGroups(user.Id);
+            foreach (GroupModel group in groups)
+            {
+                model.groups.Add(group);
+            }
             if (user.image == null)
             {
                 userService.SetImageDefault(user.Id);
@@ -54,15 +48,12 @@ namespace Stoker.Controllers
             {
                 model.interests.Add(interest);
             }
-
             model.friendRequests = userService.UserFriends(userID).ToList();
             if (model.friendRequests == null)
             {
                 model.friendRequests = new List<ApplicationUser>();
             }
             model.Users.Add(user);
-
-
             return View(model);
         }
         

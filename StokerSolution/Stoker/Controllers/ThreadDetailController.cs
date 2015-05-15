@@ -13,7 +13,6 @@ namespace Stoker.Controllers
     [Authorize]
     public class ThreadDetailController : StokerController
     {
-        // GET: ThreadDetail
         public ActionResult ThreadDetail(int threadID)
         {
             ViewModel model = new ViewModel();
@@ -43,14 +42,9 @@ namespace Stoker.Controllers
             comment.content = collection["commentContent"];
             comment.dateCreated = DateTime.Now;
             comment.likes = 0;
-         //   comment.usersLiked = new List<ApplicationUser>();
             string userID = User.Identity.GetUserId();
-          
             int id = Convert.ToInt32(collection["threadID"]);
-          //  comment.thread = threadService.GetThreadByID(id);
-
             threadService.SetThreadComment(id, userID, comment);
-
             return RedirectToAction("ThreadDetail", "ThreadDetail", new { threadID = id });
         }
     }

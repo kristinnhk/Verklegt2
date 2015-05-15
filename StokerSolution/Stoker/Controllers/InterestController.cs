@@ -12,8 +12,6 @@ namespace Stoker.Controllers
     [Authorize]
     public class InterestController : StokerController
     {
-   
-        // GET: Interest
         public ActionResult Interest(int interestId)
         {
             ViewModel model = new ViewModel();
@@ -28,13 +26,8 @@ namespace Stoker.Controllers
             model.sidebar = new SidebarModel();
             model.sidebar.userGroups = new List<GroupModel>();
             model.sidebar.userInterests = new List<InterestModel>();
-            //model.threads = new List<ThreadModel>();
             int interestProfile = 2;
             model.threads = threadService.GetFilteredThreads(userID, 0, 0, interestProfile).ToList();
-           /* foreach (ThreadModel thread in threads)
-            {
-                model.threads.Add(thread);
-            }*/
 
             if (user.Id != null)
             {
@@ -53,6 +46,7 @@ namespace Stoker.Controllers
             model.interests.Add(interest);
             return View(model);
         }
+
         public void FollowInterest()
         {
             int id = Convert.ToInt32(Request["id"]);
@@ -64,6 +58,7 @@ namespace Stoker.Controllers
             int id = Convert.ToInt32(Request["id"]);
             interestService.DeleteUserInterest(User.Identity.GetUserId(), id);
         }
+
         public ActionResult SubmitInterestThread(FormCollection thread)
         {
             ThreadModel model = new ThreadModel();
