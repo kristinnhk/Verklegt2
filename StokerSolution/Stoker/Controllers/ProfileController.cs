@@ -10,7 +10,6 @@ using System.IO;
 using System.Drawing;
 
 using Microsoft.AspNet.Identity;
-using System.Drawing;
 
 namespace Stoker.Controllers
 {
@@ -38,6 +37,7 @@ namespace Stoker.Controllers
             //Initiating the parts of the view model needed. 
             model.Users = new List<ApplicationUser>();
             model.Users.Add(user);
+            model.friendRequests = new List<ApplicationUser>();
 			model.sidebar = new SidebarModel();
 			model.sidebar.userGroups = new List<GroupModel>();
 			model.sidebar.userInterests = new List<InterestModel>();
@@ -47,6 +47,8 @@ namespace Stoker.Controllers
             {
                 model.groups = GetUserGroups(thisUser.Id);
                 model.interests = GetUserInterests(thisUser.Id);
+                model.sidebar.userGroups = GetUserGroups(thisUser.Id);
+                model.sidebar.userInterests = GetUserInterests(thisUser.Id);
             }
             else
             {
@@ -54,7 +56,8 @@ namespace Stoker.Controllers
                 model.interests = new List<InterestModel>();
             }
             //Getting the threads on this users profile
-            model.threads = threadService.GetUserThreads(userID).ToList();
+            int userProfile = -1;
+            model.threads = threadService.GetFilteredThreads(userID,0,0,userProfile).ToList();
             if (model.threads == null)
             {
                 model.threads = new List<ThreadModel>();

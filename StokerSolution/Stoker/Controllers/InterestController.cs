@@ -10,11 +10,7 @@ namespace Stoker.Controllers
 {
     public class InterestController : StokerController
     {
-        private static ApplicationDbContext db = new ApplicationDbContext();
-        private UserService userService = new UserService(db);
-        private GroupService groupService = new GroupService(db);
-        private InterestService interestService = new InterestService(db);
-        private ThreadService threadService = new ThreadService(db);
+   
         // GET: Interest
         public ActionResult Interest(int interestId)
         {
@@ -30,12 +26,13 @@ namespace Stoker.Controllers
             model.sidebar = new SidebarModel();
             model.sidebar.userGroups = new List<GroupModel>();
             model.sidebar.userInterests = new List<InterestModel>();
-            model.threads = new List<ThreadModel>();
-            var threads = threadService.GetInterestThreads(interestId).ToList();
-            foreach (ThreadModel thread in threads)
+            //model.threads = new List<ThreadModel>();
+            int interestProfile = 2;
+            model.threads = threadService.GetFilteredThreads(userID, 0, 0, interestProfile).ToList();
+           /* foreach (ThreadModel thread in threads)
             {
                 model.threads.Add(thread);
-            }
+            }*/
 
             if (user.Id != null)
             {

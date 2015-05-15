@@ -29,7 +29,14 @@ namespace Stoker.Controllers
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
-
+            if (user.friendRequestReceived == null)
+            {
+                user.friendRequestReceived = new List<ApplicationUser>();
+            }
+            if (user.friendRequestSent == null)
+            {
+                user.friendRequestSent = new List<ApplicationUser>();
+            }
                 var groups = GetUserGroups(user.Id);
                 foreach (GroupModel group in groups)
                 {
