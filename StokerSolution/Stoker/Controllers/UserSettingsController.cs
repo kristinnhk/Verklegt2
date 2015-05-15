@@ -53,6 +53,11 @@ namespace Stoker.Controllers
                 model.interests.Add(interest);
             }
 
+            model.friendRequests = userService.UserFriends(userID).ToList();
+            if (model.friendRequests == null)
+            {
+                model.friendRequests = new List<ApplicationUser>();
+            }
             model.Users.Add(user);
 
 
