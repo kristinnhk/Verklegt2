@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@section JavaScript
+{
+    <script type="text/javascript" src="@Url.Content("/Scripts/Comments.js")"></script>
+}
 
 <html>
 <head>
@@ -35,11 +38,14 @@
                             <input type="hidden" id="commmentID" value="@comment.commentID" />
                             Posted by: <span><a href="http://localhost:65443/Profile/FriendIndex?userID=@comment.commentAuthor.Id">@comment.commentAuthor.firstName @comment.commentAuthor.lastName</a></span>
                            At: <span>@comment.dateCreated</span>
-                           Likes: <span>@comment.likes</span>
-                            <span id="UserLike">
-                                <input type="button" id="likebutton" name="likeButton" value="Like" />
-                            </span>
-                        </div>
+                            <span id="likeFunctioniality">
+                                likes
+                                <span>@comment.likes</span>
+                                <span id="UserLike">
+                                    <input type="button" id="likebutton" name="likeButton" value="Like" />
+                                </span>
+                            </span>        
+                     </div>
                         <div id="commentContent">
                             <span>@comment.content</span>
                         </div>

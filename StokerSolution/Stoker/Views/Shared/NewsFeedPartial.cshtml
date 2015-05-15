@@ -3,7 +3,7 @@
 @if (Model.threads != null)
 {
     <div id="orderByDiv">
-        <span>
+        <span id="orderBySpan">
             <label id="orderByLabel"> Order threads by: </label>
             <select name="orderBy" id="orderBy">
                 <option value="0">Newest</option>
@@ -29,7 +29,7 @@
                         @item.dateCreated
                     </span>
                     <div>
-                        <button class="likeButton" value=@item.threadID>Like</button>
+                        <button class="likeButton" id="likeButton" value=@item.threadID>Like</button>
                         <span class="likeCount">
                             Likes: @item.likes
                         </span>
@@ -44,14 +44,14 @@
                         @item.mainContent
                     </span>
                 </div>
-                <span class="DetailView">
+                <span class="DetailView" id="actionlinkComments">
                     @Html.ActionLink("Go to comments", "ThreadDetail", "ThreadDetail", new { threadID = @item.threadID }, new { @class = "btn btn-default" })
                 </span>
             </div>
         }
         
     </div>
-    <span>
+    <span id="commentDelete">
         <input type="button" name="loadMoreNews" id="loadMoreNews" value="loadMoreNews" />
         <img src="~/Content/Images/ajax-loader.gif" id="loader2" style="display: none; width:20px;" />
     </span>

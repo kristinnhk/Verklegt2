@@ -14,6 +14,8 @@ using System.Drawing;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class AddInterestController : StokerController
     {
         // GET: AddInterest

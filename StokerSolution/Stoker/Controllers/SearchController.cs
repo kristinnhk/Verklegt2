@@ -8,6 +8,8 @@ using System.Web.Mvc;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class SearchController : StokerController
     {
 
@@ -15,18 +17,7 @@ namespace Stoker.Controllers
         // GET: Search
         public ActionResult Search()
         {
-            /*InterestModel model = new InterestModel();
-            model.name = "Grindverk Satans";
-            model.numberOfUsersInterested = 1;
-            if (model.users == null)
-            {
-                model.users = new List<ApplicationUser>();
-            }
-            if (model.threads == null)
-            {
-                model.threads = new List<ThreadModel>();
-            }
-            interestService.SetNewInterest(model);*/
+
             return View();
         }
         /// <summary>

@@ -7,7 +7,6 @@ $(document).ready(function () {
         var profileID = $("#profileID").val();
         var threadsShown = "0";
         var returnstring = { 'orderBy': order, 'filterBy': filter, 'threadsShown': threadsShown, 'profileID': profileID };
-
         var posting = $.post('/Stoker/GetMoreNews/', returnstring);
         posting.done(function (result) {
             $('.mainNewsFeed .threadItem').remove();
@@ -38,15 +37,11 @@ $(document).ready(function () {
             var profileID = $("#profileID").val();
             var threadsShown = $("#threadsOnPage").val();
             var returnstring = { 'orderBy': order, 'filterBy': filter, 'threadsShown': threadsShown, 'profileID': profileID };
-
             var posting = $.post('/Stoker/GetMoreNews/', returnstring);
             posting.done(function (result) {
-            //    alert("Got more news!");
-
                 var currentValue = parseInt($("#threadsOnPage").val(),10);
                 currentValue += result.threads.length;
                 $("#threadsOnPage").val(currentValue.toString());
-
                 for (var i = 0; i < result.threads.length; i++) {
                     var date = new Date(parseInt(result.threads[i].dateCreated.substr(6))).toUTCString();
                     var newsFeedItem = '<div class="threadItem well well-lg" > <div class="threadTop"> <span class="threadTitle">' +
@@ -61,7 +56,6 @@ $(document).ready(function () {
                     '<a href="/ThreadDetail/ThreadDetail?threadID=' + result.threads[i].threadID + '">Go to comments</a> </span></div>';
                     $('.mainNewsFeed').append(newsFeedItem);
                 }
-
                 $("#loader2").hide();
                 $('#loadMoreNews').removeAttr('disabled');
             });

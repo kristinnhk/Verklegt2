@@ -12,6 +12,11 @@ namespace Stoker
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        protected void Application_Error( )
+        {
+            Exception ex = HttpContext.Current.Server.GetLastError();
+            
+        }
         protected void Application_Start()
         {
             Database.SetInitializer<ApplicationDbContext>(null);

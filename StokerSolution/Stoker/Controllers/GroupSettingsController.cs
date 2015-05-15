@@ -12,6 +12,8 @@ using System.Drawing;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class GroupSettingsController : StokerController
     {
 
