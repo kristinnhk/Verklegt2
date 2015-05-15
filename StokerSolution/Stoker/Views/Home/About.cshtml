@@ -1,7 +1,27 @@
 ﻿@{
-    ViewBag.Title = "About";
+	ViewBag.Title = "About Us";
+	Layout = "~/Views/Shared/_LayoutNoSidebar.cshtml";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<h3>Our Staff:</h3>
+<table class="aboutUsTable">
+	<tbody>
+		<tr>
+			<td>
+				Steinn Elliði has been working at Stoker for three weeks now. His main job has been Services.
+			</td>
+			<td>
+				Skúli Þór as also been working at Stoker and has mainly concentrated on being a little princess.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Kristinn is the database-and-gitmaster of the group and has worked on the project since earlier this month. Three weeks earlier, to be exact.
+			</td>
+			<td>
+				Höskuldur has mainly focused on Views, CSS and Testing the site, trying to break it. Like everyone else, he's been here for three weeks now.
+			</td>
+		</tr>
+	</tbody>
+</table>

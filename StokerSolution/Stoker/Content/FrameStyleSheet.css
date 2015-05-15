@@ -25,10 +25,6 @@ header #headerLogo {
   width: 75px;
   height: 25px;
 }
-#backToTopFooter {
-	position: relative;
-	float: right;
-}
 
 #aboutUsFooter {
 	position: relative;
