@@ -27,3 +27,8 @@
 #profilePicture{
      float: left;
 }
+
+.formPadding{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
