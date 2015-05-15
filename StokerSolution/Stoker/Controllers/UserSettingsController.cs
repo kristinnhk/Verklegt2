@@ -83,31 +83,6 @@ namespace Stoker.Controllers
             return interestService.GetUserInterests(userID).ToList();
         }
 
-        public void DeleteUserGroups()
-        {
-            string userID = User.Identity.GetUserId();
-            foreach(char ID in Request["groupIds[]"])
-            {
-                int groupID = (int)Char.GetNumericValue(ID);
-                groupService.DeleteUserGroup(userID, groupID);
-            }
-        }
-
-        public void DeleteUserInterests()
-        {
-            string userID = User.Identity.GetUserId();
-            string interestIDs = Request["interestIds[]"];
-            if (interestIDs == null)
-            {
-                return;
-            }
-            foreach (char ID in interestIDs)
-            {
-                int interestID = (int)Char.GetNumericValue(ID);
-                interestService.DeleteUserInterest(userID, interestID);
-            }
-        }
-
         [HttpPost]
         public ActionResult UpdateImage(FormCollection collection)
         {

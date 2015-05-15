@@ -158,9 +158,10 @@ namespace Stoker.Services
         /// <returns>returns a threadmodel of the thread</returns>
         public ThreadModel GetThreadByID(int threadID)
         {
-            return (from t in db.threads
-                    where t.threadID == threadID
-                    select t).SingleOrDefault();
+            ThreadModel thread = (from t in db.threads
+                                  where t.threadID == threadID
+                                 select t).SingleOrDefault();
+            return thread;
         }
         
         /// <summary>
@@ -236,6 +237,11 @@ namespace Stoker.Services
             UserService serviceUser = new UserService(db);
             GroupService serviceGroup = new GroupService(db);
 
+            if (model.title == "" || model.mainContent == "")
+            {
+                return;
+            }
+
             ApplicationUser threadUser = serviceUser.GetUserByID(userID);
             GroupModel threadGroup = serviceGroup.GetGroupByID(groupID);
             if (threadGroup == null || threadUser == null)
@@ -270,6 +276,11 @@ namespace Stoker.Services
             UserService serviceUser = new UserService(db);
             InterestService serviceInterest = new InterestService(db);
 
+            if (model.title == "" || model.mainContent == "")
+            {
+                return;
+            }
+
             ApplicationUser threadUser = serviceUser.GetUserByID(userID);
             InterestModel threadInterest = serviceInterest.GetInterestByID(interestID);
             if (threadInterest == null || threadUser == null)
@@ -299,6 +310,11 @@ namespace Stoker.Services
         /// <param name="model">The thread itself</param>
         public void SetUserThread(string userID, ThreadModel model)
         {
+            if (model.title == "" || model.mainContent == "")
+            {
+                return;
+            }
+
             UserService serviceUser = new UserService(db);
 
             ApplicationUser threadUser = serviceUser.GetUserByID(userID);
@@ -405,9 +421,15 @@ namespace Stoker.Services
             {
                 thread.usersLiked = new List<ApplicationUser>();
             }
-            thread.likes += 1;
-            thread.usersLiked.Add(user);
-            db.SaveChanges();
+            string hasLiked = (from t in thread.usersLiked
+                               where t.Id == user.Id
+                               select t.Id).SingleOrDefault();
+            if (hasLiked == null)
+            {
+                thread.likes += 1;
+                thread.usersLiked.Add(user);
+                db.SaveChanges();
+            }
         }
 
         /// <summary>

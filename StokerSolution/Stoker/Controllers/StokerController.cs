@@ -62,6 +62,12 @@ namespace Stoker.Controllers
 
         public byte[] FileToByteArray(HttpPostedFileBase file)
         {
+            if (file.ContentLength == 0)
+            {
+                string userID = User.Identity.GetUserId();
+                ApplicationUser user = userService.GetUserByID(userID);
+                return user.image;
+            }
             Image imageIn = Image.FromStream(file.InputStream, true, true);
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
@@ -145,19 +151,12 @@ namespace Stoker.Controllers
         /// Checks if current user has liked a thread
         /// </summary>
         /// <returns>true if user has liked</returns>
-        public int IsLikedThread()
+        public bool IsLikedThread()
         {
             string userID = User.Identity.GetUserId();
              int threadID = Convert.ToInt32(Request["threadID"]);
             bool isLiked = threadService.UserHasLikedThread(userID, threadID);
-            if (isLiked == true)
-            {
-                return threadID;
-            }
-            else
-            {
-                return 0;
-            }
+            return isLiked;
         }
 
         /// <summary>
