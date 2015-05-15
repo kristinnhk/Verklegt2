@@ -16,6 +16,14 @@ namespace Stoker.Services
             db = context ?? new ApplicationDbContext();
         }
 
+        /// <summary>
+        /// The main DB function
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="threadsShown">Number of threads alread on front page for skip</param>
+        /// <param name="orderBy">what order the data should be</param>
+        /// <param name="filterBy">what it should be filtered by</param>
+        /// <returns></returns>
         public ICollection<ThreadModel> GetFilteredThreads(string userID, int threadsShown = 0, int orderBy = 0, int filterBy = 0)
         {
             if(filterBy == 1){

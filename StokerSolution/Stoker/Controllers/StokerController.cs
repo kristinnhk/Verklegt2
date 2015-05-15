@@ -33,11 +33,20 @@ namespace Stoker.Controllers
             interestService = new InterestService(db);
             threadService = new ThreadService(db);
         }
+
         public virtual ActionResult StopAmbigiousNameError()
         {
             return View();
         }
 
+        /// <summary>
+        /// These 3 similar functions render pictures to the view
+        /// by getting the image seperately 
+        /// this helps alot with ajax calls because you dont have to send the 
+        /// entire image files through Json
+        /// </summary>
+        /// <param name="id">Id of the thread we we are rending image for</param>
+        /// <returns></returns>
         public ActionResult RenderThreadImage(int id)
         {
 
@@ -53,6 +62,7 @@ namespace Stoker.Controllers
             byte[] photoBack = user.image;
             return File(photoBack, "image/png");
         }
+
         public ActionResult RenderGroupImage(int id)
         {
             GroupModel group = groupService.GetGroupByID(id);
@@ -60,6 +70,11 @@ namespace Stoker.Controllers
             return File(photoBack, "image/png");
         }
 
+        /// <summary>
+        /// we use memorystream to turn the image into a byte[]
+        /// </summary>
+        /// <param name="file">This is the image we get from the user</param>
+        /// <returns></returns>
         public byte[] FileToByteArray(HttpPostedFileBase file)
         {
             if (file.ContentLength == 0)
@@ -74,6 +89,12 @@ namespace Stoker.Controllers
             return ms.ToArray();
         }
 
+        /// <summary>
+        /// This function is simply to reduce refactoring of code
+        /// basically it gets all the values from the form to make a thread
+        /// </summary>
+        /// <param name="thread"> the form we take in</param>
+        /// <returns></returns>
         public ThreadModel FillThreadModel(FormCollection thread)
         {
             ThreadModel model = new ThreadModel();
@@ -95,19 +116,20 @@ namespace Stoker.Controllers
             return model;
         }
 
-
+        /// <summary>
+        /// This function gets called by the ajax call when someone wants to load more news.
+        /// There are filtering options in the html wich we cherry pick to send to our servicelayer.
+        /// ultimately when we get the data we want from the service, we cherry pick only the data we HAVE to ahve
+        /// to make it as lightweight as possible and to reduce loading times
+        /// images for example are not needed and we render them using aforementioned functions
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetMoreNews()
         {
             int filterBy = Convert.ToInt32(Request["filterBy"]);
             int orderBy = Convert.ToInt32(Request["orderBy"]);
             int threadsShown = Convert.ToInt32(Request["threadsShown"]);
-
-
-
             ViewModel model = new ViewModel();
-         //   model.groups = new List<GroupModel>();
-        //    model.interests = new List<InterestModel>();
-         //   model.Users = new List<ApplicationUser>();
             model.threads = new List<ThreadModel>();
             byte[] bit = new byte[] { 0x1 }; // Used so Json request doesnt get too large
             List<ThreadModel> templist = new List<ThreadModel>();
@@ -121,7 +143,6 @@ namespace Stoker.Controllers
             {
                 templist = threadService.GetFilteredThreads(User.Identity.GetUserId(), threadsShown, orderBy, filterBy).ToList();
             }
-
             foreach (var item in templist)
             {
                 ThreadModel newModel = new ThreadModel();
@@ -138,15 +159,11 @@ namespace Stoker.Controllers
                 newModel.originalPoster.Id = item.originalPoster.Id;
                 newModel.originalPoster.firstName = item.originalPoster.firstName;
                 newModel.originalPoster.lastName = item.originalPoster.lastName;
-                // newModel.usersLiked = item.usersLiked;
-                //   newModel.profilePost = item.profilePost;
-                //   newModel.interestPost = item.interestPost;
-                //  newModel.groupPost = item.groupPost;
-                //  newModel.comments = item.comments;
                 model.threads.Add(newModel);
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
         /// <summary>
         /// Checks if current user has liked a thread
         /// </summary>

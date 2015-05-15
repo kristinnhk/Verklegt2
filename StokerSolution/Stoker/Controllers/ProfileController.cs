@@ -78,6 +78,7 @@ namespace Stoker.Controllers
             
             return View(model);
         }
+
         public List<GroupModel> GetUserGroups(string userID)
         {
             return groupService.GetUserGroups(userID).ToList();
@@ -87,6 +88,7 @@ namespace Stoker.Controllers
         {
             return interestService.GetUserInterests(userID).ToList();
         }
+
         [HttpPost]
         public ActionResult SubmitUserThread(FormCollection thread)
         {

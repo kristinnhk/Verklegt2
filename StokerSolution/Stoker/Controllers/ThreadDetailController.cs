@@ -13,7 +13,12 @@ namespace Stoker.Controllers
     [Authorize]
     public class ThreadDetailController : StokerController
     {
-        // GET: ThreadDetail
+        /// <summary>
+        /// This is filling up a view model, the view model includes a list of comments
+        /// some sidebar functionality also must be instantiated to avoid exceptions
+        /// </summary>
+        /// <param name="threadID">the ID of the thread to view in detail</param>
+        /// <returns></returns>
         public ActionResult ThreadDetail(int threadID)
         {
             ViewModel model = new ViewModel();
@@ -37,20 +42,21 @@ namespace Stoker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// collect the data from the form
+        /// instantiate a commentmodel and save it to the db
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
         public ActionResult SubmitThreadComment(FormCollection collection)
         {
             CommentModel comment = new CommentModel();
             comment.content = collection["commentContent"];
             comment.dateCreated = DateTime.Now;
             comment.likes = 0;
-         //   comment.usersLiked = new List<ApplicationUser>();
             string userID = User.Identity.GetUserId();
-          
             int id = Convert.ToInt32(collection["threadID"]);
-          //  comment.thread = threadService.GetThreadByID(id);
-
             threadService.SetThreadComment(id, userID, comment);
-
             return RedirectToAction("ThreadDetail", "ThreadDetail", new { threadID = id });
         }
     }
