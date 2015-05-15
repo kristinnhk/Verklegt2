@@ -28,7 +28,7 @@
                 }
             });
         };
-    }*/
+    }
     //checkLikes();
     function updateLikes()
     {
@@ -40,32 +40,32 @@
             var posting = $.post('/Stoker/NumberOfLikes/', returnString);
             posting.done(function (result)
             {
-                $(checkString).next().text("Likes: " + result);
+                $(checkString).next().text("Upvotes: " + result);
             });
         }
-    }
+    }*/
     $(".likeButton").click(function () 
     {
-        if ($(this).html() == "Like") 
+        if ($(this).html() == "Upvote") 
         {
-            $(this).html('Unlike');
+            $(this).html('Downvote');
             var turnString = { 'threadID': $(this).val() };
             var posting = $.post('/Stoker/LikeThread/', turnString);
             posting.done(function ()
             {
-                updateLikes();
+               // updateLikes();
                 //checkLikes();
             });
             
         }
         else
         {
-            $(this).html('Like');
+            $(this).html('Upvote');
             var turnString = { 'threadID': $(this).val() };
             var posting = $.post('/Stoker/UnLikeThread/', turnString);
             posting.done(function ()
             {
-                updateLikes();
+               // updateLikes();
                // checkLikes();
             });
         }
