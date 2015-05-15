@@ -19,21 +19,26 @@
         {
             <div class="threadItem well well-lg" >
                 <div class="threadTop">
-                    <span class="threadTitle">
-                        @item.title
-                    </span>
-                    <span class="threadUsername">
-                        Posted by: <a href="/Profile/FriendIndex?userID=@item.originalPoster.Id">@item.originalPoster.firstName  @item.originalPoster.lastName</a>
-                    </span>
-                    <span>
-                        @item.dateCreated
-                    </span>
                     <div>
-                        <button class="likeButton" id="likeButton" value=@item.threadID>Like</button>
-                        <span class="likeCount">
-                            Likes: @item.likes
+                        <span class="myThreadTitle">
+                            @item.title
                         </span>
                     </div>
+                    <div>
+                        <span>
+                            Posted by: <a href="/Profile/FriendIndex?userID=@item.originalPoster.Id">@item.originalPoster.firstName  @item.originalPoster.lastName</a>
+                        </span>
+                        <span>
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            @item.dateCreated
+                        </span>
+                        <span>
+                            <button class="likeButton" id="likeButton" value=@item.threadID>Like</button>
+                            <span class="likeCount">
+                                Likes: @item.likes
+                            </span>
+                        </span>
+                     </div>
                 </div>
                 <div class="threadContent">
                     @if (item.image != null)
@@ -51,10 +56,12 @@
         }
         
     </div>
-    <span id="commentDelete">
-        <input type="button" name="loadMoreNews" id="loadMoreNews" value="loadMoreNews" />
-        <img src="~/Content/Images/ajax-loader.gif" id="loader2" style="display: none; width:20px;" />
-    </span>
+    <div class="container text-center">
+        <span id="commentDelete">
+            <input type="button" name="loadMoreNews" id="loadMoreNews" value="loadMoreNews" />
+            <img src="~/Content/Images/ajax-loader.gif" id="loader2" style="display: none; width:20px;" />
+        </span>
+    </div>
 }
         
    

@@ -17,7 +17,10 @@ namespace Stoker.Services
         }
 
         /// <summary>
-        /// The main DB function
+        /// The main DB function, This is kind a server who you give an order
+        /// for a type of thread and the order of it and if any threads should be skipped because
+        /// in the ajax calls we already have for example the first 5 threads, then we skip 5 and take
+        /// the next 5 threads.
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="threadsShown">Number of threads alread on front page for skip</param>
@@ -42,9 +45,6 @@ namespace Stoker.Services
             else if(filterBy == 0)
             {
                 ICollection<ThreadModel> threads = (from t in db.threads
-                                                    // orderby t.likes descending when like works
-                                                    //some logic to NOT show all userprofile threads that ARENT freinds
-                                                    //some logic to NOT show group posts user ISNT in
                                                     select t).ToList();
                 return FilterSkipTake(threads, threadsShown, orderBy);
             }
@@ -139,6 +139,14 @@ namespace Stoker.Services
             return threads;
         }
 
+        /// <summary>
+        /// This function is for sorting and skipping threads if there are some already
+        /// displayed.
+        /// </summary>
+        /// <param name="threads">the threads to sort and filter</param>
+        /// <param name="threadsShown">the number of threads already displayed</param>
+        /// <param name="orderBy">the order you want them sorted</param>
+        /// <returns></returns>
         public ICollection<ThreadModel> FilterSkipTake(ICollection<ThreadModel> threads, int threadsShown, int orderBy)
         {
             if (orderBy == 0) //show newest first

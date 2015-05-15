@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Home Page";
-		
 }
 
 @section JavaScript
@@ -12,10 +11,10 @@
 <script type="text/javascript" src="@Url.Content("/Scripts/NewsFeed.js")"></script>
 }
 
-@Html.Partial("HeaderPartialView")
+@*@Html.Partial("HeaderPartialView")*@
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div id="filterByDiv">
             <span>
                 <label id="filterByLabel">Filter threads by: </label>
@@ -28,7 +27,5 @@
             </span>
         </div>
        @Html.Partial("NewsFeedPartial")
-        
     </div>
-   
 </div>
