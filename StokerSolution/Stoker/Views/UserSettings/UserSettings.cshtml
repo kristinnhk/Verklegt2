@@ -33,29 +33,25 @@
         </div>
         <div class="col-md-10">
             <div class="col-md-3" id="groupDiv">
-                <h3>Manage your groups</h3>
-							<fieldset>
-								<ul class="list-group manageScrollBox">
-									@foreach (Stoker.Models.GroupModel group in Model.groups)
-									{
-										<li class="list-group-item"><input type="checkbox" class="userGroups" name=@group.title value=@group.groupID /> @group.title</li>
-									}
-								</ul>
-								<button id="deleteGroupButton" class="btn btn-danger">Leave selected groups</button>
-							</fieldset>
-
+                <h3>Your groups</h3>
+				<fieldset>
+					<ul class="list-group manageScrollBox">
+						@foreach (Stoker.Models.GroupModel group in Model.groups)
+						{
+							<li class="list-group-item">@Html.ActionLink(@group.title, "GroupProfile", "GroupProfile", new { groupID = @group.groupID }, null)</li>
+						}
+					</ul>
+				</fieldset>
             </div>
             <div class="col-md-3" id="interestDiv">
-                <h3>Manage your interests</h3>
+                <h3>Your interests</h3>
                 <fieldset>
-									<ul class="list-group manageScrollBox">
-										@foreach (Stoker.Models.InterestModel interest in Model.interests)
-										{
-											<li class="list-group-item"><input type="checkbox" class="userInterests" name=@interest.name value=@interest.name /> @interest.name</li>
-										}
-									</ul>
-
-                    <button id="deleteInterestButton" class="btn btn-danger"> Unfollow selected interests</button>
+					<ul class="list-group manageScrollBox">
+						@foreach (Stoker.Models.InterestModel interest in Model.interests)
+						{
+							<li class="list-group-item">@Html.ActionLink(@interest.name, "Interest", "Interest", new { interestID = @interest.interestID }, null)</li>
+						}
+					</ul>
                 </fieldset>
             </div>
             <div class="col-md-5">

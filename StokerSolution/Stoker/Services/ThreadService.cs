@@ -158,9 +158,10 @@ namespace Stoker.Services
         /// <returns>returns a threadmodel of the thread</returns>
         public ThreadModel GetThreadByID(int threadID)
         {
-            return (from t in db.threads
-                    where t.threadID == threadID
-                    select t).SingleOrDefault();
+            ThreadModel thread = (from t in db.threads
+                                  where t.threadID == threadID
+                                 select t).SingleOrDefault();
+            return thread;
         }
         
         /// <summary>
@@ -420,9 +421,15 @@ namespace Stoker.Services
             {
                 thread.usersLiked = new List<ApplicationUser>();
             }
-            thread.likes += 1;
-            thread.usersLiked.Add(user);
-            db.SaveChanges();
+            string hasLiked = (from t in thread.usersLiked
+                               where t.Id == user.Id
+                               select t.Id).SingleOrDefault();
+            if (hasLiked == null)
+            {
+                thread.likes += 1;
+                thread.usersLiked.Add(user);
+                db.SaveChanges();
+            }
         }
 
         /// <summary>

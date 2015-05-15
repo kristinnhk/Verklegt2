@@ -286,6 +286,7 @@
     <Content Include="Views\Profile\FriendIndex.cshtml" />
     <Content Include="Views\ThreadDetail\ThreadDetail.cshtml" />
     <Content Include="Views\AddInterest\AddInterest.cshtml" />
+    <Content Include="Views\GroupProfile\GroupNonMemberProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

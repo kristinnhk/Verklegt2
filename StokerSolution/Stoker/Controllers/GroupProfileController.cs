@@ -14,21 +14,22 @@ namespace Stoker.Controllers
     {
  
         // GET: GroupProfile
-        public ActionResult GroupProfile(int groupId)
+        public ActionResult GroupProfile(int groupID)
         {
 
             ViewModel model = new ViewModel();
             string userID = User.Identity.GetUserId();
-            GroupModel group = db.groups.FirstOrDefault(x => x.groupID == groupId);
-            ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
+            GroupModel group = groupService.GetGroupByID(groupID);
+            ApplicationUser user = userService.GetUserByID(userID);
             model.Users = new List<ApplicationUser>();
+            model.Users.Add(user);
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
             model.threads = new List<ThreadModel>();
 			model.sidebar = new SidebarModel();
 			model.sidebar.userGroups = new List<GroupModel>();
 			model.sidebar.userInterests = new List<InterestModel>();
-            var threads = threadService.GetGroupThreads(groupId).ToList();
+            var threads = threadService.GetGroupThreads(groupID).ToList();
             foreach (ThreadModel thread in threads)
             {
                 model.threads.Add(thread);
@@ -49,9 +50,16 @@ namespace Stoker.Controllers
                 model.sidebar.userInterests.Add(i);
             }
 
-            model.groups.Add(group); 
-         
-            return View(model);
+            model.groups.Add(group);
+
+            if (groupService.IsMemberOfGroup(userID, groupID) == true)
+            {
+                return View(model);
+            }
+            else
+            {
+                return View("GroupNonMemberProfile", model);
+            }
         }
 
         [HttpPost]
