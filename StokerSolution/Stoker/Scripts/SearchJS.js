@@ -1,20 +1,26 @@
 ﻿
 
-$(document).ready(function () {
+$(document).ready(function ()
+{
     //http://stackoverflow.com/questions/1909441/jquery-keyup-delay delay function from Stackoverflow user CMS
-    var delay = (function () {
+    var delay = (function ()
+    {
         var timer = 0;
-        return function (callback, ms) {
+        return function (callback, ms)
+        {
             clearTimeout(timer);
             timer = setTimeout(callback, ms);
         };
     })();
-    $("#searchbarInSearchView").keyup(function () {
-        delay(function () {
+    $("#searchbarInSearchView").keyup(function ()
+    {
+        delay(function ()
+        {
 
         $("#loader").show();
         //$("#searchbarInSearchView").attr("disabled", "disabled");
-        if (!$("#searchbarInSearchView").val()) {
+        if (!$("#searchbarInSearchView").val())
+        {
             $("#loader").hide();
             $("#userTable tbody tr").remove();
             $("#interestTable tbody tr").remove();
@@ -22,7 +28,8 @@ $(document).ready(function () {
             // $("#searchbarInSearchView").removeAttr("disabled");
             return false;
         }
-        else {
+        else
+        {
             var theForm = $("#searchbarInSearchView");
             var returnString = { 'Search': $('#searchbarInSearchView').val().trim() };
             var posting = $.post('/Search/SearchJson/', returnString);

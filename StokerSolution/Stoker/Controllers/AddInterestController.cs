@@ -18,11 +18,16 @@ namespace Stoker.Controllers
     [Authorize]
     public class AddInterestController : StokerController
     {
-        // GET: AddInterest
         public ActionResult AddInterest()
         {
             return View();
         }
+
+        /// <summary>
+        /// Creates a new interest
+        /// </summary>
+        /// <param name="collection">formcollection containing information about the interest</param>
+        /// <returns>the page of the interest</returns>
          public ActionResult Add(FormCollection collection)
         {
             InterestModel model = new InterestModel();

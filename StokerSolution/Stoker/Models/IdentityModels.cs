@@ -66,6 +66,11 @@ namespace Stoker.Models
             return new ApplicationDbContext();
         }
 
+        /// <summary>
+        /// This catches an exception we do not know what causes
+        /// and logs its message
+        /// </summary>
+        /// <returns>a detailed errormessage</returns>
         public override int SaveChanges()
         {
             try

@@ -13,6 +13,7 @@ namespace Stoker.Controllers
     [Authorize]
     public class ThreadDetailController : StokerController
     {
+
         /// <summary>
         /// This is filling up a view model, the view model includes a list of comments
         /// some sidebar functionality also must be instantiated to avoid exceptions

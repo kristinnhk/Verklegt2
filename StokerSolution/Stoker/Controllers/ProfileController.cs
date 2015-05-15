@@ -17,9 +17,6 @@ namespace Stoker.Controllers
     [Authorize]
     public class ProfileController : StokerController
     {
-
-        // GET: Profile
-
         [Authorize]
         public ActionResult Index()
         {

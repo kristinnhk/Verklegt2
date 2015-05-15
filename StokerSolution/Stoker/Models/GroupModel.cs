@@ -7,7 +7,7 @@ using System.Web;
 namespace Stoker.Models
 {
     /// <summary>
-    /// 
+    /// A template for how information about groups are stored in the database
     /// </summary>
     public class GroupModel
     {

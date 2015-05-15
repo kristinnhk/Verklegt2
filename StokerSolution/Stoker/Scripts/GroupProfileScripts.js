@@ -1,17 +1,27 @@
 ﻿$(document).ready(function () {
-    var interestString = { 'groupID': $('#idGroup').val() };
-    var isFollowing = $.post('/GroupProfile/IsGroupMember/', interestString);
-    var following = isFollowing.done(function (result) {
-        if (result == "True") {
+
+    //checks if user is a member of a group
+    var groupString = { 'groupID': $('#idGroup').val() };
+    var isMember = $.post('/GroupProfile/IsGroupMember/', groupString);
+    var following = isMember.done(function (result)
+    {
+        if (result == "True")
+        {
             $('#groupButton').attr('value', 'Leave group');
         }
     });
-    $("#groupButton").click(function () {
-        if ($(this).val() == "Join group") {
+
+    //joins or leaves user from a group depending on what he was before
+    $("#groupButton").click(function ()
+    {
+        if ($(this).val() == "Join group")
+        {
             $(this).attr('value', 'Leave group');
             var returnString = { 'groupID': $('#idGroup').val() };
             var posting = $.post('/GroupProfile/JoinGroup/', returnString);
-        } else {
+        }
+        else
+        {
             $(this).attr('value', 'Join group');
             var returnString = { 'groupID': $('#idGroup').val() };
             var posting = $.post('/GroupProfile/LeaveGroup/', returnString);

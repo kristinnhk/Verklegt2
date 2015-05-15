@@ -33,21 +33,6 @@ namespace Stoker.Services
         }
 
         /// <summary>
-        /// Uses GetInterestByID method to get the interest with the given id and then replace it's
-        /// title with the one given in the parameters. if no interest is found we do nothing.
-        /// </summary>
-        /// <param name="interestID">The id of the interest we want to change</param>
-        /// <param name="title">The new title</param>
-        /*public void SetInterestTitle(int interestID, string title)
-        {
-            try { 
-                GetInterestByID(interestID).name = title;
-            }catch(Exception){
-                return;
-            }
-            db.SaveChanges();
-        }*/
-        /// <summary>
         /// This function returns a list of users who are interested in the interest of the given id
         /// </summary>
         /// <param name="interestID">the id of the interest we are looking to find the users for</param>
@@ -103,6 +88,7 @@ namespace Stoker.Services
             db.interests.Add(interest);
             db.SaveChanges();
         }
+
         /// <summary>
         /// connect a user to an interest he is interested in
         /// </summary>
@@ -131,6 +117,7 @@ namespace Stoker.Services
             interest.users.Add(user);
             db.SaveChanges();
         }
+
         /// <summary>
         /// Gets all of the interests that include the search string
         /// it matches partially and selects all that match

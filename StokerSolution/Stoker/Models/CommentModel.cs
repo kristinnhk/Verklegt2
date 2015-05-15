@@ -7,7 +7,7 @@ using System.Web;
 namespace Stoker.Models
 {
     /// <summary>
-    /// TODO
+    /// Template for how information about comments is stored in the database
     /// </summary>
     public class CommentModel
     {

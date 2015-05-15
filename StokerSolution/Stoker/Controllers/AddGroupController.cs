@@ -19,13 +19,16 @@ namespace Stoker.Controllers
     public class AddGroupController : StokerController
     {
 
-        //
-        // GET: /AddGroup/
         public ActionResult AddGroup()
         {
             return View();
         }
-
+        
+        /// <summary>
+        /// Registers a new group in the database
+        /// </summary>
+        /// <param name="collection">formcollection containing information about the group</param>
+        /// <returns>redirects the user to a site where he can manage his group</returns>
         public ActionResult Add(FormCollection collection)
         {
             GroupModel model = new GroupModel();

@@ -246,5 +246,18 @@ namespace Stoker.Services
                 return false;
             }
         }
+
+        /// <summary>
+        /// gets a list of the users friends
+        /// </summary>
+        /// <param name="userID">id of the user</param>
+        /// <returns>list of the friends users</returns>
+        public IEnumerable<ApplicationUser> UserFriends(string userID)
+        {
+            ApplicationUser user = GetUserByID(userID);
+            return (from u in user.friendRequestSent
+                    join b in user.friendRequestReceived on u.Id equals b.Id
+                    select u);
+        }
     }
 }

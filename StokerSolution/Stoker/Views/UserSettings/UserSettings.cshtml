@@ -58,8 +58,18 @@
                 <h3>Create a new group or interest</h3>
                 @Html.ActionLink("Create new group", "AddGroup", null, new { @class = "btn btn-primary pull-left" })
                 @Html.ActionLink("Create new interest", "AddInterest", null, new { @class = "btn btn-primary pull-right"})
-                <!--<button class="btn btn-primary pull-right">Create new interest</button>-->
             </div>
+        </div>
+        <div class="col-lg-4">
+            <h3>Your friends</h3>
+            <ul class="list-group">
+                @foreach (Stoker.Models.ApplicationUser u in Model.friendRequests)
+                {
+                    <li class="list-group-item">
+                        @Html.ActionLink(@u.firstName + @u.lastName, "FriendIndex", "Profile", new {userID = @u.Id}, null)
+                    </li>
+                }
+            </ul>
         </div>
 
                     @Html.Partial("FooterPartialView")

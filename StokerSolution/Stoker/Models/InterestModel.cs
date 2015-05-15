@@ -7,7 +7,7 @@ using System.Web;
 namespace Stoker.Models
 {
     /// <summary>
-    /// TODO
+    /// template for how information about interests should be stored
     /// </summary>
     public class InterestModel
     {
