@@ -12,6 +12,15 @@
 
 <div class="container">
     <div class="container">
+        <img src="@Url.Action("RenderGroupImage", new { id = Model.groups[0].groupID })" alt="Photo change" width="100" height="100" />
+        <p class="col-lg-6" style="overflow: scroll; overflow-x: hidden; max-height: 150px;">@Model.groups[0].about </p>
+       @* @{
+            if(Model.Users[0].Id == Model.groups[0].groupAdmin.Id){
+                @Html.ActionLink("Settings", "GroupSettings", new { goToGroupID = @Model.groups[0].groupID }, new { @class = "btn btn-primary" })
+            }
+           }*@
+    </div>
+    <div class="container">
         <input type="hidden" value="@Model.groups[0].groupID" id="idGroup" />
         <h2>@Model.groups[0].title</h2>
         <input type="button" class="btn btn-primary" value="Join group" id="groupButton" />

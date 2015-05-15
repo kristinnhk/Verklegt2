@@ -48,14 +48,14 @@ namespace Stoker.Controllers
 
             model.groups.Add(group);
 
-            if (groupService.IsMemberOfGroup(userID, groupID) == true)
-            {
+           // if (groupService.IsMemberOfGroup(userID, groupID) == true)
+          //  {
                 return View(model);
-            }
-            else
-            {
-                return View("GroupNonMemberProfile", model);
-            }
+           // }
+           // else
+          //  {
+             //   return View("GroupNonMemberProfile", model);
+          //  }
         }
 
         [HttpPost]

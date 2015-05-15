@@ -20,8 +20,9 @@ namespace Stoker.Controllers
     {
         public ActionResult UserSettings()
         {
+           //Initialisation of model classes
             string userID = User.Identity.GetUserId();
-            ApplicationUser user = db.Users.FirstOrDefault(x => x.Id == userID);
+            ApplicationUser user = userService.GetUserByID(userID);
             ViewModel model = new ViewModel();
             model.Users = new List<ApplicationUser>();
             model.groups = new List<GroupModel>();
@@ -34,6 +35,7 @@ namespace Stoker.Controllers
             {
                 user.friendRequestSent = new List<ApplicationUser>();
             }
+            //Adding information to the model
             var groups = GetUserGroups(user.Id);
             foreach (GroupModel group in groups)
             {
@@ -95,6 +97,7 @@ namespace Stoker.Controllers
         {
             return RedirectToAction("AddGroup", "AddGroup");
         }
+
         public ActionResult AddInterest()
         {
             return RedirectToAction("AddInterest", "AddInterest");

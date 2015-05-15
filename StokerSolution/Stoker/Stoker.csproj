@@ -163,6 +163,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddGroupController.cs" />
     <Compile Include="Controllers\AddInterestController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\GroupSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -288,6 +289,7 @@
     <Content Include="Views\ThreadDetail\ThreadDetail.cshtml" />
     <Content Include="Views\AddInterest\AddInterest.cshtml" />
     <Content Include="Views\GroupProfile\GroupNonMemberProfile.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
