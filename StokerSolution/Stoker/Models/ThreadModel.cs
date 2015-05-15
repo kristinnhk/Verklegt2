@@ -6,9 +6,6 @@ using System.Web;
 
 namespace Stoker.Models
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ThreadModel
     {
         [Key]

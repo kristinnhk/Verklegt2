@@ -13,7 +13,6 @@
 <div class="container">
     <div class="container">
         <img src="@Url.Action("RenderGroupImage", new { id = Model.groups[0].groupID })" alt="Photo change" width="100" height="100" />
-       @* <img src="@Model.groups[0].image" alt="Profile picture" class="img-responsive col-lg-4" /> *@
         <p class="col-lg-6" style="overflow: scroll; overflow-x: hidden; max-height: 150px;">@Model.groups[0].about </p>
         @{
             if(Model.Users[0].Id == Model.groups[0].groupAdmin.Id){

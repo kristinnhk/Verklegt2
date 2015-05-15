@@ -212,6 +212,10 @@ namespace Stoker.Services
             }
         }
 
+        /// <summary>
+        /// Sets a default image for a group if none has been selected
+        /// </summary>
+        /// <param name="group">the group model</param>
         public void SetImageDefault(GroupModel group)
         {
             string pathPrefix = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/Images"), "default-group.jpg");

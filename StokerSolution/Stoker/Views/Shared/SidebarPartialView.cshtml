@@ -1,15 +1,10 @@
 ﻿@model Stoker.Models.ViewModel
 
 <nav class="navbar-left col-md-2" id="sidebarEveryPage">
-	<!--<link href="~/Content/SidebarStyleSheet.css" rel="stylesheet" />-->
 	<link href="~/Content/FrameStyleSheet.css" rel="stylesheet" />
 	<div class="interestsSidebar">
 		<h3>Interests</h3>
 		<ul class="list-group">
-			@*@for (int i = 1; i <= 15; i++)
-			{
-				<li>interest @i</li>
-			}*@
 			@if ((Model.sidebar.userInterests == null) || (Model.sidebar.userInterests.Count == 0))
 			{
 				<li class="list-group-item">No interests</li>
@@ -26,10 +21,6 @@
 	<div class="groupsSidebar">
 		<h3>Groups</h3>
 		<ul class="list-group">
-			@*@for (int i = 1; i <= 15; i++)
-			{
-				<li>group @i</li>
-			}*@
 			@if ((Model.sidebar.userGroups == null) || (Model.sidebar.userGroups.Count == 0))
 			{
 				<li class="list-group-item">No groups</li>
