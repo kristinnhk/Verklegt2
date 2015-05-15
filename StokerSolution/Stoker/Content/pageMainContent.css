@@ -11,6 +11,7 @@
 .manageScrollBox {
 	position: relative;
 	max-height: 35vh;
+	min-height: 35vh;
 	overflow-y: scroll;
 }
 

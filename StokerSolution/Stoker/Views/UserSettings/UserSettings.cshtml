@@ -32,7 +32,7 @@
             </fieldset>
         </div>
         <div class="col-md-10">
-            <div class="col-md-3" id="groupDiv">
+            <div class="col-md-4" id="groupDiv">
                 <h3>Your groups</h3>
 				<fieldset>
 					<ul class="list-group manageScrollBox">
@@ -43,7 +43,7 @@
 					</ul>
 				</fieldset>
             </div>
-            <div class="col-md-3" id="interestDiv">
+            <div class="col-md-4" id="interestDiv">
                 <h3>Your interests</h3>
                 <fieldset>
 					<ul class="list-group manageScrollBox">
@@ -54,23 +54,25 @@
 					</ul>
                 </fieldset>
             </div>
+					<div class="col-lg-4" id="friendsDiv">
+						<h3>Your friends</h3>
+						<ul class="list-group manageScrollBox">
+							@foreach (Stoker.Models.ApplicationUser u in Model.friendRequests)
+							{
+								<li class="list-group-item">
+									@Html.ActionLink(@u.firstName + @u.lastName, "FriendIndex", "Profile", new { userID = @u.Id }, null)
+								</li>
+							}
+						</ul>
+					</div>
+
             <div class="col-md-5">
                 <h3>Create a new group or interest</h3>
                 @Html.ActionLink("Create new group", "AddGroup", null, new { @class = "btn btn-primary pull-left" })
                 @Html.ActionLink("Create new interest", "AddInterest", null, new { @class = "btn btn-primary pull-right"})
             </div>
         </div>
-        <div class="col-lg-4">
-            <h3>Your friends</h3>
-            <ul class="list-group">
-                @foreach (Stoker.Models.ApplicationUser u in Model.friendRequests)
-                {
-                    <li class="list-group-item">
-                        @Html.ActionLink(@u.firstName + @u.lastName, "FriendIndex", "Profile", new {userID = @u.Id}, null)
-                    </li>
-                }
-            </ul>
-        </div>
+        
 
                     @Html.Partial("FooterPartialView")
 
