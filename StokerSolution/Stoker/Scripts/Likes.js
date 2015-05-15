@@ -9,7 +9,7 @@
         });
         return likes;
     }
-   /* function checkLikes ()
+    function checkLikes ()
     {
         var likes = getLikeButtonValues();
         for (var i = 0; i < likes.length; i++) {
@@ -29,7 +29,7 @@
             });
         };
     }
-    //checkLikes();
+    checkLikes();
     function updateLikes()
     {
         var likes = getLikeButtonValues();
@@ -43,7 +43,7 @@
                 $(checkString).next().text("Upvotes: " + result);
             });
         }
-    }*/
+    }
     $(".likeButton").click(function () 
     {
         if ($(this).html() == "Upvote") 
@@ -53,8 +53,8 @@
             var posting = $.post('/Stoker/LikeThread/', turnString);
             posting.done(function ()
             {
-               // updateLikes();
-                //checkLikes();
+                updateLikes();
+                checkLikes();
             });
             
         }
@@ -65,8 +65,8 @@
             var posting = $.post('/Stoker/UnLikeThread/', turnString);
             posting.done(function ()
             {
-               // updateLikes();
-               // checkLikes();
+                updateLikes();
+                checkLikes();
             });
         }
     });

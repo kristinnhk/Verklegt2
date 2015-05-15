@@ -109,7 +109,8 @@ namespace Stoker.Controllers
             string thisUserID = User.Identity.GetUserId();
             string friendID = Request["userID"].ToString();
             userService.SendFriendRequest(thisUserID, friendID);
-            return UserIndex(friendID);
+            return RedirectToAction("UserIndex", "Profile", new { userID = friendID });
+
         }
     }
 }
