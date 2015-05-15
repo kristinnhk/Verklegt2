@@ -5,27 +5,18 @@ $(document).ready(function () {
         var order = $("#orderBy option:selected").val();
         var filter = $("#filterBy option:selected").val();
         var profileID = $("#profileID").val();
-        // var element = document.getElementById('filterBy');
-    /*    var filter = $("#filterBy option:selected").val();
-        var filter = "tempstring";
-        if ($('#filterBy').is('input:select')) {
-            filter = filter = $("#filterBy option:selected").val();
-        }
-        else {
-            filter = $('#filterBy').val();
-        }*/
         var threadsShown = "0";
         var returnstring = { 'orderBy': order, 'filterBy': filter, 'threadsShown': threadsShown, 'profileID': profileID };
 
         var posting = $.post('/Stoker/GetMoreNews/', returnstring);
         posting.done(function (result) {
-       //     alert("posting work");
             $('.mainNewsFeed .threadItem').remove();
             for (var i = 0; i < result.threads.length; i++) {
+                var date = new Date(parseInt(result.threads[i].dateCreated.substr(6))).toUTCString();
                 var newsFeedItem = '<div class="threadItem well well-lg" > <div class="threadTop"> <span class="threadTitle">' +
                     result.threads[i].title + '</span><span class="threadUsername">Posted by: <a href="/Profile/FriendIndex?userID=' +
                     result.threads[i].originalPoster.Id + '">' + result.threads[i].originalPoster.firstName + ' ' + result.threads[i].originalPoster.lastName +
-                    '</a> </span> <span>' + result.threads[i].dateCreated + '</span> <span id="UserLike"><input type="button" id="likebutton" name="likeButton" />' +
+                    '</a> </span> <span>' + date + '</span> <span id="UserLike"><input type="button" id="likebutton" name="likeButton" />' +
                     '</span><span> Likes: ' + result.threads[i].likes + '</span></div><div class="threadContent">';
                 if (result.threads[i].image != null) {
                     newsFeedItem += '<img src="/Profile/RenderThreadImage/' + result.threads[i].threadID + '" alt="Photo change" width="100" height="100">';
@@ -57,10 +48,11 @@ $(document).ready(function () {
                 $("#threadsOnPage").val(currentValue.toString());
 
                 for (var i = 0; i < result.threads.length; i++) {
+                    var date = new Date(parseInt(result.threads[i].dateCreated.substr(6))).toUTCString();
                     var newsFeedItem = '<div class="threadItem well well-lg" > <div class="threadTop"> <span class="threadTitle">' +
                         result.threads[i].title + '</span><span class="threadUsername">Posted by: <a href="/Profile/FriendIndex?userID=' +
                         result.threads[i].originalPoster.Id + '">' + result.threads[i].originalPoster.firstName + ' ' + result.threads[i].originalPoster.lastName +
-                        '</a> </span> <span>' + result.threads[i].dateCreated + '</span> <span id="UserLike"><input type="button" id="likebutton" name="likeButton" />' +
+                        '</a> </span> <span>' + date + '</span> <span id="UserLike"><input type="button" id="likebutton" name="likeButton" />' +
                         '</span><span> Likes: ' + result.threads[i].likes + '</span></div><div class="threadContent">';
                     if (result.threads[i].image != null) {
                         newsFeedItem += '<img src="/Profile/RenderThreadImage/' + result.threads[i].threadID + '" alt="Photo change" width="100" height="100">';

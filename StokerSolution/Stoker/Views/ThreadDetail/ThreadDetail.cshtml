@@ -11,10 +11,10 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="col-md-6">
+    <div class="col-md-10">
         @Html.Partial("NewsFeedPartial")
     </div>
-    <div class="col-md-8">
+    <div class="col-md-10">
         <fieldset>
             <legend>New comment</legend>
             @using (@Html.BeginForm("SubmitThreadComment", "ThreadDetail", FormMethod.Post))
@@ -27,7 +27,7 @@
             }
         </fieldset>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-10">
                 @foreach (var comment in Model.threads.First().comments)
                 {
                     <div class="well well-lg">

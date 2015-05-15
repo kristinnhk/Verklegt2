@@ -30,6 +30,7 @@ namespace Stoker.Controllers
                 model.sidebar.userInterests = interestService.GetUserInterests(userID).ToList();
             }
             ThreadModel thread = threadService.GetThreadByID(threadID);
+            thread.comments = thread.comments.OrderByDescending(CommentModel => CommentModel.dateCreated).ToList();
             model.threads.Add(thread);
             return View(model);
         }
