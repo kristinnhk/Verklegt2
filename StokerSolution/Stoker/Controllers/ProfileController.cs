@@ -13,6 +13,8 @@ using Microsoft.AspNet.Identity;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class ProfileController : StokerController
     {
 

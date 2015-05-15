@@ -9,6 +9,8 @@ using Stoker.Models;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class ThreadDetailController : StokerController
     {
         // GET: ThreadDetail

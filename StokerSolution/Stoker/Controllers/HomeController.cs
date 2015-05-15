@@ -13,9 +13,15 @@ using Stoker.Models;
 namespace Stoker.Controllers
 {
     [Authorize]
+    [HandleError]
     public class HomeController : StokerController
     {
-
+        /// <summary>
+        /// The main frontpage, we instanciate the view model and 
+        /// we get the necessary threads to display on the frontpage
+        /// Then we send the view model to our view
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             //instanciating necessary lists

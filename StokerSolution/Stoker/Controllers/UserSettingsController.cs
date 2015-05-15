@@ -14,6 +14,8 @@ using Stoker.Services;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class UserSettingsController : StokerController
     {
         //

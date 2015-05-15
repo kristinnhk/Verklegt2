@@ -209,6 +209,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Comments.js" />
     <Content Include="Scripts\GroupProfileScripts.js" />
     <Content Include="Scripts\GroupSettingScripts.js" />
     <Content Include="Scripts\InterestJS.js" />

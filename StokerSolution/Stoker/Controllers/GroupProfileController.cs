@@ -10,13 +10,14 @@ using System.Web.Mvc;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class GroupProfileController : StokerController
     {
  
         // GET: GroupProfile
         public ActionResult GroupProfile(int groupID)
         {
-
             ViewModel model = new ViewModel();
             string userID = User.Identity.GetUserId();
             GroupModel group = groupService.GetGroupByID(groupID);
@@ -25,14 +26,11 @@ namespace Stoker.Controllers
             model.Users.Add(user);
             model.groups = new List<GroupModel>();
             model.interests = new List<InterestModel>();
-          //  model.threads = new List<ThreadModel>();
 			model.sidebar = new SidebarModel();
 			model.sidebar.userGroups = new List<GroupModel>();
 			model.sidebar.userInterests = new List<InterestModel>();
             int groupProfile = 1;
             model.threads = threadService.GetFilteredThreads(userID, 0, 0, groupProfile).ToList();
-         
-
             if (user.Id != null)
             {
                 var groups = groupService.GetUserGroups(User.Identity.GetUserId());

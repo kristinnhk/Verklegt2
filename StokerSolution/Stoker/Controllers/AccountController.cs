@@ -15,6 +15,7 @@ using Stoker.Models;
 namespace Stoker.Controllers
 {
     [Authorize]
+    [HandleError]
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;

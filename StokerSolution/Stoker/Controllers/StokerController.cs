@@ -13,6 +13,8 @@ using System.IO;
 
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class StokerController : Controller
     {
 

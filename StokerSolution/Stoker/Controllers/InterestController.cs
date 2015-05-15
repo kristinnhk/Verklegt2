@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 namespace Stoker.Controllers
 {
+    [HandleError]
+    [Authorize]
     public class InterestController : StokerController
     {
    
